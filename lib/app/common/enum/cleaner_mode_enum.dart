@@ -1,0 +1,1 @@
+enum CleanerMode { sweep, tone }
