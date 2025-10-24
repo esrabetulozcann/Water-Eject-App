@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:water_eject/app/common/constant/app_icons.dart';
+import 'package:water_eject/app/common/constant/localization_keys.dart';
 import 'navigation_cubit.dart';
 
 class AppNavBar extends StatelessWidget {
@@ -17,20 +19,20 @@ class AppNavBar extends StatelessWidget {
           onDestinationSelected: cubit.setIndex,
           destinations: [
             NavigationDestination(
-              icon: const Icon(Icons.water_drop_outlined),
-              label: 'tab_eject'.tr(),
+              icon: Icon(AppIcons.waterDropOutlined.iconData),
+              label: LocaleKeys.tab_eject.tr(),
             ),
             NavigationDestination(
-              icon: const Icon(Icons.graphic_eq),
-              label: 'tab_tone'.tr(),
+              icon: Icon(AppIcons.graphicEq.iconData),
+              label: LocaleKeys.tab_tone.tr(),
             ),
             NavigationDestination(
-              icon: const Icon(Icons.record_voice_over),
-              label: 'tab_meter'.tr(),
+              icon: Icon(AppIcons.recordVoice.iconData),
+              label: LocaleKeys.tab_meter.tr(),
             ),
             NavigationDestination(
-              icon: const Icon(Icons.surround_sound),
-              label: 'tab_stereo'.tr(),
+              icon: Icon(AppIcons.surroundSound.iconData),
+              label: LocaleKeys.tab_stereo.tr(),
             ),
           ],
         );

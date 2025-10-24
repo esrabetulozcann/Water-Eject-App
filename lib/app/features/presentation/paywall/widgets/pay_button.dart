@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:water_eject/app/common/constant/colors.dart';
+import 'package:water_eject/app/common/constant/localization_keys.dart';
 import '../cubit/paywall_selection_cubit.dart';
 import '../cubit/premium_cubit.dart';
 
@@ -38,9 +40,9 @@ class PayButton extends StatelessWidget {
               elevation: 0,
             ),
             child: Text(
-              selectedPackage == 'yearly_title'.tr()
-                  ? 'pay_yearly'.tr()
-                  : 'pay_monthly'.tr(),
+              selectedPackage == LocaleKeys.yearly_title.tr()
+                  ? LocaleKeys.pay_yearly.tr()
+                  : LocaleKeys.pay_monthly.tr(),
               style: theme.textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: colors.onPrimary,
@@ -61,7 +63,7 @@ class PayButton extends StatelessWidget {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('premium_activated'.tr()),
+            content: Text(LocaleKeys.premium_activated.tr()),
             backgroundColor: Theme.of(context).colorScheme.primary,
             duration: const Duration(seconds: 2),
           ),
@@ -71,8 +73,8 @@ class PayButton extends StatelessWidget {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('error'.tr(args: ['$e'])),
-            backgroundColor: Colors.red,
+            content: Text(LocaleKeys.error.tr(args: ['$e'])),
+            backgroundColor: AppColors.red,
           ),
         );
       }

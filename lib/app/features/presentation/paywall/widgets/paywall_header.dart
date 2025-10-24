@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:water_eject/app/common/constant/app_icons.dart';
+import 'package:water_eject/app/common/constant/localization_keys.dart';
 
 class PaywallHeader extends StatelessWidget {
   const PaywallHeader({super.key});
@@ -15,7 +17,7 @@ class PaywallHeader extends StatelessWidget {
         Align(
           alignment: Alignment.centerRight,
           child: IconButton(
-            icon: const Icon(Icons.close, size: 20),
+            icon: Icon(AppIcons.close.iconData, size: 20),
             padding: EdgeInsets.zero,
             constraints: const BoxConstraints(maxWidth: 40),
             onPressed: () => Navigator.of(context).pop(false),
@@ -25,7 +27,7 @@ class PaywallHeader extends StatelessWidget {
         const SizedBox(height: 8),
         // Başlık
         Text(
-          'upgrade_to_premium'.tr(),
+          LocaleKeys.upgrade_to_premium.tr(),
           style: theme.textTheme.titleLarge?.copyWith(
             // HeadlineSmall -> TitleLarge
             fontWeight: FontWeight.bold,
@@ -35,7 +37,7 @@ class PaywallHeader extends StatelessWidget {
         const SizedBox(height: 4),
         // Açıklama
         Text(
-          'premium_description'.tr(),
+          LocaleKeys.premium_description.tr(),
           style: theme.textTheme.bodyMedium,
           textAlign: TextAlign.center,
         ),

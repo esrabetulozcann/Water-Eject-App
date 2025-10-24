@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:water_eject/app/common/constant/localization_keys.dart';
 import 'package:water_eject/app/features/presentation/stereo/cubit/stereo_cubit.dart';
 import 'package:water_eject/app/features/presentation/stereo/cubit/stereo_state.dart';
 import 'package:water_eject/app/features/presentation/stereo/widgets/auto_loop_switch.dart';
@@ -29,7 +30,7 @@ class StereoView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'stereo_start_test'.tr(),
+                    LocaleKeys.stereo_start_test.tr(),
                     style: theme.textTheme.titleMedium,
                     textAlign: TextAlign.center,
                   ),
@@ -52,14 +53,14 @@ class StereoView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           ChannelButton(
-                            label: "stereo_left_channel".tr(),
+                            label: LocaleKeys.stereo_left_channel.tr(),
                             side: StereoChannel.left,
                             isActive: leftActive,
                             isSelected: leftSelected,
                             onTap: () => context.read<StereoCubit>().tapLeft(),
                           ),
                           ChannelButton(
-                            label: "stereo_right_channel".tr(),
+                            label: LocaleKeys.stereo_right_channel.tr(),
                             side: StereoChannel.right,
                             isActive: rightActive,
                             isSelected: rightSelected,

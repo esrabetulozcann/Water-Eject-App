@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:water_eject/app/common/constant/localization_keys.dart';
 
 class OnboardingButtonWidget extends StatelessWidget {
   final bool isLastPage;
@@ -39,8 +40,8 @@ class OnboardingButtonWidget extends StatelessWidget {
 
   String _getButtonText() {
     if (isLastPage) {
-      return buttonText ?? 'start'.tr();
+      return buttonText ?? LocaleKeys.start.tr();
     }
-    return 'next'.tr();
+    return LocaleKeys.next.tr();
   }
 }

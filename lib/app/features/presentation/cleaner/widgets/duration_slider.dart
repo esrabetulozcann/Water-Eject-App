@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:water_eject/app/common/constant/localization_keys.dart';
 import 'package:water_eject/app/features/presentation/cleaner/cubit/cleaner_state.dart';
 import 'package:water_eject/app/features/presentation/cleaner/cubit/cleaner_cubit.dart';
 
@@ -18,7 +19,7 @@ class DurationSlider extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'duration'.tr(),
+              LocaleKeys.duration.tr(),
               style: Theme.of(context).textTheme.titleSmall,
             ),
             Slider(
@@ -32,7 +33,9 @@ class DurationSlider extends StatelessWidget {
             ),
             Align(
               alignment: Alignment.centerRight,
-              child: Text('seconds_fmt'.tr(args: ['${state.durationSec}'])),
+              child: Text(
+                LocaleKeys.seconds_fmt.tr(args: ['${state.durationSec}']),
+              ),
             ),
           ],
         );

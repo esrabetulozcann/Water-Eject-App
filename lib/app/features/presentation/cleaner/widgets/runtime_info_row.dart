@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:water_eject/app/common/constant/app_icons.dart';
+import 'package:water_eject/app/common/constant/localization_keys.dart';
 import 'package:water_eject/app/features/presentation/cleaner/cubit/cleaner_state.dart';
 import '../cubit/cleaner_cubit.dart';
 
@@ -16,13 +18,15 @@ class RuntimeInfoRow extends StatelessWidget {
         return Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.timer_outlined, size: 18),
+            Icon(AppIcons.time.iconData, size: 18),
             const SizedBox(width: 6),
-            Text('seconds_fmt'.tr(args: ['${state.remainingSec}'])),
+            Text(LocaleKeys.seconds_fmt.tr(args: ['${state.remainingSec}'])),
             const SizedBox(width: 12),
-            const Icon(Icons.graphic_eq, size: 18),
+            Icon(AppIcons.graphicEq.iconData, size: 18),
             const SizedBox(width: 6),
-            Text('hz_fmt'.tr(args: [state.currentHz.toStringAsFixed(0)])),
+            Text(
+              LocaleKeys.hz_fmt.tr(args: [state.currentHz.toStringAsFixed(0)]),
+            ),
           ],
         );
       },

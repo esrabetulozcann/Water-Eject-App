@@ -87,6 +87,9 @@
   "preset_light": "Hafif",
   "tone_generator": "Tone Generator",
   "tone_subtitle": "Su atma için ayarlanabilir frekans (20–300 Hz)",
-  "tone_about_description": "Bu uygulama, cihazınızdan su atmanıza yardımcı olmak için tonlar üretir. Sorumlu bir şekilde ve kendi riskinizle kullanın."
+  "tone_about_description": "Bu uygulama, cihazınızdan su atmanıza yardımcı olmak için tonlar üretir. Sorumlu bir şekilde ve kendi riskinizle kullanın.",
+  "skip": "Atla",
+  "next": "İleri",
+  "auto_loop_description" :"Auto Loop: Testi otomatik olarak kanallar arasında geçiş yapar"
 
 }

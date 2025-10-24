@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:water_eject/app/common/constant/localization_keys.dart';
 
 class InfoRow extends StatelessWidget {
   final String currentText;
@@ -20,15 +21,19 @@ class InfoRow extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            child: _InfoTile(title: "current_db".tr(), value: currentText),
+            child: _InfoTile(
+              title: LocaleKeys.current_db.tr(),
+              value: currentText,
+            ),
           ),
+          const SizedBox(width: 8),
           Expanded(
             child: _InfoTile(
-              title: "peak_db".tr(),
+              title: LocaleKeys.peak_db.tr(),
               value: peakText,
               action: TextButton(
                 onPressed: onResetPeak,
-                child: Text("reset".tr()),
+                child: Text(LocaleKeys.reset.tr()),
               ),
             ),
           ),
@@ -42,15 +47,43 @@ class _InfoTile extends StatelessWidget {
   final String title;
   final String value;
   final Widget? action;
+
   const _InfoTile({required this.title, required this.value, this.action});
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: ListTile(
-        title: Text(title),
-        subtitle: Text(value, style: Theme.of(context).textTheme.titleMedium),
-        trailing: action,
+      child: Container(
+        height: 80,
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    title,
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.onSurface.withOpacity(0.6),
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    value,
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            if (action != null) action!,
+          ],
+        ),
       ),
     );
   }

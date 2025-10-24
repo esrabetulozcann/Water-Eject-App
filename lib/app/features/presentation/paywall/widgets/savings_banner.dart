@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:water_eject/app/common/constant/localization_keys.dart';
 
 class SavingsBanner extends StatelessWidget {
   final bool isVisible;
@@ -24,20 +25,20 @@ class SavingsBanner extends StatelessWidget {
         text: TextSpan(
           children: [
             TextSpan(
-              text: 'savings_banner_part1'.tr(),
+              text: LocaleKeys.savings_banner_part1.tr(),
               style: theme.textTheme.bodySmall?.copyWith(
                 color: colors.onSurface,
               ),
             ),
             TextSpan(
-              text: 'savings_banner_part2'.tr(),
+              text: LocaleKeys.savings_banner_part2.tr(),
               style: theme.textTheme.bodySmall?.copyWith(
                 color: colors.primary,
                 fontWeight: FontWeight.bold,
               ),
             ),
             TextSpan(
-              text: ' savings_banner_part3'.tr(),
+              text: LocaleKeys.savings_banner_part3.tr(),
               style: theme.textTheme.bodySmall?.copyWith(
                 color: colors.onSurface,
               ),

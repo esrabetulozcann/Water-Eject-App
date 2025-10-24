@@ -3,6 +3,7 @@
   "cta_subtitle": "Safely eject water from the speaker",
   "start": "Start",
   "stop": "Stop",
+  "play": "Play",
   "ready": "Ready",
   "running": "Running…",
   "intensity": "Intensity",
@@ -87,5 +88,8 @@
   "preset_light": "Light",
   "tone_generator": "Tone Generator",
   "tone_subtitle": "Adjustable frequency for water ejection (20–300 Hz)",
-  "tone_about_description": "This app generates tones to help eject water from your device. Use responsibly and at your own risk."
+  "tone_about_description": "This app generates tones to help eject water from your device. Use responsibly and at your own risk.",
+  "skip": "Skip",
+  "next": "Next",
+  "auto_loop_description": "Auto Loop: Automatically switches between channels during testing"
 }

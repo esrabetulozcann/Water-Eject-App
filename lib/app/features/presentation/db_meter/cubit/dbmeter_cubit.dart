@@ -111,7 +111,7 @@ class DbMeterCubit extends Cubit<DbMeterState> with WidgetsBindingObserver {
     await repo.stop();
     await _levelSub?.cancel();
     _levelSub = null;
-    emit(state.copyWith(isMeasuring: false, effect: null));
+    emit(state.copyWith(isMeasuring: false, effect: null, currentDb: 0));
   }
 
   void resetPeak() {

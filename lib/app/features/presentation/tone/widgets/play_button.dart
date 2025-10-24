@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:water_eject/app/common/constant/app_icons.dart';
+import 'package:water_eject/app/common/constant/localization_keys.dart';
 import '../cubit/tone_cubit.dart';
 import '../cubit/tone_state.dart';
 
@@ -16,8 +18,12 @@ class PlayButton extends StatelessWidget {
           width: double.infinity,
           height: 56,
           child: ElevatedButton.icon(
-            icon: Icon(isPlaying ? Icons.stop : Icons.play_arrow),
-            label: Text(isPlaying ? "stop".tr() : "play".tr()),
+            icon: Icon(
+              isPlaying ? AppIcons.stop.iconData : AppIcons.playArrow.iconData,
+            ),
+            label: Text(
+              isPlaying ? LocaleKeys.stop.tr() : LocaleKeys.play.tr(),
+            ),
             onPressed: () => context.read<ToneCubit>().toggle(),
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(

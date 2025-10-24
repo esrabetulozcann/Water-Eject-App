@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:water_eject/app/common/constant/app_icons.dart';
+import 'package:water_eject/app/common/constant/localization_keys.dart';
 
 class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CommonAppBar({
@@ -8,7 +10,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.subtitle,
     this.leading,
     this.centerTitle = false,
-    this.showSettings = true,
+    this.showSettings = false,
     this.onSettingsPressed,
     this.actions,
     this.backgroundColor,
@@ -84,13 +86,13 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
         if (actions != null) ...actions!,
         if (showSettings)
           IconButton(
-            icon: const Icon(Icons.settings),
+            icon: Icon(AppIcons.settings.iconData),
             onPressed:
                 onSettingsPressed ??
                 () {
                   showAboutDialog(context: context, applicationName: title);
                 },
-            tooltip: 'settings'.tr(),
+            tooltip: LocaleKeys.settings.tr(),
           ),
       ],
     );

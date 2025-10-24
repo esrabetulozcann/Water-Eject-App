@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
+import 'package:water_eject/app/common/constant/colors.dart';
 
 class DecibelGauge extends StatelessWidget {
   final double value; // anlık dB
@@ -64,7 +65,7 @@ class _GaugePainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = stroke
       ..strokeCap = StrokeCap.round
-      ..color = const Color(0xFFEAEAEA);
+      ..color = AppColors.dbBackground;
 
     final activePaint = Paint()
       ..style = PaintingStyle.stroke
@@ -74,9 +75,9 @@ class _GaugePainter extends CustomPainter {
         startAngle: startAngle,
         endAngle: startAngle + sweepAngle,
         colors: const [
-          Color(0xFF4CAF50), // düşük
-          Color(0xFFFFC107), // orta
-          Color(0xFFF44336), // yüksek
+          AppColors.dbSoft, // düşük
+          AppColors.dbMedium, // orta
+          AppColors.dbStrong, // yüksek
         ],
         stops: const [0.0, 0.6, 1.0],
       ).createShader(Rect.fromCircle(center: center, radius: radius));
@@ -103,7 +104,7 @@ class _GaugePainter extends CustomPainter {
     final peakPaint = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 3
-      ..color = const Color(0xFF9E9E9E);
+      ..color = AppColors.dbIndicator;
 
     final peakAngle = startAngle + sweepAngle * peakRatio;
     final p1 = Offset(

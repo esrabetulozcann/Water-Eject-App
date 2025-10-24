@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:water_eject/app/common/constant/app_icons.dart';
+import 'package:water_eject/app/common/constant/localization_keys.dart';
 import 'package:water_eject/app/features/presentation/cleaner/cubit/cleaner_state.dart';
 import 'package:water_eject/app/features/presentation/cleaner/cubit/cleaner_cubit.dart';
 
@@ -18,11 +20,15 @@ class StartStopButton extends StatelessWidget {
             IconButton.filled(
               onPressed: state.running ? cubit.stop : cubit.start,
               iconSize: 64,
-              icon: Icon(state.running ? Icons.stop : Icons.water_drop),
+              icon: Icon(
+                state.running
+                    ? AppIcons.stop.iconData
+                    : AppIcons.waterDrop.iconData,
+              ),
             ),
             const SizedBox(height: 4),
             Text(
-              state.running ? 'running'.tr() : 'ready'.tr(),
+              state.running ? LocaleKeys.running.tr() : LocaleKeys.ready.tr(),
               style: Theme.of(context).textTheme.titleMedium,
             ),
           ],

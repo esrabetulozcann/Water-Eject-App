@@ -1,4 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:water_eject/app/common/constant/app_icons.dart';
+import 'package:water_eject/app/common/constant/colors.dart';
 import '../cubit/stereo_state.dart';
 
 class ChannelButton extends StatelessWidget {
@@ -64,7 +68,7 @@ class ChannelButton extends StatelessWidget {
               ),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.06),
+                  color: AppColors.black.withValues(alpha: 0.06),
                   blurRadius: 12,
                   offset: const Offset(0, 6),
                 ),
@@ -77,12 +81,13 @@ class ChannelButton extends StatelessWidget {
                   ),
               ],
             ),
-            child: Icon(
-              side == StereoChannel.left
-                  ? Icons.volume_down_rounded
-                  : Icons.volume_up_rounded,
-              size: 40,
-            ),
+            child: side == StereoChannel.left
+                ? Transform(
+                    alignment: Alignment.center,
+                    transform: Matrix4.rotationY(pi),
+                    child: Icon(AppIcons.volumeUp.iconData, size: 40),
+                  )
+                : Icon(AppIcons.volumeUp.iconData, size: 40),
           ),
         ),
         const SizedBox(height: 10),

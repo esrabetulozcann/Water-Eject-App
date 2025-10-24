@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:water_eject/app/common/constant/localization_keys.dart';
 import '../widgets/frequency_display.dart';
 import '../widgets/preset_row.dart';
 import '../widgets/play_button.dart';
@@ -25,7 +26,7 @@ class ToneView extends StatelessWidget {
                   ),
 
                   Text(
-                    "tone_adjust_instruction".tr(),
+                    LocaleKeys.tone_adjust_instruction.tr(),
                     style: theme.textTheme.bodyMedium?.copyWith(
                       color: theme.textTheme.bodyMedium?.color?.withOpacity(
                         0.6,

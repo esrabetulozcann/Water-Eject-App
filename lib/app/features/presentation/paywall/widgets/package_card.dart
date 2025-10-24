@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:water_eject/app/common/constant/localization_keys.dart';
 import '../cubit/paywall_selection_cubit.dart';
 
 class PackageCard extends StatelessWidget {
@@ -102,9 +103,9 @@ class PackageCard extends StatelessWidget {
 
                 const SizedBox(height: 4),
                 // Aylık maliyet (sadece yıllık için)
-                if (period == 'year'.tr())
+                if (period == LocaleKeys.year.tr())
                   Text(
-                    'monthly_price'.tr(),
+                    LocaleKeys.monthly_price.tr(),
                     style: theme.textTheme.bodySmall?.copyWith(
                       color: colors.primary,
                       fontWeight: FontWeight.bold,

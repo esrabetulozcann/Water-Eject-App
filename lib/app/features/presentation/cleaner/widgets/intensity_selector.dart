@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:water_eject/app/common/constant/colors.dart';
+import 'package:water_eject/app/common/constant/localization_keys.dart';
 import 'package:water_eject/app/features/presentation/cleaner/cubit/cleaner_state.dart';
 import 'package:water_eject/app/common/enum/intensity_enum.dart';
 import '../cubit/cleaner_cubit.dart';
@@ -23,7 +25,7 @@ class IntensitySelector extends StatelessWidget {
             if (states.contains(WidgetState.selected)) {
               return Theme.of(context).colorScheme.primary.withOpacity(0.12);
             }
-            return Colors.transparent;
+            return AppColors.transparent;
           }),
           foregroundColor: WidgetStateProperty.resolveWith((states) {
             if (states.contains(WidgetState.selected)) {
@@ -54,7 +56,7 @@ class IntensitySelector extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'intensity'.tr(),
+              LocaleKeys.intensity.tr(),
               style: Theme.of(context).textTheme.titleSmall,
             ),
             const SizedBox(height: 6),
@@ -67,15 +69,15 @@ class IntensitySelector extends StatelessWidget {
                 segments: [
                   ButtonSegment(
                     value: Intensity.soft,
-                    label: segLabel('intensity_soft'.tr()),
+                    label: segLabel(LocaleKeys.intensity_soft.tr()),
                   ),
                   ButtonSegment(
                     value: Intensity.medium,
-                    label: segLabel('intensity_medium'.tr()),
+                    label: segLabel(LocaleKeys.intensity_medium.tr()),
                   ),
                   ButtonSegment(
                     value: Intensity.strong,
-                    label: segLabel('intensity_strong'.tr()),
+                    label: segLabel(LocaleKeys.intensity_strong.tr()),
                   ),
                 ],
                 selected: {state.intensity},

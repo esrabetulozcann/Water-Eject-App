@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:water_eject/app/common/constant/colors.dart';
+import 'package:water_eject/app/common/constant/localization_keys.dart';
 import '../cubit/tone_cubit.dart';
 import '../cubit/tone_state.dart';
 
@@ -30,9 +32,9 @@ class PresetRow extends StatelessWidget {
   }
 
   String _labelOf(double p) {
-    if (p <= 70) return "preset_deep_bass".tr();
-    if (p <= 110) return "preset_strong_bass".tr();
-    return "preset_light".tr();
+    if (p <= 70) return LocaleKeys.preset_deep_bass.tr();
+    if (p <= 110) return LocaleKeys.preset_strong_bass.tr();
+    return LocaleKeys.preset_light.tr();
   }
 }
 
@@ -64,7 +66,7 @@ class _PresetChip extends StatelessWidget {
           color: active ? base : base.withOpacity(0.5),
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
-            color: active ? theme.colorScheme.primary : Colors.transparent,
+            color: active ? theme.colorScheme.primary : AppColors.transparent,
             width: 1.2,
           ),
         ),

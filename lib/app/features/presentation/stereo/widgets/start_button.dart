@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:water_eject/app/common/constant/app_icons.dart';
+import 'package:water_eject/app/common/constant/localization_keys.dart';
 import '../cubit/stereo_cubit.dart';
 import '../cubit/stereo_state.dart';
 
@@ -36,8 +38,12 @@ class StartButton extends StatelessWidget {
 
               await context.read<StereoCubit>().startOrStop();
             },
-            icon: Icon(isOn ? Icons.stop_rounded : Icons.play_arrow_rounded),
-            label: Text(isOn ? 'stop'.tr() : 'start'.tr()),
+            icon: Icon(
+              isOn
+                  ? AppIcons.stopRounded.iconData
+                  : AppIcons.playArrowRounded.iconData,
+            ),
+            label: Text(isOn ? LocaleKeys.stop.tr() : LocaleKeys.start.tr()),
           ),
         );
       },
