@@ -13,9 +13,9 @@ class TonePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<ToneCubit>(
       create: (_) => ToneCubit(TonePlayer(JustAudioEngine())),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Scaffold(appBar: ToneAppBar(), body: const ToneView()),
+      child: Scaffold(
+        appBar: ToneAppBar(),
+        body: Padding(padding: EdgeInsets.all(16), child: const ToneView()),
       ),
     );
   }
