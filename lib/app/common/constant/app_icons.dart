@@ -25,6 +25,12 @@ enum AppIcons {
   recordVoice,
   surroundSound,
   play, // oynat ikonu
+  darkMode,
+  language,
+  chevron_right,
+  info,
+  share,
+  star,
 }
 
 extension AppIconsExtension on AppIcons {
@@ -76,6 +82,18 @@ extension AppIconsExtension on AppIcons {
         return Icons.surround_sound;
       case AppIcons.play:
         return Icons.play_arrow;
+      case AppIcons.darkMode:
+        return Icons.dark_mode_outlined;
+      case AppIcons.language:
+        return Icons.language_outlined;
+      case AppIcons.chevron_right:
+        return Icons.chevron_right;
+      case AppIcons.info:
+        return Icons.info_outline;
+      case AppIcons.share:
+        return Icons.share_outlined;
+      case AppIcons.star:
+        return Icons.star_border_outlined;
     }
   }
 }

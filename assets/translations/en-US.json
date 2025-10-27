@@ -92,5 +92,14 @@
   "skip": "Skip",
   "next": "Next",
   "auto_loop_description": "Auto Loop: Automatically switches between channels during testing",
-  "ready_hint": "Tap the start icon inside the circle."
+  "ready_hint": "Tap the start icon inside the circle.",
+  "setting_title": "Settings",
+  "setting_dark_mode": "Dark Mode",
+  "setting_light_mode": "Light Mode",
+  "setting_language_en": "English",
+  "setting_language_tr": "Turkish",
+  "setting_abaout": "About",
+  "setting_app_share": "Share App",
+  "setting_app_rate": "Rate Us",
+  "setting_privacy_policy": "Privacy Policy"
 }

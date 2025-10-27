@@ -98,4 +98,13 @@ abstract class LocaleKeys {
   static const next = 'next';
   static const auto_loop_description = 'auto_loop_description';
   static const ready_hint = 'ready_hint';
+  static const setting_title = 'setting_title';
+  static const setting_dark_mode = 'setting_dark_mode';
+  static const setting_light_mode = 'setting_light_mode';
+  static const setting_language_en = 'setting_language_en';
+  static const setting_language_tr = 'setting_language_tr';
+  static const setting_abaout = 'setting_abaout';
+  static const setting_app_share = 'setting_app_share';
+  static const setting_app_rate = 'setting_app_rate';
+  static const setting_privacy_policy = 'setting_privacy_policy';
 }

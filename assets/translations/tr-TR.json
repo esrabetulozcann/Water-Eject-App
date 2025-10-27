@@ -91,6 +91,15 @@
   "skip": "Atla",
   "next": "İleri",
   "auto_loop_description" :"Auto Loop: Testi otomatik olarak kanallar arasında geçiş yapar",
-  "ready_hint": "Yuvarlak içindeki başlatma ikonuna tıklayınız."
+  "ready_hint": "Yuvarlak içindeki başlatma ikonuna tıklayınız.",
+  "setting_title":"Ayarlar",
+  "setting_dark_mode":"Koyu Mod",
+  "setting_light_mode":"Aydınlık Mod",
+  "setting_language_en":"İngilizce",
+  "setting_language_tr":"Türkçe",
+  "setting_abaout":"Hakkında",
+  "setting_app_share":"Uygulamayı Paylaş",
+  "setting_app_rate":"Uygulamayı Değerlendir",
+  "setting_privacy_policy":"Gizlilik Politikası"
 
 }

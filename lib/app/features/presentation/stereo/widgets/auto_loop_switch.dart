@@ -13,15 +13,17 @@ class AutoLoopSwitch extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return Column(
-      children: [
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-          decoration: BoxDecoration(
-            color: theme.colorScheme.surface.withOpacity(0.08),
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: Row(
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: theme.colorScheme.primary.withOpacity(0.10),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
             children: [
               Icon(AppIcons.refresh.iconData),
               const SizedBox(width: 12),
@@ -42,20 +44,16 @@ class AutoLoopSwitch extends StatelessWidget {
               ),
             ],
           ),
-        ),
-
-        const SizedBox(height: 8),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: Text(
+          const SizedBox(height: 8),
+          Text(
             LocaleKeys.auto_loop_description.tr(),
             style: theme.textTheme.bodySmall?.copyWith(
               color: theme.colorScheme.onSurface.withOpacity(0.6),
             ),
-            textAlign: TextAlign.center,
+            textAlign: TextAlign.start,
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
