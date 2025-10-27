@@ -23,7 +23,7 @@ class CleanerShell extends StatelessWidget {
       buildWhen: (p, c) => p.tab != c.tab,
       builder: (context, state) {
         final index = NavigationCubit().index;
-        // DO:
+
         final i = context.read<NavigationCubit>().index;
 
         return Scaffold(

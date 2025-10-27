@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 import 'package:just_audio/just_audio.dart';
 import 'package:water_eject/app/features/data/cleaner/audio/in_memory_audio_source.dart';
-import 'package:water_eject/app/domain/services/audio_engine.dart';
+import 'package:water_eject/app/domain/services/audio_engine_service.dart';
 
 class JustAudioEngine implements IAudioEngine {
   final _player = AudioPlayer();

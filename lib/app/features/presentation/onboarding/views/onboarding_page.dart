@@ -6,7 +6,7 @@ import 'package:water_eject/app/features/presentation/onboarding/widgets/onboard
 import 'package:water_eject/app/features/presentation/onboarding/widgets/onboarding_title_widget.dart';
 
 class OnboardingPageWidget extends StatelessWidget {
-  final OnboardingPage page;
+  final OnboardingPageModel page;
   final bool isLastPage;
   final VoidCallback onNext;
   final VoidCallback onSkip;

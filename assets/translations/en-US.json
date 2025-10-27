@@ -91,5 +91,6 @@
   "tone_about_description": "This app generates tones to help eject water from your device. Use responsibly and at your own risk.",
   "skip": "Skip",
   "next": "Next",
-  "auto_loop_description": "Auto Loop: Automatically switches between channels during testing"
+  "auto_loop_description": "Auto Loop: Automatically switches between channels during testing",
+  "ready_hint": "Tap the start icon inside the circle."
 }

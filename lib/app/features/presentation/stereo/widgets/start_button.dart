@@ -11,9 +11,11 @@ import 'package:water_eject/app/features/presentation/paywall/views/paywall_page
 
 class StartButton extends StatelessWidget {
   const StartButton({super.key});
-
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colors = theme.colorScheme;
+
     return BlocBuilder<StereoCubit, StereoState>(
       buildWhen: (p, c) => p.isTesting != c.isTesting,
       builder: (_, state) {
@@ -23,9 +25,11 @@ class StartButton extends StatelessWidget {
           width: double.infinity,
           child: ElevatedButton.icon(
             style: ElevatedButton.styleFrom(
-              padding: const EdgeInsets.symmetric(vertical: 16),
+              backgroundColor: colors.primary,
+              foregroundColor: colors.onPrimary,
+              padding: const EdgeInsets.symmetric(vertical: 14),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(14),
               ),
             ),
             onPressed: () async {
@@ -42,8 +46,12 @@ class StartButton extends StatelessWidget {
               isOn
                   ? AppIcons.stopRounded.iconData
                   : AppIcons.playArrowRounded.iconData,
+              size: isOn ? 20 : 24,
             ),
-            label: Text(isOn ? LocaleKeys.stop.tr() : LocaleKeys.start.tr()),
+            label: Text(
+              isOn ? LocaleKeys.stop.tr() : LocaleKeys.start.tr(),
+              style: TextStyle(fontSize: 16),
+            ),
           ),
         );
       },

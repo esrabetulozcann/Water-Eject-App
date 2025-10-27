@@ -90,6 +90,7 @@
   "tone_about_description": "Bu uygulama, cihazınızdan su atmanıza yardımcı olmak için tonlar üretir. Sorumlu bir şekilde ve kendi riskinizle kullanın.",
   "skip": "Atla",
   "next": "İleri",
-  "auto_loop_description" :"Auto Loop: Testi otomatik olarak kanallar arasında geçiş yapar"
+  "auto_loop_description" :"Auto Loop: Testi otomatik olarak kanallar arasında geçiş yapar",
+  "ready_hint": "Yuvarlak içindeki başlatma ikonuna tıklayınız."
 
 }

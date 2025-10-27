@@ -32,7 +32,7 @@ class StereoCubit extends Cubit<StereoState> {
           ? StereoChannel.left
           : state.selected;
 
-      await player.play(sel); // player sürekli çalacak (LoopMode.one)
+      await player.play(sel);
       emit(state.copyWith(active: sel));
     }
   }

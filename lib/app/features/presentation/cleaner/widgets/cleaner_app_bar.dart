@@ -9,6 +9,7 @@ class CleanerAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CommonAppBar(
+      elevation: 0,
       title: LocaleKeys.app_title.tr(),
       centerTitle: true,
       subtitle: LocaleKeys.cta_subtitle.tr(),
@@ -20,6 +21,8 @@ class CleanerAppBar extends StatelessWidget {
           children: [Text(LocaleKeys.disclaimer_body.tr())],
         );
       },
+
+      //  backgroundColor: const Color(0xFFE1F5FE),
     );
   }
 }

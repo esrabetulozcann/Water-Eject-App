@@ -1,5 +1,5 @@
-class CalibrationValue {
+class CalibrationValueModel {
   // dB ekleme/çıkarma için offset; +3 => 3 dB daha yüksek göster
   final double offsetDb;
-  const CalibrationValue(this.offsetDb);
+  const CalibrationValueModel(this.offsetDb);
 }

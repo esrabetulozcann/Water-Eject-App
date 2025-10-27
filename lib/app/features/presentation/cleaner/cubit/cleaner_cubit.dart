@@ -7,7 +7,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:volume_controller/volume_controller.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
-import 'package:water_eject/app/domain/services/audio_engine.dart';
+import 'package:water_eject/app/domain/models/buble_model.dart';
+import 'package:water_eject/app/domain/services/audio_engine_service.dart';
 import 'package:water_eject/app/domain/services/vibration_service.dart';
 import 'package:water_eject/app/features/data/cleaner/audio/tone_generator.dart';
 
@@ -30,6 +31,53 @@ class CleanerCubit extends Cubit<CleanerState> {
   double? _oldVolume;
   Timer? _timer;
   Timer? _vibTimer;
+  Timer? _bubbleTimer;
+
+  void _startBubbles() {
+    emit(state.copyWith(bubbles: [], showBubbles: true));
+
+    _bubbleTimer?.cancel();
+    _bubbleTimer = Timer.periodic(const Duration(milliseconds: 300), (timer) {
+      if (!state.running) {
+        timer.cancel();
+        return;
+      }
+      final random = math.Random();
+      final newBubble = Bubble(
+        size: random.nextDouble() * 30 + 20, // 20-50 arası boyut
+        left: random.nextDouble() * 300, // 0-300 arası konum
+        duration: random.nextInt(2000) + 1000, // 1-3 saniye
+        bottom: 0.0,
+      );
+
+      final currentBubbles = List<Bubble>.from(state.bubbles);
+      if (currentBubbles.length < 15) {
+        // Maksimum 15 baloncuk
+        currentBubbles.add(newBubble);
+        emit(state.copyWith(bubbles: currentBubbles));
+      }
+    });
+  }
+
+  void _stopBubbles() {
+    _bubbleTimer?.cancel();
+    emit(state.copyWith(showBubbles: false, bubbles: []));
+  }
+
+  void _updateBubbles() {
+    final updatedBubbles = state.bubbles
+        .map((bubble) {
+          // Baloncukları yukarı hareket ettir
+          final newBottom = bubble.bottom + 50; // Her seferinde 50px yukarı
+          return bubble.copyWith(bottom: newBottom);
+        })
+        .where((bubble) => bubble.bottom < 600)
+        .toList(); // 600px'den fazla olanları kaldır
+
+    if (updatedBubbles.length != state.bubbles.length) {
+      emit(state.copyWith(bubbles: updatedBubbles));
+    }
+  }
 
   void _log(String m, [Object? d]) {
     if (kDebugMode)
@@ -135,10 +183,24 @@ class CleanerCubit extends Cubit<CleanerState> {
         error: null,
         remainingSec: state.durationSec,
         currentHz: initialHz,
+        showBubbles: true,
+        bubbles: [],
       ),
     );
 
     try {
+      //Baloncukları başlattım
+      /* _startBubbles();
+
+      // Baloncuk güncellemeleri
+      Timer.periodic(const Duration(milliseconds: 100), (timer) {
+        if (!state.running) {
+          timer.cancel();
+          return;
+        }
+        _updateBubbles();
+      });
+*/
       _oldVolume = await _volume.getVolume();
       await _volume.setVolume(1.0);
       await WakelockPlus.enable();
@@ -233,7 +295,14 @@ class CleanerCubit extends Cubit<CleanerState> {
       audio.play();
     } catch (e) {
       _log('ERROR', e.toString());
-      emit(state.copyWith(running: false, progress: 0, error: e.toString()));
+      emit(
+        state.copyWith(
+          running: false,
+          progress: 0,
+          error: e.toString(),
+          showBubbles: false,
+        ),
+      );
       await _cleanup();
     }
   }
@@ -242,6 +311,7 @@ class CleanerCubit extends Cubit<CleanerState> {
     if (!state.running) return;
     _log('STOP');
     await audio.stop();
+    _stopBubbles();
     await _cleanup();
     final prof = _profile();
     emit(
@@ -252,11 +322,14 @@ class CleanerCubit extends Cubit<CleanerState> {
         currentHz: state.mode == CleanerMode.sweep
             ? prof.startHz
             : state.frequencyHz,
+        showBubbles: false, // baloncukları gizledim
       ),
     );
   }
 
   Future<void> _cleanup() async {
+    _bubbleTimer?.cancel();
+    _bubbleTimer = null;
     _timer?.cancel();
     _timer = null;
     _vibTimer?.cancel();

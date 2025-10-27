@@ -28,7 +28,7 @@ class ModeVibrationRow extends StatelessWidget {
                 value: state.mode == CleanerMode.sweep,
                 icon: AppIcons.waves.iconData,
                 onChanged: state.running
-                    ? (_) {}
+                    ? null
                     : (v) => cubit.setMode(
                         v ? CleanerMode.sweep : CleanerMode.tone,
                       ),

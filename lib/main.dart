@@ -3,16 +3,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:water_eject/app/common/router/app_router.dart';
 import 'package:water_eject/app/domain/services/premium_service.dart';
 import 'package:water_eject/app/common/widgets/navigation_cubit.dart';
-import 'package:water_eject/app/features/presentation/onboarding/views/onboarding_view.dart';
 import 'package:water_eject/app/features/presentation/paywall/cubit/paywall_selection_cubit.dart';
 import 'package:water_eject/app/features/presentation/paywall/cubit/premium_cubit.dart';
-import 'package:water_eject/app/features/presentation/stereo/views/stereo_view.dart';
 
 import 'core/theme/app_theme.dart';
 import 'core/theme/cubit/theme_cubit.dart';
-import 'app/features/presentation/cleaner/views/cleaner_shell.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -58,7 +56,6 @@ class WaterEjectApp extends StatelessWidget {
             // localization
             locale: context.locale,
             supportedLocales: context.supportedLocales,
-            // localizationsDelegates: context.localizationDelegates,
             localizationsDelegates: [
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
@@ -66,11 +63,8 @@ class WaterEjectApp extends StatelessWidget {
               EasyLocalization.of(context)!.delegate,
             ],
 
-            routes: {
-              '/': (_) => const OnboardingView(),
-              '/cleaner': (_) => const CleanerShell(),
-              '/stereo': (_) => const StereoView(),
-            },
+            onGenerateRoute: AppRouter.generateRoute,
+            initialRoute: AppRouter.onboarding,
           );
         },
       ),

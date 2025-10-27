@@ -24,6 +24,7 @@ enum AppIcons {
   waterDropOutlined,
   recordVoice,
   surroundSound,
+  play, // oynat ikonu
 }
 
 extension AppIconsExtension on AppIcons {
@@ -73,6 +74,8 @@ extension AppIconsExtension on AppIcons {
         return Icons.record_voice_over;
       case AppIcons.surroundSound:
         return Icons.surround_sound;
+      case AppIcons.play:
+        return Icons.play_arrow;
     }
   }
 }

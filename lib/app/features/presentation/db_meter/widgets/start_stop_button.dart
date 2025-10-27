@@ -15,16 +15,24 @@ class StartStopButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colors = theme.colorScheme;
+
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton.icon(
-        icon: Icon(AppIcons.mic.iconData),
-        label: Text(isMeasuring ? LocaleKeys.stop.tr() : LocaleKeys.start.tr()),
+        icon: Icon(AppIcons.mic.iconData, size: 20),
+        label: Text(
+          isMeasuring ? LocaleKeys.stop.tr() : LocaleKeys.start.tr(),
+          style: TextStyle(fontSize: 16),
+        ),
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
+          backgroundColor: colors.primary,
+          foregroundColor: colors.onPrimary,
           padding: const EdgeInsets.symmetric(vertical: 14),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(14),
           ),
         ),
       ),

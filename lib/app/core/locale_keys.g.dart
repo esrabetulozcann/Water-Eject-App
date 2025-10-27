@@ -96,5 +96,6 @@ abstract class  LocaleKeys {
   static const skip = 'skip';
   static const next = 'next';
   static const auto_loop_description = 'auto_loop_description';
+  static const ready_hint = 'ready_hint';
 
 }

@@ -1,18 +1,18 @@
 import 'package:equatable/equatable.dart';
 
-class SoundLevel extends Equatable {
+class SoundLevelModel extends Equatable {
   final double db; // Anlık (EMA + kalibrasyon uygulanmış) dB
   final double peakDb; // O ana kadarki tepe dB
   final DateTime timestamp; // Örnekleme zamanı
 
-  const SoundLevel({
+  const SoundLevelModel({
     required this.db,
     required this.peakDb,
     required this.timestamp,
   });
 
-  SoundLevel copyWith({double? db, double? peakDb, DateTime? timestamp}) {
-    return SoundLevel(
+  SoundLevelModel copyWith({double? db, double? peakDb, DateTime? timestamp}) {
+    return SoundLevelModel(
       db: db ?? this.db,
       peakDb: peakDb ?? this.peakDb,
       timestamp: timestamp ?? this.timestamp,

@@ -11,7 +11,7 @@ abstract class OnboardingState extends Equatable {
 class OnboardingInitial extends OnboardingState {}
 
 class OnboardingLoaded extends OnboardingState {
-  final List<OnboardingPage> pages;
+  final List<OnboardingPageModel> pages;
   final int currentPage;
 
   const OnboardingLoaded({required this.pages, required this.currentPage});
@@ -19,7 +19,10 @@ class OnboardingLoaded extends OnboardingState {
   bool get isFirstPage => currentPage == 0;
   bool get isLastPage => currentPage == pages.length - 1;
 
-  OnboardingLoaded copyWith({List<OnboardingPage>? pages, int? currentPage}) {
+  OnboardingLoaded copyWith({
+    List<OnboardingPageModel>? pages,
+    int? currentPage,
+  }) {
     return OnboardingLoaded(
       pages: pages ?? this.pages,
       currentPage: currentPage ?? this.currentPage,

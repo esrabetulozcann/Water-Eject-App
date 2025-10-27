@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:water_eject/app/domain/models/buble_model.dart';
 import '../../../../common/enum/cleaner_mode_enum.dart';
 import '../../../../common/enum/intensity_enum.dart';
 
@@ -13,6 +14,8 @@ class CleanerState extends Equatable {
   final int remainingSec;
   final double currentHz; // anlık Hz (sweep’te değişir)
   final double frequencyHz; // tone modunda seçilen Hz
+  final List<Bubble> bubbles; // baloncuk listesi
+  final bool showBubbles; // baloncukların gösterilip gösterilmeyeceği
 
   const CleanerState({
     this.running = false,
@@ -25,6 +28,8 @@ class CleanerState extends Equatable {
     this.remainingSec = 30,
     this.currentHz = 165,
     this.frequencyHz = 165,
+    this.bubbles = const [],
+    this.showBubbles = false,
   });
 
   CleanerState copyWith({
@@ -38,6 +43,8 @@ class CleanerState extends Equatable {
     int? remainingSec,
     double? currentHz,
     double? frequencyHz,
+    List<Bubble>? bubbles,
+    bool? showBubbles,
   }) {
     return CleanerState(
       running: running ?? this.running,
@@ -50,6 +57,8 @@ class CleanerState extends Equatable {
       remainingSec: remainingSec ?? this.remainingSec,
       currentHz: currentHz ?? this.currentHz,
       frequencyHz: frequencyHz ?? this.frequencyHz,
+      bubbles: bubbles ?? this.bubbles,
+      showBubbles: showBubbles ?? this.showBubbles,
     );
   }
 
@@ -65,5 +74,7 @@ class CleanerState extends Equatable {
     remainingSec,
     currentHz,
     frequencyHz,
+    bubbles,
+    showBubbles,
   ];
 }

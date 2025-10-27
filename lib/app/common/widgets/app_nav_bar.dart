@@ -15,6 +15,7 @@ class AppNavBar extends StatelessWidget {
       builder: (context, state) {
         final cubit = context.read<NavigationCubit>();
         return NavigationBar(
+          // backgroundColor: const Color.fromARGB(255, 177, 193, 234),
           selectedIndex: cubit.index,
           onDestinationSelected: cubit.setIndex,
           destinations: [
