@@ -56,6 +56,9 @@ class _PresetChip extends StatelessWidget {
     final theme = Theme.of(context);
     final base = theme.colorScheme.primary.withOpacity(0.10);
 
+    final activeBg = theme.colorScheme.primary.withOpacity(0.08);
+    final inactiveBg = theme.colorScheme.primary.withOpacity(0.04);
+
     return InkWell(
       borderRadius: BorderRadius.circular(14),
       onTap: onTap,
@@ -63,7 +66,7 @@ class _PresetChip extends StatelessWidget {
         width: 110,
         padding: const EdgeInsets.symmetric(vertical: 12),
         decoration: BoxDecoration(
-          color: active ? base : base.withOpacity(0.5),
+          color: active ? activeBg : inactiveBg,
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
             color: active ? theme.colorScheme.primary : AppColors.transparent,
