@@ -13,6 +13,7 @@ import 'package:water_eject/app/features/data/cleaner/haptics/vibration_service_
 import 'package:water_eject/app/features/data/cleaner/audio/noise_meter_repository_impl.dart';
 import 'package:water_eject/app/domain/repositories/sound_level_repository.dart';
 import 'package:water_eject/app/features/presentation/db_meter/cubit/dbmeter_cubit.dart';
+import 'package:water_eject/app/features/presentation/paywall/cubit/paywall_selection_cubit.dart';
 import 'package:water_eject/app/features/presentation/setting/cubit/setting_cubit.dart';
 import 'package:water_eject/app/features/presentation/stereo/cubit/stereo_cubit.dart';
 import 'package:water_eject/app/features/presentation/tone/cubit/tone_cubit.dart';
@@ -53,4 +54,7 @@ void setupLocator() {
     () => TonePlayer(sl<JustAudioEngine>()),
   ); // <-- interface -> impl
   sl.registerFactory(() => ToneCubit(sl<ITonePlayer>()));
+
+  //paywall
+  sl.registerFactory(() => PaywallSelectionCubit());
 }

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:water_eject/core/di/locator.dart';
 import '../cubit/paywall_selection_cubit.dart';
 import '../widgets/paywall_header.dart';
 import '../widgets/features_list.dart';
 import '../widgets/packages_grid.dart';
 import '../widgets/pay_button.dart';
-import '../widgets/trust_footer.dart';
+//import '../widgets/trust_footer.dart';
 
 class PaywallPage extends StatelessWidget {
   const PaywallPage({super.key});
@@ -24,7 +25,9 @@ class PaywallPage extends StatelessWidget {
     final colors = Theme.of(context).colorScheme;
 
     return MultiBlocProvider(
-      providers: [BlocProvider(create: (_) => PaywallSelectionCubit())],
+      providers: [
+        BlocProvider(create: (_) => sl<PaywallSelectionCubit>()),
+      ], // create: (_) => PaywallSelectionCubit()
       child: Container(
         constraints: BoxConstraints(
           maxHeight: MediaQuery.of(context).size.height * 0.80,
@@ -46,7 +49,7 @@ class PaywallPage extends StatelessWidget {
               const SizedBox(height: 12),
               const PayButton(),
               const SizedBox(height: 8),
-              const TrustFooter(),
+              // const TrustFooter(),
             ],
           ),
         ),

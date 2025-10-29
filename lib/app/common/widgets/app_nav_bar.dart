@@ -4,6 +4,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:water_eject/app/common/constant/app_icons.dart';
 import 'package:water_eject/app/common/constant/localization_keys.dart';
 import 'navigation_cubit.dart';
+import 'nav_icon.dart'; // yeni dosya
+import 'nav_theme.dart'; // yeni dosya
 
 class AppNavBar extends StatelessWidget {
   const AppNavBar({super.key});
@@ -14,28 +16,30 @@ class AppNavBar extends StatelessWidget {
       buildWhen: (p, c) => p.tab != c.tab,
       builder: (context, state) {
         final cubit = context.read<NavigationCubit>();
-        return NavigationBar(
-          // backgroundColor: const Color.fromARGB(255, 177, 193, 234),
-          selectedIndex: cubit.index,
-          onDestinationSelected: cubit.setIndex,
-          destinations: [
-            NavigationDestination(
-              icon: Icon(AppIcons.waterDropOutlined.iconData),
-              label: LocaleKeys.tabEject.tr(),
-            ),
-            NavigationDestination(
-              icon: Icon(AppIcons.graphicEq.iconData),
-              label: LocaleKeys.tabTone.tr(),
-            ),
-            NavigationDestination(
-              icon: Icon(AppIcons.recordVoice.iconData),
-              label: LocaleKeys.tabMeter.tr(),
-            ),
-            NavigationDestination(
-              icon: Icon(AppIcons.surroundSound.iconData),
-              label: LocaleKeys.tabStereo.tr(),
-            ),
-          ],
+
+        return NavTheme(
+          child: NavigationBar(
+            selectedIndex: cubit.index,
+            onDestinationSelected: cubit.setIndex,
+            destinations: [
+              NavigationDestination(
+                icon: NavIcon(AppIcons.waterDropOutlined.iconData),
+                label: LocaleKeys.tabEject.tr(),
+              ),
+              NavigationDestination(
+                icon: NavIcon(AppIcons.graphicEq.iconData),
+                label: LocaleKeys.tabTone.tr(),
+              ),
+              NavigationDestination(
+                icon: NavIcon(AppIcons.recordVoice.iconData),
+                label: LocaleKeys.tabMeter.tr(),
+              ),
+              NavigationDestination(
+                icon: NavIcon(AppIcons.surroundSound.iconData),
+                label: LocaleKeys.tabStereo.tr(),
+              ),
+            ],
+          ),
         );
       },
     );

@@ -1,11 +1,8 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:water_eject/app/common/constant/localization_keys.dart';
+import 'package:water_eject/app/common/enum/paywall_plan_type_enum.dart';
 
-class PaywallSelectionCubit extends Cubit<String> {
-  PaywallSelectionCubit() : super(LocaleKeys.year.tr());
-
-  void selectPackage(String packageType) {
-    emit(packageType);
-  }
+class PaywallSelectionCubit extends Cubit<PlanType> {
+  PaywallSelectionCubit()
+    : super(PlanType.yearly); // default: yearly (daha kârlı)
+  void select(PlanType t) => emit(t);
 }
