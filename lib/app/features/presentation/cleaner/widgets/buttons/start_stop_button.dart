@@ -2,9 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:water_eject/app/common/constant/app_icons.dart';
-import 'package:water_eject/app/core/locale_keys.g.dart';
 import 'package:water_eject/app/features/presentation/cleaner/cubit/cleaner_state.dart';
 import 'package:water_eject/app/features/presentation/cleaner/cubit/cleaner_cubit.dart';
+import 'package:water_eject/core/localization/locale_keys.g.dart';
 
 class StartStopButton extends StatelessWidget {
   const StartStopButton({super.key});

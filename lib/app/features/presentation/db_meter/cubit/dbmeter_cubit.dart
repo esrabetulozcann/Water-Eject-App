@@ -13,6 +13,11 @@ class DbMeterCubit extends Cubit<DbMeterState> with WidgetsBindingObserver {
     WidgetsBinding.instance.addObserver(this);
   }
 
+  //..init() çağıracağız
+  Future<void> init() async {
+    await checkPermission();
+  }
+
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.inactive ||
@@ -48,7 +53,6 @@ class DbMeterCubit extends Cubit<DbMeterState> with WidgetsBindingObserver {
       await start();
       return;
     }
-    // İzin yoksa UI'ya dialog aç komutu gönder
     final permanentlyDenied =
         state.permission == MicPermissionStatus.permanentlyDenied;
     emit(state.copyWith(effect: ShowPermissionDialog(permanentlyDenied)));
@@ -72,7 +76,6 @@ class DbMeterCubit extends Cubit<DbMeterState> with WidgetsBindingObserver {
     }
   }
 
-  /// Kullanıcı vazgeçerse effect'i temizle
   void clearEffect() {
     if (state.effect != null) {
       emit(state.copyWith(effect: null));
@@ -80,6 +83,8 @@ class DbMeterCubit extends Cubit<DbMeterState> with WidgetsBindingObserver {
   }
 
   Future<void> start() async {
+    if (state.isMeasuring) return;
+
     if (state.permission != MicPermissionStatus.granted) {
       await requestPermission();
       if (state.permission != MicPermissionStatus.granted) return;
@@ -120,9 +125,9 @@ class DbMeterCubit extends Cubit<DbMeterState> with WidgetsBindingObserver {
   }
 
   @override
-  Future<void> close() {
+  Future<void> close() async {
     WidgetsBinding.instance.removeObserver(this);
-    _levelSub?.cancel();
+    await _levelSub?.cancel();
     return super.close();
   }
 }

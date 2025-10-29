@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'stereo_state.dart';
 import 'package:water_eject/app/features/data/stereo/stereo_player.dart';
+import 'stereo_state.dart';
 
 class StereoCubit extends Cubit<StereoState> {
   final StereoPlayer player;
@@ -11,33 +11,30 @@ class StereoCubit extends Cubit<StereoState> {
 
   void toggleAutoLoop(bool value) => emit(state.copyWith(autoLoop: value));
 
-  Future<void> tapLeft() async {
-    emit(state.copyWith(selected: StereoChannel.left));
-  }
-
-  Future<void> tapRight() async {
-    emit(state.copyWith(selected: StereoChannel.right));
-  }
+  Future<void> tapLeft() async =>
+      emit(state.copyWith(selected: StereoChannel.left));
+  Future<void> tapRight() async =>
+      emit(state.copyWith(selected: StereoChannel.right));
 
   Future<void> startOrStop() async => state.isTesting ? stop() : start();
 
   Future<void> start() async {
+    if (state.isTesting) return; // re-entrancy guard
     emit(state.copyWith(isTesting: true));
 
     if (state.autoLoop) {
-      _startLoop(); // sol↔sağ arasında geçiş
+      _startLoop();
     } else {
-      //Seçili kanalı kesintisiz çal
       final sel = state.selected == StereoChannel.none
           ? StereoChannel.left
           : state.selected;
-
       await player.play(sel);
       emit(state.copyWith(active: sel));
     }
   }
 
   Future<void> stop() async {
+    if (!state.isTesting) return;
     _loop?.cancel();
     _loop = null;
     await player.stop();
@@ -46,13 +43,10 @@ class StereoCubit extends Cubit<StereoState> {
 
   void _startLoop() {
     _loop?.cancel();
-
-    // İlk tur: eğer bir seçim varsa onunla başla, yoksa left
     StereoChannel next = (state.selected == StereoChannel.none)
         ? StereoChannel.left
         : state.selected;
 
-    // Hemen başlat
     _tick(next);
     next = _toggle(next);
 

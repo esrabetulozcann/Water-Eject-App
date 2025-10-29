@@ -1,10 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:water_eject/app/domain/services/tone_player_service.dart';
 import 'tone_state.dart';
-import 'package:water_eject/app/features/data/tone/tone_player.dart';
 
 class ToneCubit extends Cubit<ToneState> {
-  final TonePlayer player;
-
+  final ITonePlayer player; // <-- ITonePlayer
   ToneCubit(this.player) : super(ToneState.initial());
 
   static const _throttleMs = 16; // ~60 fps

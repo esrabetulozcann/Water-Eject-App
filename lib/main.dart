@@ -8,6 +8,7 @@ import 'package:water_eject/app/common/widgets/navigation_cubit.dart';
 import 'package:water_eject/app/features/presentation/paywall/cubit/paywall_selection_cubit.dart';
 import 'package:water_eject/app/features/presentation/paywall/cubit/premium_cubit.dart';
 import 'package:water_eject/core/cubit/localization_cubit.dart';
+import 'package:water_eject/core/di/locator.dart';
 
 import 'core/theme/app_theme.dart';
 import 'core/theme/cubit/theme_cubit.dart';
@@ -19,6 +20,7 @@ Future<void> main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+  setupLocator();
 
   runApp(
     EasyLocalization(

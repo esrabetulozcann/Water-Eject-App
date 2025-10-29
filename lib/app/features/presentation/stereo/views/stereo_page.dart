@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:water_eject/app/features/data/stereo/stereo_player_impl.dart';
 import 'package:water_eject/app/features/presentation/stereo/cubit/stereo_cubit.dart';
 import 'package:water_eject/app/features/presentation/stereo/views/stereo_view.dart';
+import 'package:water_eject/core/di/locator.dart';
 
 class StereoPage extends StatelessWidget {
   const StereoPage({super.key});
@@ -10,7 +10,7 @@ class StereoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => StereoCubit(StereoPlayerImpl()),
+      create: (_) => sl<StereoCubit>(),
       child: const StereoView(),
     );
   }

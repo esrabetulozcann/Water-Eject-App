@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:volume_controller/volume_controller.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
+
 import 'package:water_eject/app/domain/models/buble_model.dart';
 import 'package:water_eject/app/domain/services/audio_engine_service.dart';
 import 'package:water_eject/app/domain/services/vibration_service.dart';
@@ -20,6 +21,9 @@ class CleanerCubit extends Cubit<CleanerState> {
   final IVibrationService vibration;
   final VolumeController _volume;
 
+  // ✅ Player stream’i için subscription’ı tutuyoruz
+  StreamSubscription? _playerSub;
+
   CleanerCubit({
     required this.audio,
     required this.vibration,
@@ -33,6 +37,23 @@ class CleanerCubit extends Cubit<CleanerState> {
   Timer? _bubbleTimer;
   Timer? _bubbleUpdateTimer;
 
+  // =========================
+  // Life-cycle / Init
+  // =========================
+  Future<void> init() async {
+    try {
+      // Gerekirse burada servis init’leri olur:
+      // await audio.init();
+      // await vibration.init();
+      // emit(state.copyWith(...));
+    } catch (e) {
+      emit(state.copyWith(error: e.toString()));
+    }
+  }
+
+  // =========================
+  // UI Helpers (Bubbles)
+  // =========================
   void _startBubbles() {
     emit(state.copyWith(bubbles: [], showBubbles: true));
 
@@ -80,8 +101,7 @@ class CleanerCubit extends Cubit<CleanerState> {
   void _updateBubbles() {
     final updatedBubbles = state.bubbles
         .map((bubble) {
-          // Yukarı hareket
-          final newBottom = bubble.bottom + 50;
+          final newBottom = bubble.bottom + 50; // yukarı hareket
           return bubble.copyWith(bottom: newBottom);
         })
         .where((bubble) => bubble.bottom < 600) // 600 px üzerini sil
@@ -92,6 +112,9 @@ class CleanerCubit extends Cubit<CleanerState> {
     }
   }
 
+  // =========================
+  // Logging
+  // =========================
   void _log(String m, [Object? d]) {
     if (kDebugMode) {
       dev.log(
@@ -101,6 +124,9 @@ class CleanerCubit extends Cubit<CleanerState> {
     }
   }
 
+  // =========================
+  // Setters
+  // =========================
   Future<void> setMode(CleanerMode mode) async {
     emit(state.copyWith(mode: mode));
   }
@@ -121,6 +147,9 @@ class CleanerCubit extends Cubit<CleanerState> {
     emit(state.copyWith(vibrationEnabled: v));
   }
 
+  // =========================
+  // Tone Profile
+  // =========================
   ({
     double startHz,
     double endHz,
@@ -186,14 +215,17 @@ class CleanerCubit extends Cubit<CleanerState> {
   }
 
   double _instantHzLogSweep(double s, double e, int T, int t) {
+    // ✅ defansif: T <= 0 ise başlangıç frekansı dön
+    if (T <= 0) return s;
     final K = T / math.log(e / s);
     return (s * math.exp(t / K)).clamp(s, e);
   }
 
+  // =========================
+  // Start / Stop
+  // =========================
   Future<void> start() async {
-    if (state.running) {
-      return;
-    }
+    if (state.running) return;
 
     final prof = _profile();
     final initialHz = state.mode == CleanerMode.sweep
@@ -255,11 +287,15 @@ class CleanerCubit extends Cubit<CleanerState> {
             );
 
       await audio.prepareFromBytes(bytes);
-      audio.playerState$.listen(
+
+      // ✅ Eski dinleyiciyi iptal et, yenisini bağla
+      await _playerSub?.cancel();
+      _playerSub = audio.playerState$.listen(
         (s) => _log('player', {'playing': s.playing, 'proc': s.processing}),
+        onError: (e, _) => _log('player_err', e.toString()),
       );
 
-      // Vibration
+      // ✅ Vibration
       if (state.vibrationEnabled) {
         if (await vibration.isSupported()) {
           final amp = switch (state.intensity) {
@@ -281,6 +317,7 @@ class CleanerCubit extends Cubit<CleanerState> {
 
       final total = state.durationSec;
       var elapsed = 0;
+
       _timer?.cancel();
       _timer = Timer.periodic(const Duration(seconds: 1), (_) {
         elapsed++;
@@ -299,14 +336,17 @@ class CleanerCubit extends Cubit<CleanerState> {
             currentHz: hz,
           ),
         );
+
         _log('tick', {'remaining': remaining, 'hz': hz.toStringAsFixed(1)});
 
         if (elapsed >= total) {
+          // ✅ önce timer’ı durdur, sonra stop çağır
+          _timer?.cancel();
+          _timer = null;
           stop();
         }
       });
 
-      // Play
       await audio.play();
     } catch (e) {
       _log('ERROR', e.toString());
@@ -323,13 +363,18 @@ class CleanerCubit extends Cubit<CleanerState> {
   }
 
   Future<void> stop() async {
-    if (!state.running) {
-      return;
-    }
+    if (!state.running) return;
+
     _log('STOP');
+
+    // ✅ Re-entrancy önlemi: timer’ı hemen kes
+    _timer?.cancel();
+    _timer = null;
+
     await audio.stop();
     _stopBubbles();
     await _cleanup();
+
     final prof = _profile();
     emit(
       state.copyWith(
@@ -344,24 +389,36 @@ class CleanerCubit extends Cubit<CleanerState> {
     );
   }
 
+  // =========================
+  // Cleanup
+  // =========================
   Future<void> _cleanup() async {
     _bubbleTimer?.cancel();
     _bubbleTimer = null;
     _bubbleUpdateTimer?.cancel();
     _bubbleUpdateTimer = null;
-
-    _timer?.cancel();
-    _timer = null;
-
     _vibTimer?.cancel();
     _vibTimer = null;
+
+    // ✅ Player dinleyicisini kes
+    await _playerSub?.cancel();
+    _playerSub = null;
+
+    // Timer zaten stop’ta kesiliyor ama yine defansif:
+    _timer?.cancel();
+    _timer = null;
 
     await vibration.cancel();
     await WakelockPlus.disable();
 
     if (_oldVolume != null) {
-      final vol = _oldVolume!.clamp(0.0, 1.0);
-      await _volume.setVolume(vol);
+      try {
+        final vol = _oldVolume!.clamp(0.0, 1.0);
+        await _volume.setVolume(vol);
+      } catch (_) {
+        // sessiz geç
+      }
+      _oldVolume = null;
     }
     _log('cleanup');
   }
