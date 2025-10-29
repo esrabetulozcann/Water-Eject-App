@@ -21,19 +21,19 @@ class AppNavBar extends StatelessWidget {
           destinations: [
             NavigationDestination(
               icon: Icon(AppIcons.waterDropOutlined.iconData),
-              label: LocaleKeys.tab_eject.tr(),
+              label: LocaleKeys.tabEject.tr(),
             ),
             NavigationDestination(
               icon: Icon(AppIcons.graphicEq.iconData),
-              label: LocaleKeys.tab_tone.tr(),
+              label: LocaleKeys.tabTone.tr(),
             ),
             NavigationDestination(
               icon: Icon(AppIcons.recordVoice.iconData),
-              label: LocaleKeys.tab_meter.tr(),
+              label: LocaleKeys.tabMeter.tr(),
             ),
             NavigationDestination(
               icon: Icon(AppIcons.surroundSound.iconData),
-              label: LocaleKeys.tab_stereo.tr(),
+              label: LocaleKeys.tabStereo.tr(),
             ),
           ],
         );

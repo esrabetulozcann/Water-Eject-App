@@ -35,10 +35,11 @@ class _WavePainter extends CustomPainter {
     for (int x = 0; x <= size.width; x++) {
       final t = x / size.width * 2 * pi * freq;
       final y = size.height / 2 + sin(t) * amp;
-      if (x == 0)
+      if (x == 0) {
         path.moveTo(x.toDouble(), y);
-      else
+      } else {
         path.lineTo(x.toDouble(), y);
+      }
     }
     canvas.drawPath(path, paint);
   }

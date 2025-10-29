@@ -29,7 +29,7 @@ class AutoLoopSwitch extends StatelessWidget {
               const SizedBox(width: 12),
               Expanded(
                 child: Text(
-                  LocaleKeys.auto_loop.tr(),
+                  LocaleKeys.autoLoop.tr(),
                   style: theme.textTheme.titleMedium,
                 ),
               ),
@@ -46,7 +46,7 @@ class AutoLoopSwitch extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            LocaleKeys.auto_loop_description.tr(),
+            LocaleKeys.autoLoopDescription.tr(),
             style: theme.textTheme.bodySmall?.copyWith(
               color: theme.colorScheme.onSurface.withOpacity(0.6),
             ),

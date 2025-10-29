@@ -217,22 +217,22 @@ class IntensitySelector extends StatelessWidget {
   String _getIntensityLabel(Intensity intensity) {
     switch (intensity) {
       case Intensity.soft:
-        return LocaleKeys.intensity_soft.tr();
+        return LocaleKeys.intensitySoft.tr();
       case Intensity.medium:
-        return LocaleKeys.intensity_medium.tr();
+        return LocaleKeys.intensityMedium.tr();
       case Intensity.strong:
-        return LocaleKeys.intensity_strong.tr();
+        return LocaleKeys.intensityStrong.tr();
     }
   }
 
   String _getIntensityText(Intensity intensity) {
     switch (intensity) {
       case Intensity.soft:
-        return LocaleKeys.intensity_soft.tr();
+        return LocaleKeys.intensitySoft.tr();
       case Intensity.medium:
-        return LocaleKeys.intensity_medium.tr();
+        return LocaleKeys.intensityMedium.tr();
       case Intensity.strong:
-        return LocaleKeys.intensity_strong.tr();
+        return LocaleKeys.intensityStrong.tr();
     }
   }
 }

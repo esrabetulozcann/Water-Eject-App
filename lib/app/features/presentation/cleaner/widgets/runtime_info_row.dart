@@ -20,12 +20,12 @@ class RuntimeInfoRow extends StatelessWidget {
           children: [
             Icon(AppIcons.time.iconData, size: 18),
             const SizedBox(width: 6),
-            Text(LocaleKeys.seconds_fmt.tr(args: ['${state.remainingSec}'])),
+            Text(LocaleKeys.secondsFmt.tr(args: ['${state.remainingSec}'])),
             const SizedBox(width: 12),
             Icon(AppIcons.graphicEq.iconData, size: 18),
             const SizedBox(width: 6),
             Text(
-              LocaleKeys.hz_fmt.tr(args: [state.currentHz.toStringAsFixed(0)]),
+              LocaleKeys.hzFmt.tr(args: [state.currentHz.toStringAsFixed(0)]),
             ),
           ],
         );

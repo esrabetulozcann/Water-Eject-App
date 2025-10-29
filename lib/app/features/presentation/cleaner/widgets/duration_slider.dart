@@ -34,7 +34,7 @@ class DurationSlider extends StatelessWidget {
             Align(
               alignment: Alignment.centerRight,
               child: Text(
-                LocaleKeys.seconds_fmt.tr(args: ['${state.durationSec}']),
+                LocaleKeys.secondsFmt.tr(args: ['${state.durationSec}']),
               ),
             ),
           ],

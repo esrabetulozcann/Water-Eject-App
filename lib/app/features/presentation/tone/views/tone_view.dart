@@ -26,7 +26,7 @@ class ToneView extends StatelessWidget {
                   ),
 
                   Text(
-                    LocaleKeys.tone_adjust_instruction.tr(),
+                    LocaleKeys.toneAdjustInstruction.tr(),
                     style: theme.textTheme.bodyMedium?.copyWith(
                       color: theme.textTheme.bodyMedium?.color?.withOpacity(
                         0.6,

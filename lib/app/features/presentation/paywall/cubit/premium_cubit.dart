@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:water_eject/app/domain/services/premium_service.dart';
 
 class PremiumCubit extends Cubit<bool> {

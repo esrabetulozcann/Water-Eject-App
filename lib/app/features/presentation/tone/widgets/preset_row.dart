@@ -32,9 +32,9 @@ class PresetRow extends StatelessWidget {
   }
 
   String _labelOf(double p) {
-    if (p <= 70) return LocaleKeys.preset_deep_bass.tr();
-    if (p <= 110) return LocaleKeys.preset_strong_bass.tr();
-    return LocaleKeys.preset_light.tr();
+    if (p <= 70) return LocaleKeys.presetDeepBass.tr();
+    if (p <= 110) return LocaleKeys.presetStrongBass.tr();
+    return LocaleKeys.presetLight.tr();
   }
 }
 
@@ -54,7 +54,7 @@ class _PresetChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final base = theme.colorScheme.primary.withOpacity(0.10);
+    //final base = theme.colorScheme.primary.withOpacity(0.10);
 
     final activeBg = theme.colorScheme.primary.withOpacity(0.08);
     final inactiveBg = theme.colorScheme.primary.withOpacity(0.04);

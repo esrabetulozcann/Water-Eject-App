@@ -25,20 +25,20 @@ class SavingsBanner extends StatelessWidget {
         text: TextSpan(
           children: [
             TextSpan(
-              text: LocaleKeys.savings_banner_part1.tr(),
+              text: LocaleKeys.savingsBannerPart1.tr(),
               style: theme.textTheme.bodySmall?.copyWith(
                 color: colors.onSurface,
               ),
             ),
             TextSpan(
-              text: LocaleKeys.savings_banner_part2.tr(),
+              text: LocaleKeys.savingsBannerPart2.tr(),
               style: theme.textTheme.bodySmall?.copyWith(
                 color: colors.primary,
                 fontWeight: FontWeight.bold,
               ),
             ),
             TextSpan(
-              text: LocaleKeys.savings_banner_part3.tr(),
+              text: LocaleKeys.savingsBannerPart3.tr(),
               style: theme.textTheme.bodySmall?.copyWith(
                 color: colors.onSurface,
               ),

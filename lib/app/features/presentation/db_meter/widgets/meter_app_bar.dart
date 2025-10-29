@@ -12,16 +12,16 @@ class MeterAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return CommonAppBar(
-      title: LocaleKeys.db_meter.tr(),
+      title: LocaleKeys.dbMeter.tr(),
       centerTitle: true,
-      subtitle: LocaleKeys.real_time_sound_level.tr(),
+      subtitle: LocaleKeys.realTimeSoundLevel.tr(),
       showSettings: false,
       //automaticallyImplyLeading: false, //  hizalar aynı
       onSettingsPressed: () {
         showAboutDialog(
           context: context,
-          applicationName: LocaleKeys.db_meter.tr(),
-          children: [Text(LocaleKeys.about_dialog_description.tr())],
+          applicationName: LocaleKeys.dbMeter.tr(),
+          children: [Text(LocaleKeys.aboutDialogDescription.tr())],
         );
       },
     );

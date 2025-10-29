@@ -33,14 +33,17 @@ class StartButton extends StatelessWidget {
               ),
             ),
             onPressed: () async {
-              final isPremium = context.read<PremiumCubit>().state;
+              final premium = context.read<PremiumCubit>().state;
+              final stereo = context.read<StereoCubit>();
 
-              if (!isPremium && !isOn) {
+              final isOn = context.read<StereoCubit>().state.isTesting;
+
+              if (!premium && !isOn) {
                 final purchased = await PaywallPage.show(context) ?? false;
                 if (!purchased) return;
               }
 
-              await context.read<StereoCubit>().startOrStop();
+              await stereo.startOrStop();
             },
             icon: Icon(
               isOn

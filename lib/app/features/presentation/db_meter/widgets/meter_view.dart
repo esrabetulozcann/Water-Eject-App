@@ -21,14 +21,18 @@ class MeterView extends StatelessWidget {
             final effect = state.effect;
             if (effect is ShowPermissionDialog) {
               final permanentlyDenied = effect.permanentlyDenied;
+
+              final cubit = context.read<DbMeterCubit>();
+              //final navigator = Navigator.of(context);
+
               final result = await showDialog<bool>(
                 context: context,
                 builder: (ctx) => AlertDialog(
-                  title: Text(LocaleKeys.mic_permission_required.tr()),
+                  title: Text(LocaleKeys.micPermissionRequired.tr()),
                   content: Text(
                     permanentlyDenied
-                        ? LocaleKeys.permission_permanently_denied_message.tr()
-                        : LocaleKeys.permission_request_message.tr(),
+                        ? LocaleKeys.permissionPermanentlyDeniedMessage.tr()
+                        : LocaleKeys.permissionRequestMessage.tr(),
                   ),
                   actions: [
                     TextButton(
@@ -39,8 +43,8 @@ class MeterView extends StatelessWidget {
                       onPressed: () => Navigator.of(ctx).pop(true),
                       child: Text(
                         permanentlyDenied
-                            ? LocaleKeys.open_settings.tr()
-                            : LocaleKeys.grant_permission.tr(),
+                            ? LocaleKeys.openSettings.tr()
+                            : LocaleKeys.grantPermission.tr(),
                       ),
                     ),
                   ],
@@ -48,11 +52,11 @@ class MeterView extends StatelessWidget {
               );
 
               if (result == true) {
-                await context.read<DbMeterCubit>().requestPermissionAndStart(
+                await cubit.requestPermissionAndStart(
                   permanentlyDenied: permanentlyDenied,
                 );
               } else {
-                context.read<DbMeterCubit>().clearEffect();
+                cubit.clearEffect();
               }
             }
           },

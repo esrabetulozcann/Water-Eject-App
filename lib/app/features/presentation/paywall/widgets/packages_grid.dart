@@ -20,20 +20,20 @@ class PackagesGrid extends StatelessWidget {
               children: [
                 Expanded(
                   child: PackageCard(
-                    title: LocaleKeys.monthly_title.tr(),
-                    price: LocaleKeys.monthly_price2.tr(),
-                    period: LocaleKeys.monthly_period.tr(),
-                    packageType: LocaleKeys.monthly_title.tr(),
+                    title: LocaleKeys.monthlyTitle.tr(),
+                    price: LocaleKeys.monthlyPrice2.tr(),
+                    period: LocaleKeys.monthlyPeriod.tr(),
+                    packageType: LocaleKeys.monthlyTitle.tr(),
                   ),
                 ),
                 SizedBox(width: 8),
                 Expanded(
                   child: PackageCard(
-                    title: LocaleKeys.yearly_title.tr(),
-                    price: LocaleKeys.yearly_price.tr(),
-                    period: LocaleKeys.yearly_period.tr(),
-                    packageType: LocaleKeys.yearly_title.tr(),
-                    discount: LocaleKeys.yearly_discount.tr(),
+                    title: LocaleKeys.yearlyTitle.tr(),
+                    price: LocaleKeys.yearlyPrice.tr(),
+                    period: LocaleKeys.yearlyPeriod.tr(),
+                    packageType: LocaleKeys.yearlyTitle.tr(),
+                    discount: LocaleKeys.yearlyDiscount.tr(),
                   ),
                 ),
               ],
@@ -41,7 +41,7 @@ class PackagesGrid extends StatelessWidget {
             const SizedBox(height: 8),
             // Tasarruf banner'ı
             SavingsBanner(
-              isVisible: selectedPackage == LocaleKeys.yearly_title.tr(),
+              isVisible: selectedPackage == LocaleKeys.yearlyTitle.tr(),
             ),
           ],
         );

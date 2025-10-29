@@ -13,7 +13,7 @@ class TrustFooter extends StatelessWidget {
     return Column(
       children: [
         Text(
-          LocaleKeys.trust_footer.tr(),
+          LocaleKeys.trustFooter.tr(),
           style: theme.textTheme.bodySmall?.copyWith(
             color: colors.onSurface.withOpacity(0.6),
           ),

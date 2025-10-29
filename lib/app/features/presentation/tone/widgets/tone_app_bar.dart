@@ -12,15 +12,15 @@ class ToneAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return CommonAppBar(
-      title: LocaleKeys.tone_generator.tr(),
+      title: LocaleKeys.toneGenerator.tr(),
       centerTitle: true,
-      subtitle: LocaleKeys.tone_subtitle.tr(),
+      subtitle: LocaleKeys.toneSubtitle.tr(),
       showSettings: false,
       onSettingsPressed: () {
         showAboutDialog(
           context: context,
-          applicationName: LocaleKeys.tone_generator.tr(),
-          children: [Text(LocaleKeys.tone_about_description.tr())],
+          applicationName: LocaleKeys.toneGenerator.tr(),
+          children: [Text(LocaleKeys.toneAboutDescription.tr())],
         );
       },
     );

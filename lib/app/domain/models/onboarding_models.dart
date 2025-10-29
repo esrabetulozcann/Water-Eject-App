@@ -18,20 +18,20 @@ class OnboardingPageModel {
 class OnboardingData {
   static final List<OnboardingPageModel> pages = [
     OnboardingPageModel(
-      title: LocaleKeys.onboarding_page1_title.tr(),
-      description: LocaleKeys.onboarding_page1_description.tr(),
+      title: LocaleKeys.onboardingPage1Title.tr(),
+      description: LocaleKeys.onboardingPage1Description.tr(),
       imagePath: 'assets/onboarding/water_eject2.jpg',
     ),
     OnboardingPageModel(
-      title: LocaleKeys.onboarding_page2_title.tr(),
-      description: LocaleKeys.onboarding_page2_description.tr(),
+      title: LocaleKeys.onboardingPage2Title.tr(),
+      description: LocaleKeys.onboardingPage2Description.tr(),
       imagePath: 'assets/onboarding/usage.png',
     ),
     OnboardingPageModel(
-      title: LocaleKeys.onboarding_page3_title.tr(),
-      description: LocaleKeys.onboarding_page3_description.tr(),
+      title: LocaleKeys.onboardingPage3Title.tr(),
+      description: LocaleKeys.onboardingPage3Description.tr(),
       imagePath: 'assets/onboarding/disclaimer.jpg',
-      buttonText: LocaleKeys.onboarding_page3_buttonText.tr(),
+      buttonText: LocaleKeys.onboardingPage3ButtonText.tr(),
     ),
   ];
 }

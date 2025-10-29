@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 enum AppIcons {
   stop, // Dur buton ikonu
@@ -27,10 +26,11 @@ enum AppIcons {
   play, // oynat ikonu
   darkMode,
   language,
-  chevron_right,
+  chevronRight,
   info,
   share,
   star,
+  privacy,
 }
 
 extension AppIconsExtension on AppIcons {
@@ -86,7 +86,7 @@ extension AppIconsExtension on AppIcons {
         return Icons.dark_mode_outlined;
       case AppIcons.language:
         return Icons.language_outlined;
-      case AppIcons.chevron_right:
+      case AppIcons.chevronRight:
         return Icons.chevron_right;
       case AppIcons.info:
         return Icons.info_outline;
@@ -94,6 +94,8 @@ extension AppIconsExtension on AppIcons {
         return Icons.share_outlined;
       case AppIcons.star:
         return Icons.star_border_outlined;
+      case AppIcons.privacy:
+        return Icons.privacy_tip_outlined;
     }
   }
 }

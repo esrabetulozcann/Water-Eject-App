@@ -27,7 +27,7 @@ class PaywallHeader extends StatelessWidget {
         const SizedBox(height: 8),
         // Başlık
         Text(
-          LocaleKeys.upgrade_to_premium.tr(),
+          LocaleKeys.upgradeToPremium.tr(),
           style: theme.textTheme.titleLarge?.copyWith(
             // HeadlineSmall -> TitleLarge
             fontWeight: FontWeight.bold,
@@ -37,7 +37,7 @@ class PaywallHeader extends StatelessWidget {
         const SizedBox(height: 4),
         // Açıklama
         Text(
-          LocaleKeys.premium_description.tr(),
+          LocaleKeys.premiumDescription.tr(),
           style: theme.textTheme.bodyMedium,
           textAlign: TextAlign.center,
         ),

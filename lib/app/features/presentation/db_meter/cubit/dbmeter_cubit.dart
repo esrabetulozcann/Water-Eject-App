@@ -14,9 +14,9 @@ class DbMeterCubit extends Cubit<DbMeterState> with WidgetsBindingObserver {
   }
 
   @override
-  void didChangeAppLifecycleState(AppLifecycleState stateLife) {
-    if (stateLife == AppLifecycleState.inactive ||
-        stateLife == AppLifecycleState.paused) {
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.inactive ||
+        state == AppLifecycleState.paused) {
       stop();
     }
   }

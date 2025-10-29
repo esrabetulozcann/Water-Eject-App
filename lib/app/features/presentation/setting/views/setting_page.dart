@@ -23,6 +23,25 @@ class SettingPage extends StatelessWidget {
         builder: (context, state) {
           final cubit = context.read<SettingCubit>();
 
+          final isDarkNow = state.isDarkMode;
+          final darkNextTitle = isDarkNow
+              ? LocaleKeys.settingLightMode
+                    .tr() // koyuysa Light Mode göster
+              : LocaleKeys.settingDarkMode.tr(); // açıksa Dark Mode göster
+          final darkNextIcon = isDarkNow
+              ? Icons
+                    .wb_sunny_rounded // koyuysa güneş ikonunu göster
+              : AppIcons.darkMode.iconData; // açıksa ay (dark) ikonunu göster
+
+          final isEnglishNow = state.isEnglish;
+          final langNextTitle = isEnglishNow
+              ? LocaleKeys.settingLanguageTr
+                    .tr() // İngilizce ise Türkçe yaz
+              : LocaleKeys.settingLanguageEn.tr(); // Türkçe ise English yaz
+          final langNextIcon = isEnglishNow
+              ? Icons.translate
+              : AppIcons.language.iconData;
+
           return Scaffold(
             appBar: SettingAppBar(),
             body: ListView(
@@ -30,51 +49,51 @@ class SettingPage extends StatelessWidget {
               children: [
                 SettingsSection(
                   children: [
+                    // 🌙/🌞 Tema anahtarı
                     SettingsSwitchTile(
-                      icon: AppIcons.darkMode.iconData,
-                      title: LocaleKeys.setting_dark_mode.tr(),
-                      value: state.isDarkMode,
+                      icon: darkNextIcon,
+                      title: darkNextTitle,
+                      value: isDarkNow,
                       onChanged: (val) {
-                        // 1) Kendi cubit’inin state’ini güncelle (UI tutarlılığı)
                         cubit.toggleDarkMode(val);
-                        // 2) Uygulama temasını gerçek Cubit’e bildir (global etki)
                         context.read<ThemeCubit>().toggle(val);
                       },
                     ),
 
+                    //  Dil
                     SettingsSwitchTile(
-                      icon: AppIcons.language.iconData,
-                      title: LocaleKeys.setting_language_en.tr(),
-                      value: state.isEnglish,
+                      icon: langNextIcon,
+                      title: langNextTitle,
+                      value: isEnglishNow,
                       onChanged: (isEnglish) async {
-                        // 1) Kendi cubit’inin state’ini güncelle
                         cubit.toggleLanguage(isEnglish);
-                        // 2) LocaleCubit’e bildir (global etki)
                         final locale = isEnglish
                             ? const Locale('en', 'US')
                             : const Locale('tr', 'TR');
                         context.read<LocaleCubit>().setLocale(locale);
-                        // 3) EasyLocalization zaten main.dart’ta BlocListener ile locale’ı güncelliyor.
-                        // (İstersen burada da güvence olsun diye:)
                         await context.setLocale(locale);
                       },
                     ),
                   ],
                 ),
-                const SizedBox(height: 16),
+
                 SettingsSection(
                   children: [
                     SettingsTile(
                       icon: AppIcons.info.iconData,
-                      title: LocaleKeys.setting_abaout.tr(),
+                      title: LocaleKeys.settingAbout.tr(),
                     ),
                     SettingsTile(
                       icon: AppIcons.share.iconData,
-                      title: LocaleKeys.setting_app_share.tr(),
+                      title: LocaleKeys.settingAppShare.tr(),
                     ),
                     SettingsTile(
                       icon: AppIcons.star.iconData,
-                      title: LocaleKeys.setting_app_rate.tr(),
+                      title: LocaleKeys.settingAppRate.tr(),
+                    ),
+                    SettingsTile(
+                      icon: AppIcons.privacy.iconData,
+                      title: LocaleKeys.settingPrivacyPolicy.tr(),
                     ),
                   ],
                 ),

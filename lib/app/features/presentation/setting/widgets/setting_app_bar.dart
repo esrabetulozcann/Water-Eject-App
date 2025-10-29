@@ -9,7 +9,7 @@ class SettingAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return CommonAppBar(
-      title: LocaleKeys.setting_title.tr(),
+      title: LocaleKeys.settingTitle.tr(),
       centerTitle: true,
       showSettings: false,
     );

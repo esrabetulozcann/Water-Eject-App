@@ -30,7 +30,7 @@ class StereoView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    LocaleKeys.stereo_start_test.tr(),
+                    LocaleKeys.stereoStartTest.tr(),
                     style: theme.textTheme.titleMedium,
                     textAlign: TextAlign.center,
                   ),
@@ -53,14 +53,14 @@ class StereoView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           ChannelButton(
-                            label: LocaleKeys.stereo_left_channel.tr(),
+                            label: LocaleKeys.stereoLeftChannel.tr(),
                             side: StereoChannel.left,
                             isActive: leftActive,
                             isSelected: leftSelected,
                             onTap: () => context.read<StereoCubit>().tapLeft(),
                           ),
                           ChannelButton(
-                            label: LocaleKeys.stereo_right_channel.tr(),
+                            label: LocaleKeys.stereoRightChannel.tr(),
                             side: StereoChannel.right,
                             isActive: rightActive,
                             isSelected: rightSelected,

@@ -5,12 +5,12 @@ import 'package:water_eject/app/features/data/cleaner/audio/tone_generator.dart'
 class TonePlayer {
   final JustAudioEngine _engine;
   bool _playing = false;
-  double _currentHz = 165;
+  // double _currentHz = 165;
 
   TonePlayer(this._engine);
 
   Future<void> start(double hz) async {
-    _currentHz = hz;
+    // _currentHz = hz;
     final bytes = _buildWav(hz);
 
     await _engine.prepareFromBytes(bytes);
@@ -19,7 +19,7 @@ class TonePlayer {
   }
 
   Future<void> setFrequency(double hz) async {
-    _currentHz = hz;
+    // _currentHz = hz;
     if (!_playing) return;
     final bytes = _buildWav(hz);
     // Hz değişince yeni wav'ı hazırlayıp hemen çalıyoruz

@@ -40,9 +40,9 @@ class PayButton extends StatelessWidget {
               elevation: 0,
             ),
             child: Text(
-              selectedPackage == LocaleKeys.yearly_title.tr()
-                  ? LocaleKeys.pay_yearly.tr()
-                  : LocaleKeys.pay_monthly.tr(),
+              selectedPackage == LocaleKeys.yearlyTitle.tr()
+                  ? LocaleKeys.payYearly.tr()
+                  : LocaleKeys.payMonthly.tr(),
               style: theme.textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: colors.onPrimary,
@@ -55,15 +55,16 @@ class PayButton extends StatelessWidget {
   }
 
   void _onPayPressed(BuildContext context) async {
+    final premiumCubit = context.read<PremiumCubit>();
     try {
-      final premiumCubit = context.read<PremiumCubit>();
       await premiumCubit.activatePremium();
+      if (!context.mounted) return;
       Navigator.of(context).pop(true);
 
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(LocaleKeys.premium_activated.tr()),
+            content: Text(LocaleKeys.premiumActivated.tr()),
             backgroundColor: Theme.of(context).colorScheme.primary,
             duration: const Duration(seconds: 2),
           ),

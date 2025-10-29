@@ -105,7 +105,7 @@ class PackageCard extends StatelessWidget {
                 // Aylık maliyet (sadece yıllık için)
                 if (period == LocaleKeys.year.tr())
                   Text(
-                    LocaleKeys.monthly_price.tr(),
+                    LocaleKeys.monthlyPrice.tr(),
                     style: theme.textTheme.bodySmall?.copyWith(
                       color: colors.primary,
                       fontWeight: FontWeight.bold,

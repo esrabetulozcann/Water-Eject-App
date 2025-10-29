@@ -11,9 +11,9 @@ class CleanerAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return CommonAppBar(
       elevation: 0,
-      title: LocaleKeys.app_title.tr(),
+      title: LocaleKeys.appTitle.tr(),
       centerTitle: true,
-      subtitle: LocaleKeys.cta_subtitle.tr(),
+      subtitle: LocaleKeys.ctaSubtitle.tr(),
       showSettings: true,
       onSettingsPressed: () {
         Navigator.push(

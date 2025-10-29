@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:lottie/lottie.dart';
 import 'package:water_eject/app/common/constant/localization_keys.dart';
-import 'package:water_eject/app/common/widgets/app_nav_bar.dart';
 import 'package:water_eject/app/features/presentation/cleaner/cubit/cleaner_state.dart';
 
 import 'package:water_eject/app/features/presentation/cleaner/cubit/cleaner_cubit.dart';
@@ -41,7 +40,7 @@ class _CleanerView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CleanerCubit, CleanerState>(
       builder: (context, state) {
-        final screenWidth = MediaQuery.of(context).size.width;
+        //final screenWidth = MediaQuery.of(context).size.width;
         return Scaffold(
           // backgroundColor: const Color(0xFFE1F5FE), //  0xFFB3E5FC
           body: Stack(
@@ -117,7 +116,7 @@ class _CleanerView extends StatelessWidget {
                     listener: (context, state) {
                       if (state.error != null) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text(LocaleKeys.error_audio.tr())),
+                          SnackBar(content: Text(LocaleKeys.errorAudio.tr())),
                         );
                       }
                     },

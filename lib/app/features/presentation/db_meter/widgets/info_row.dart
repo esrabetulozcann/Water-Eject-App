@@ -22,14 +22,14 @@ class InfoRow extends StatelessWidget {
         children: [
           Expanded(
             child: _InfoTile(
-              title: LocaleKeys.current_db.tr(),
+              title: LocaleKeys.currentDb.tr(),
               value: currentText,
             ),
           ),
           const SizedBox(width: 8),
           Expanded(
             child: _InfoTile(
-              title: LocaleKeys.peak_db.tr(),
+              title: LocaleKeys.peakDb.tr(),
               value: peakText,
               action: TextButton(
                 onPressed: onResetPeak,

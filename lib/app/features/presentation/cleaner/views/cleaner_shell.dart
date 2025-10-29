@@ -22,7 +22,7 @@ class CleanerShell extends StatelessWidget {
     return BlocBuilder<NavigationCubit, NavigationState>(
       buildWhen: (p, c) => p.tab != c.tab,
       builder: (context, state) {
-        final index = NavigationCubit().index;
+        //final index = NavigationCubit().index;
 
         final i = context.read<NavigationCubit>().index;
 

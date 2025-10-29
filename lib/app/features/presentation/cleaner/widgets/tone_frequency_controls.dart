@@ -38,7 +38,7 @@ class ToneFrequencyControls extends StatelessWidget {
             Align(
               alignment: Alignment.centerRight,
               child: Text(
-                LocaleKeys.hz_fmt.tr(
+                LocaleKeys.hzFmt.tr(
                   args: [state.frequencyHz.toStringAsFixed(0)],
                 ),
               ),

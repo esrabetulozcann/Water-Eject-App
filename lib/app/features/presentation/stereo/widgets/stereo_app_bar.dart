@@ -9,15 +9,15 @@ class StereoAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CommonAppBar(
-      title: LocaleKeys.stereo_test.tr(),
+      title: LocaleKeys.stereoTest.tr(),
       centerTitle: true,
-      subtitle: LocaleKeys.stereo_subtitle.tr(),
+      subtitle: LocaleKeys.stereoSubtitle.tr(),
       showSettings: false,
       onSettingsPressed: () {
         showAboutDialog(
           context: context,
-          applicationName: LocaleKeys.stereo_test.tr(),
-          children: [Text(LocaleKeys.stereo_about_description.tr())],
+          applicationName: LocaleKeys.stereoTest.tr(),
+          children: [Text(LocaleKeys.stereoAboutDescription.tr())],
         );
       },
     );

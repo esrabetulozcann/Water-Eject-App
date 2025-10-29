@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'dart:math' as math;
 import 'dart:developer' as dev;
 
@@ -32,6 +31,7 @@ class CleanerCubit extends Cubit<CleanerState> {
   Timer? _timer;
   Timer? _vibTimer;
   Timer? _bubbleTimer;
+  Timer? _bubbleUpdateTimer;
 
   void _startBubbles() {
     emit(state.copyWith(bubbles: [], showBubbles: true));
@@ -44,35 +44,48 @@ class CleanerCubit extends Cubit<CleanerState> {
       }
       final random = math.Random();
       final newBubble = Bubble(
-        size: random.nextDouble() * 30 + 20, // 20-50 arası boyut
-        left: random.nextDouble() * 300, // 0-300 arası konum
-        duration: random.nextInt(2000) + 1000, // 1-3 saniye
+        size: random.nextDouble() * 30 + 20,
+        left: random.nextDouble() * 300,
+        duration: random.nextInt(2000) + 1000,
         bottom: 0.0,
       );
 
       final currentBubbles = List<Bubble>.from(state.bubbles);
       if (currentBubbles.length < 15) {
-        // Maksimum 15 baloncuk
         currentBubbles.add(newBubble);
         emit(state.copyWith(bubbles: currentBubbles));
       }
+    });
+
+    _bubbleUpdateTimer?.cancel();
+    _bubbleUpdateTimer = Timer.periodic(const Duration(milliseconds: 100), (
+      timer,
+    ) {
+      if (!state.running) {
+        timer.cancel();
+        return;
+      }
+      _updateBubbles();
     });
   }
 
   void _stopBubbles() {
     _bubbleTimer?.cancel();
+    _bubbleTimer = null;
+    _bubbleUpdateTimer?.cancel();
+    _bubbleUpdateTimer = null;
     emit(state.copyWith(showBubbles: false, bubbles: []));
   }
 
   void _updateBubbles() {
     final updatedBubbles = state.bubbles
         .map((bubble) {
-          // Baloncukları yukarı hareket ettir
-          final newBottom = bubble.bottom + 50; // Her seferinde 50px yukarı
+          // Yukarı hareket
+          final newBottom = bubble.bottom + 50;
           return bubble.copyWith(bottom: newBottom);
         })
-        .where((bubble) => bubble.bottom < 600)
-        .toList(); // 600px'den fazla olanları kaldır
+        .where((bubble) => bubble.bottom < 600) // 600 px üzerini sil
+        .toList();
 
     if (updatedBubbles.length != state.bubbles.length) {
       emit(state.copyWith(bubbles: updatedBubbles));
@@ -80,24 +93,33 @@ class CleanerCubit extends Cubit<CleanerState> {
   }
 
   void _log(String m, [Object? d]) {
-    if (kDebugMode)
+    if (kDebugMode) {
       dev.log(
         '${DateTime.now().toIso8601String()} $m ${d ?? ''}',
         name: 'Cleaner',
       );
+    }
   }
 
-  // ---- intentler
-  Future<void> setMode(CleanerMode mode) async =>
-      emit(state.copyWith(mode: mode));
-  Future<void> setIntensity(Intensity i) async =>
-      emit(state.copyWith(intensity: i));
-  Future<void> setDuration(int sec) async =>
-      emit(state.copyWith(durationSec: sec, remainingSec: sec));
-  Future<void> setFrequency(double hz) async =>
-      emit(state.copyWith(frequencyHz: hz, currentHz: hz));
-  Future<void> setVibrationEnabled(bool v) async =>
-      emit(state.copyWith(vibrationEnabled: v));
+  Future<void> setMode(CleanerMode mode) async {
+    emit(state.copyWith(mode: mode));
+  }
+
+  Future<void> setIntensity(Intensity i) async {
+    emit(state.copyWith(intensity: i));
+  }
+
+  Future<void> setDuration(int sec) async {
+    emit(state.copyWith(durationSec: sec, remainingSec: sec));
+  }
+
+  Future<void> setFrequency(double hz) async {
+    emit(state.copyWith(frequencyHz: hz, currentHz: hz));
+  }
+
+  Future<void> setVibrationEnabled(bool v) async {
+    emit(state.copyWith(vibrationEnabled: v));
+  }
 
   ({
     double startHz,
@@ -169,7 +191,9 @@ class CleanerCubit extends Cubit<CleanerState> {
   }
 
   Future<void> start() async {
-    if (state.running) return;
+    if (state.running) {
+      return;
+    }
 
     final prof = _profile();
     final initialHz = state.mode == CleanerMode.sweep
@@ -189,18 +213,8 @@ class CleanerCubit extends Cubit<CleanerState> {
     );
 
     try {
-      //Baloncukları başlattım
-      /* _startBubbles();
+      _startBubbles();
 
-      // Baloncuk güncellemeleri
-      Timer.periodic(const Duration(milliseconds: 100), (timer) {
-        if (!state.running) {
-          timer.cancel();
-          return;
-        }
-        _updateBubbles();
-      });
-*/
       _oldVolume = await _volume.getVolume();
       await _volume.setVolume(1.0);
       await WakelockPlus.enable();
@@ -209,36 +223,35 @@ class CleanerCubit extends Cubit<CleanerState> {
         'intensity': state.intensity.name,
       });
 
-      // audio bytes
-      final prof = _profile();
+      final prof2 = _profile();
 
       final bytes = state.mode == CleanerMode.sweep
           ? ToneGenerator.richLogSweepWav(
-              startHz: prof.startHz,
-              endHz: prof.endHz,
+              startHz: prof2.startHz,
+              endHz: prof2.endHz,
               durationMs: state.durationSec * 1000,
-              volume: prof.toneVolume,
-              tremoloRateHz: prof.tremoloRate,
-              tremoloDepth: prof.tremoloDepth,
-              h2: prof.h2,
-              h3: prof.h3,
-              noiseMix: prof.noiseMix,
-              attackMs: prof.attackMs,
-              releaseMs: prof.releaseMs,
+              volume: prof2.toneVolume,
+              tremoloRateHz: prof2.tremoloRate,
+              tremoloDepth: prof2.tremoloDepth,
+              h2: prof2.h2,
+              h3: prof2.h3,
+              noiseMix: prof2.noiseMix,
+              attackMs: prof2.attackMs,
+              releaseMs: prof2.releaseMs,
             )
           : ToneGenerator.richToneWav(
               baseHz: state.frequencyHz,
               durationMs: state.durationSec * 1000,
-              volume: prof.toneVolume,
-              vibratoRateHz: prof.vibratoRate,
-              vibratoDepthCents: prof.vibratoDepthCents,
-              tremoloRateHz: prof.tremoloRate,
-              tremoloDepth: prof.tremoloDepth,
-              h2: prof.h2,
-              h3: prof.h3,
-              noiseMix: prof.noiseMix,
-              attackMs: prof.attackMs,
-              releaseMs: prof.releaseMs,
+              volume: prof2.toneVolume,
+              vibratoRateHz: prof2.vibratoRate,
+              vibratoDepthCents: prof2.vibratoDepthCents,
+              tremoloRateHz: prof2.tremoloRate,
+              tremoloDepth: prof2.tremoloDepth,
+              h2: prof2.h2,
+              h3: prof2.h3,
+              noiseMix: prof2.noiseMix,
+              attackMs: prof2.attackMs,
+              releaseMs: prof2.releaseMs,
             );
 
       await audio.prepareFromBytes(bytes);
@@ -246,9 +259,7 @@ class CleanerCubit extends Cubit<CleanerState> {
         (s) => _log('player', {'playing': s.playing, 'proc': s.processing}),
       );
 
-      // await audio.play();
-
-      // vibration
+      // Vibration
       if (state.vibrationEnabled) {
         if (await vibration.isSupported()) {
           final amp = switch (state.intensity) {
@@ -268,16 +279,17 @@ class CleanerCubit extends Cubit<CleanerState> {
         _log('vibration disabled');
       }
 
-      // timer
       final total = state.durationSec;
       var elapsed = 0;
       _timer?.cancel();
       _timer = Timer.periodic(const Duration(seconds: 1), (_) {
         elapsed++;
-        final remaining = (total - elapsed).clamp(0, total);
+
+        final remaining = math.max(0, total - elapsed);
         final prog = (elapsed / total).clamp(0.0, 1.0);
+
         final hz = state.mode == CleanerMode.sweep
-            ? _instantHzLogSweep(prof.startHz, prof.endHz, total, elapsed)
+            ? _instantHzLogSweep(prof2.startHz, prof2.endHz, total, elapsed)
             : state.frequencyHz;
 
         emit(
@@ -289,10 +301,13 @@ class CleanerCubit extends Cubit<CleanerState> {
         );
         _log('tick', {'remaining': remaining, 'hz': hz.toStringAsFixed(1)});
 
-        if (elapsed >= total) stop();
+        if (elapsed >= total) {
+          stop();
+        }
       });
 
-      audio.play();
+      // Play
+      await audio.play();
     } catch (e) {
       _log('ERROR', e.toString());
       emit(
@@ -308,7 +323,9 @@ class CleanerCubit extends Cubit<CleanerState> {
   }
 
   Future<void> stop() async {
-    if (!state.running) return;
+    if (!state.running) {
+      return;
+    }
     _log('STOP');
     await audio.stop();
     _stopBubbles();
@@ -322,7 +339,7 @@ class CleanerCubit extends Cubit<CleanerState> {
         currentHz: state.mode == CleanerMode.sweep
             ? prof.startHz
             : state.frequencyHz,
-        showBubbles: false, // baloncukları gizledim
+        showBubbles: false,
       ),
     );
   }
@@ -330,14 +347,21 @@ class CleanerCubit extends Cubit<CleanerState> {
   Future<void> _cleanup() async {
     _bubbleTimer?.cancel();
     _bubbleTimer = null;
+    _bubbleUpdateTimer?.cancel();
+    _bubbleUpdateTimer = null;
+
     _timer?.cancel();
     _timer = null;
+
     _vibTimer?.cancel();
     _vibTimer = null;
+
     await vibration.cancel();
     await WakelockPlus.disable();
+
     if (_oldVolume != null) {
-      await _volume.setVolume(_oldVolume!.clamp(0.0, 1.0));
+      final vol = _oldVolume!.clamp(0.0, 1.0);
+      await _volume.setVolume(vol);
     }
     _log('cleanup');
   }
