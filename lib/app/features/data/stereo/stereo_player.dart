@@ -1,4 +1,4 @@
-import 'package:water_eject/app/features/presentation/stereo/cubit/stereo_state.dart';
+import 'package:water_eject/app/common/enum/stereo_channel_enum.dart';
 
 abstract class StereoPlayer {
   /// Belirli bir kanaldan (sol/sağ) test sesi çalar

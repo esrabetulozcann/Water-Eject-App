@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
-
-enum StereoChannel { none, left, right }
+import 'package:water_eject/app/common/enum/stereo_channel_enum.dart';
 
 class StereoState extends Equatable {
   final bool isTesting;

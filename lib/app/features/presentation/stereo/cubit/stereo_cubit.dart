@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:water_eject/app/common/enum/stereo_channel_enum.dart';
 import 'package:water_eject/app/features/data/stereo/stereo_player.dart';
 import 'stereo_state.dart';
 

@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 import 'package:just_audio/just_audio.dart';
-import 'package:water_eject/app/features/presentation/stereo/cubit/stereo_state.dart';
+import 'package:water_eject/app/common/enum/stereo_channel_enum.dart';
 import 'package:water_eject/app/features/data/stereo/stereo_player.dart';
 import 'package:water_eject/app/features/data/cleaner/audio/in_memory_audio_source.dart';
 import 'package:water_eject/app/features/data/cleaner/audio/tone_generator.dart';

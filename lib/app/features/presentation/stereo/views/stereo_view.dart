@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:water_eject/app/common/constant/localization_keys.dart';
+import 'package:water_eject/app/common/enum/stereo_channel_enum.dart';
 import 'package:water_eject/app/features/presentation/stereo/cubit/stereo_cubit.dart';
 import 'package:water_eject/app/features/presentation/stereo/cubit/stereo_state.dart';
 import 'package:water_eject/app/features/presentation/stereo/widgets/auto_loop_switch.dart';

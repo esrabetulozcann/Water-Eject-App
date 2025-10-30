@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:water_eject/app/common/constant/app_icons.dart';
 import 'package:water_eject/app/common/constant/colors.dart';
-import '../cubit/stereo_state.dart';
+import 'package:water_eject/app/common/enum/stereo_channel_enum.dart';
 
 class ChannelButton extends StatelessWidget {
   final String label;
