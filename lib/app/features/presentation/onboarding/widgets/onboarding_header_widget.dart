@@ -4,14 +4,20 @@ import '../cubit/onboarding_cubit.dart';
 
 class OnboardingHeaderWidget extends StatelessWidget {
   final int currentPage;
-  const OnboardingHeaderWidget({super.key, required this.currentPage});
+  final Future<void> Function()? onSkip; // ✅ parent’tan aksiyon al
+
+  const OnboardingHeaderWidget({
+    super.key,
+    required this.currentPage,
+    this.onSkip,
+  });
 
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<OnboardingCubit>();
-    final total = cubit.totalPages; // ✅
+    final total = cubit.totalPages;
     final colors = Theme.of(context).colorScheme;
-    final progress = (currentPage + 1) / total;
+    final progress = total == 0 ? 0.0 : (currentPage + 1) / total;
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 12, 20, 8),
@@ -22,7 +28,7 @@ class OnboardingHeaderWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "${currentPage + 1}/$total",
+                  "${(currentPage + 1).clamp(1, total)}/$total",
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
                 const SizedBox(height: 6),
@@ -48,7 +54,8 @@ class OnboardingHeaderWidget extends StatelessWidget {
           ),
           const SizedBox(width: 12),
           TextButton(
-            onPressed: () => Navigator.of(context).maybePop(),
+            // ❗ Artık maybePop() DEĞİL, parent’tan gelen onSkip
+            onPressed: onSkip,
             child: Text(
               'Skip',
               style: Theme.of(context).textTheme.labelLarge?.copyWith(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:water_eject/core/di/locator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:water_eject/app/common/router/app_router.dart';
 import '../cubit/onboarding_cubit.dart';
 import '../widgets/onboarding_header_widget.dart';
 import '../widgets/onboarding_content_widget.dart';
@@ -11,10 +12,9 @@ class OnboardingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final pages = OnboardingData.pages; // mevcut model listen
+    final pages = OnboardingData.pages;
     return BlocProvider(
-      // create: (_) => OnboardingCubit(totalPages: pages.length),
-      create: (_) => sl<OnboardingCubit>(param1: pages.length),
+      create: (_) => OnboardingCubit(totalPages: pages.length),
       child: _OnboardingContent(pages: pages),
     );
   }
@@ -26,14 +26,35 @@ class _OnboardingContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future<void> complete() async {
+      // ✅ await ÖNCESİ: navigasyon aksiyonunu hazırla
+      final nav = Navigator.of(context);
+      final routeAction = nav.canPop()
+          ? () => nav.pop(true)
+          : () => nav.pushNamedAndRemoveUntil(AppRouter.cleaner, (r) => false);
+
+      // ✅ flag’i yaz
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setBool('onboarding_done', true);
+
+      // ✅ await SONRASI: context’e dokunmadan aksiyonu çalıştır
+      routeAction();
+    }
+
     return BlocBuilder<OnboardingCubit, int>(
       builder: (context, currentPage) {
         return Scaffold(
           body: SafeArea(
             child: Column(
               children: [
-                OnboardingHeaderWidget(currentPage: currentPage),
-                OnboardingContentWidget(pages: pages), // stateless olacak
+                OnboardingHeaderWidget(
+                  currentPage: currentPage,
+                  onSkip: complete, // ✅ Skip artık buradan
+                ),
+                OnboardingContentWidget(
+                  pages: pages,
+                  onComplete: complete, // ✅ Son sayfa Next de buradan
+                ),
               ],
             ),
           ),
