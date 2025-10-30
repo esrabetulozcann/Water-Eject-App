@@ -21,7 +21,7 @@ mixin CleanerViewMixin<T extends StatefulWidget> on State<T> {
     ).showSnackBar(SnackBar(content: Text(LocaleKeys.errorAudio.tr())));
   }
 
-  /// Arka plan baloncukları (tek yerde toparlandı)
+  /// Arka plan baloncukları
   Widget buildBubbles(bool show) {
     if (!show) return const SizedBox.shrink();
     return IgnorePointer(
@@ -72,7 +72,7 @@ mixin CleanerViewMixin<T extends StatefulWidget> on State<T> {
     );
   }
 
-  /// Hata Listener – BlocListener’daki mantığı soyutladık
+  /// Hata Listener
   Widget errorListener({required Widget child}) {
     return BlocListener<CleanerCubit, CleanerState>(
       listenWhen: (prev, curr) => prev.error != curr.error,

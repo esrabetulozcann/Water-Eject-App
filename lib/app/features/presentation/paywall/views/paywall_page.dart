@@ -6,7 +6,6 @@ import '../widgets/paywall_header.dart';
 import '../widgets/features_list.dart';
 import '../widgets/packages_grid.dart';
 import '../widgets/pay_button.dart';
-//import '../widgets/trust_footer.dart';
 
 class PaywallPage extends StatelessWidget {
   const PaywallPage({super.key});

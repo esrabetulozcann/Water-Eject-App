@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-enum AppTab { eject, tone, meter, stereo }
+import 'package:water_eject/app/common/enum/app_tab_enum.dart';
 
 class NavigationState {
   final AppTab tab;

@@ -8,7 +8,7 @@ class OnboardingContentWidget extends StatelessWidget {
   const OnboardingContentWidget({
     super.key,
     required this.pages,
-    required this.onComplete, // ✅ eklendi
+    required this.onComplete,
   });
 
   final List<OnboardingPageModel> pages;
@@ -29,7 +29,7 @@ class OnboardingContentWidget extends StatelessWidget {
             page: pages[i],
             isLastPage: isLast,
             onNext: () async => isLast ? onComplete() : cubit.nextPage(),
-            onSkip: onComplete, // ✅ Skip de aynı akış
+            onSkip: onComplete,
           );
         },
       ),

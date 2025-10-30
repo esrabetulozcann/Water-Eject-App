@@ -13,7 +13,6 @@ class DbMeterCubit extends Cubit<DbMeterState> with WidgetsBindingObserver {
     WidgetsBinding.instance.addObserver(this);
   }
 
-  //..init() çağıracağız
   Future<void> init() async {
     await checkPermission();
   }
@@ -43,7 +42,7 @@ class DbMeterCubit extends Cubit<DbMeterState> with WidgetsBindingObserver {
     return MicPermissionStatus.unknown;
   }
 
-  /// Start/Stop butonuna basıldığında yalnızca bu çağrılsın
+  /// Start/Stop butonuna basıldığında yalnızca bu çağrılsın dedim
   Future<void> handleStartStopPressed() async {
     if (state.isMeasuring) {
       await stop();

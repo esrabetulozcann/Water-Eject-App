@@ -65,7 +65,7 @@ class PackageCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Rozet (her iki kartta da yer ayır: Opacity)
+                // her iki kartta da yer ayır: Opacity
                 SizedBox(
                   height: 20,
                   child: Align(
@@ -87,7 +87,7 @@ class PackageCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
 
-                // Fiyat tipografisi (₺ küçük + tam büyük + ,99 orta + dönem küçük)
+                // Fiyat
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
@@ -131,7 +131,7 @@ class PackageCard extends StatelessWidget {
 
                 const SizedBox(height: 6),
 
-                // Alt not (yıllık için aylık karşılığı). Her zaman yer ayır.
+                // Alt not (yıllık için aylık karşılığı)
                 SizedBox(
                   height: 18,
                   child: Align(

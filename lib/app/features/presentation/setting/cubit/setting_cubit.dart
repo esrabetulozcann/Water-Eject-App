@@ -1,9 +1,8 @@
-// lib/app/features/presentation/setting/cubit/setting_cubit.dart
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:water_eject/app/features/presentation/setting/cubit/setting_state.dart';
 
 class SettingCubit extends Cubit<SettingState> {
-  // ✅ başlangıç değerleri dışarıdan al
+  //  başlangıç değerleri dışarıdan aldım
   SettingCubit({required bool isDark, required bool isEnglish})
     : super(SettingState(isDarkMode: isDark, isEnglish: isEnglish));
 

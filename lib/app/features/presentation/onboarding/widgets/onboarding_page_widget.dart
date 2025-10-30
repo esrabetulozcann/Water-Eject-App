@@ -36,7 +36,7 @@ class OnboardingPageWidget extends StatelessWidget {
           children: [
             const Spacer(),
 
-            // Görsel: hafif glow + dairesel arka plan
+            // Görsel alanı
             Container(
               width: 220,
               height: 220,

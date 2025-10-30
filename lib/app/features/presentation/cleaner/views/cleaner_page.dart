@@ -11,7 +11,6 @@ class CleanerPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      // ✅ get_it’ten cubit al ve init’i burada tetikle
       create: (_) => sl<CleanerCubit>()..init(),
       child: const CleanerView(),
     );

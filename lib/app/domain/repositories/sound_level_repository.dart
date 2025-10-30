@@ -14,6 +14,6 @@ abstract class SoundLevelRepository {
   void setSmoothing(double alpha);
   void resetPeak();
 
-  /// Ölçüm akışı (calibrated + smoothed dB ve peak)
+  /// Ölçüm akışı
   Stream<SoundLevelModel> get levels;
 }

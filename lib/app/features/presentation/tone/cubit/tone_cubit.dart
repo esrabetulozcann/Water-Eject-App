@@ -3,7 +3,7 @@ import 'package:water_eject/app/domain/services/tone_player_service.dart';
 import 'tone_state.dart';
 
 class ToneCubit extends Cubit<ToneState> {
-  final ITonePlayer player; // <-- ITonePlayer
+  final ITonePlayer player;
   ToneCubit(this.player) : super(ToneState.initial());
 
   static const _throttleMs = 16; // ~60 fps
@@ -30,7 +30,7 @@ class ToneCubit extends Cubit<ToneState> {
 
   Future<void> setFreq(double hz) async {
     final clamped = hz.clamp(state.minHz, state.maxHz).toDouble();
-    // yakın değerse boşuna redraw yapmayalım
+    // yakın değerse boşuna redraw yapmasın
     if ((clamped - state.freq).abs() < 0.001) return;
 
     if (state.isPlaying) {
@@ -42,7 +42,7 @@ class ToneCubit extends Cubit<ToneState> {
   Future<void> setPreset(double hz) => setFreq(hz);
 
   Future<void> onVerticalDrag(double dy) async {
-    const sensitivity = 0.4; // daha kontrollü
+    const sensitivity = 0.4;
     final raw = state.freq + (-dy * sensitivity);
     final clamped = raw.clamp(state.minHz, state.maxHz).toDouble();
     final snapped = (clamped / _step).roundToDouble() * _step;
@@ -62,7 +62,7 @@ class ToneCubit extends Cubit<ToneState> {
     try {
       await player.stop();
     } catch (_) {
-      // hata durumunda UI güncellemesi yapılmaz
+      // hata durumunda UI güncellemesi yapılmasın
     }
   }
 

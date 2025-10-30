@@ -27,17 +27,17 @@ class _OnboardingContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future<void> complete() async {
-      // ✅ await ÖNCESİ: navigasyon aksiyonunu hazırla
+      // navigasyon aksiyonu
       final nav = Navigator.of(context);
       final routeAction = nav.canPop()
           ? () => nav.pop(true)
           : () => nav.pushNamedAndRemoveUntil(AppRouter.cleaner, (r) => false);
 
-      // ✅ flag’i yaz
+      // flag
       final prefs = await SharedPreferences.getInstance();
       await prefs.setBool('onboarding_done', true);
 
-      // ✅ await SONRASI: context’e dokunmadan aksiyonu çalıştır
+      // context’e dokunmadan aksiyonu çalıştırdım
       routeAction();
     }
 
@@ -49,11 +49,11 @@ class _OnboardingContent extends StatelessWidget {
               children: [
                 OnboardingHeaderWidget(
                   currentPage: currentPage,
-                  onSkip: complete, // ✅ Skip artık buradan
+                  onSkip: complete, // skip
                 ),
                 OnboardingContentWidget(
                   pages: pages,
-                  onComplete: complete, // ✅ Son sayfa Next de buradan
+                  onComplete: complete, //next
                 ),
               ],
             ),

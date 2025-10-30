@@ -29,7 +29,6 @@ class PaywallHeader extends StatelessWidget {
         Text(
           LocaleKeys.upgradeToPremium.tr(),
           style: theme.textTheme.titleLarge?.copyWith(
-            // HeadlineSmall -> TitleLarge
             fontWeight: FontWeight.bold,
             color: colors.primary,
           ),

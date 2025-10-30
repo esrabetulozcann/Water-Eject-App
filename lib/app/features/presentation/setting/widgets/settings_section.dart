@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class SettingsSection extends StatelessWidget {
   final List<Widget> children;
-  final String? title; // istersen başlık gösterebilirsin
+  final String? title;
 
   const SettingsSection({super.key, required this.children, this.title});
 

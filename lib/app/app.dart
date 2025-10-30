@@ -24,10 +24,6 @@ class AppCore extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBlocProvider(
-      child: LocalizationWrapper(
-        child: ThemeBuilder(), // Artık child parametresi yok
-      ),
-    );
+    return AppBlocProvider(child: LocalizationWrapper(child: ThemeBuilder()));
   }
 }

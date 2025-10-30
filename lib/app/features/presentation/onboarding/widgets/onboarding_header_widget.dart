@@ -4,7 +4,7 @@ import '../cubit/onboarding_cubit.dart';
 
 class OnboardingHeaderWidget extends StatelessWidget {
   final int currentPage;
-  final Future<void> Function()? onSkip; // ✅ parent’tan aksiyon al
+  final Future<void> Function()? onSkip;
 
   const OnboardingHeaderWidget({
     super.key,
@@ -54,7 +54,6 @@ class OnboardingHeaderWidget extends StatelessWidget {
           ),
           const SizedBox(width: 12),
           TextButton(
-            // ❗ Artık maybePop() DEĞİL, parent’tan gelen onSkip
             onPressed: onSkip,
             child: Text(
               'Skip',

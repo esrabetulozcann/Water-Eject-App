@@ -67,7 +67,7 @@ class SettingPage extends StatelessWidget {
                       },
                     ),
 
-                    // LANGUAGE (TR/EN)
+                    // Language (TR/EN)
                     SettingsExpandableChoiceTile<String>(
                       title: LocaleKeys.settingLanguage.tr(),
                       leadingIcon: AppIcons.language.iconData,

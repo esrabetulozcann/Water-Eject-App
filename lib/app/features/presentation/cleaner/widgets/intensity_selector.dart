@@ -10,9 +10,9 @@ import '../cubit/cleaner_cubit.dart';
 class IntensitySelector extends StatelessWidget {
   const IntensitySelector({super.key});
 
-  // Aynı değerleri hem slider hem etiketlerde kullanıyoruz
+  // Aynı değerleri hem slider hem etiketlerde kullanıyorum
   static const double _kSliderPad = 24.0; // Material Slider iç boşluğu
-  static const double _kSidePad = 12.0; // Senin dış kenar boşluğun
+  static const double _kSidePad = 12.0; // dış kenar boşluğu
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,7 @@ class IntensitySelector extends StatelessWidget {
 
           return Stack(
             children: [
-              // BEYAZ TRACK
+              // beyaz track
               Positioned(
                 left: trackLeft,
                 right: trackLeft,
@@ -70,7 +70,7 @@ class IntensitySelector extends StatelessWidget {
                 ),
               ),
 
-              // RENKLİ KISIM
+              // renkli kısım
               Positioned(
                 left: trackLeft,
                 width: barWidth,
@@ -99,7 +99,7 @@ class IntensitySelector extends StatelessWidget {
                 ),
               ),
 
-              // SLIDER (kendi track’ini gizliyoruz)
+              // Slider (kendi track’ini gizledim)
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: _kSidePad),
                 child: SliderTheme(
@@ -146,7 +146,7 @@ class IntensitySelector extends StatelessWidget {
     BuildContext context,
     Intensity currentIntensity,
   ) {
-    // Etiketleri track ile aynı yatay başlangıç/bitişe hizalıyoruz
+    // Etiketleri track ile aynı yatay başlangıç/bitişe hizaladım
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: _kSidePad + _kSliderPad),
       child: Row(
@@ -192,8 +192,7 @@ class IntensitySelector extends StatelessWidget {
     );
   }
 
-  // ---- helpers ----
-
+  // helpers
   Color _getThumbColorForValue(double value) {
     final double normalizedValue = (value / 2.0).clamp(0.0, 1.0).toDouble();
 

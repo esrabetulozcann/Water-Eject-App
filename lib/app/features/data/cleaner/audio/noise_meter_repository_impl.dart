@@ -39,8 +39,6 @@ class NoiseMeterRepositoryImpl implements SoundLevelRepository {
 
     _subscription = _noiseMeter.noise.listen(
       (reading) {
-        // Dokümantasyondaki alan adları:
-        // reading.meanDecibel, reading.maxDecibel
         final rawDb = reading.meanDecibel;
 
         // EMA: ilk örnekle başlat

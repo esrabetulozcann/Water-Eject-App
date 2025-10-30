@@ -19,7 +19,7 @@ class StereoCubit extends Cubit<StereoState> {
   Future<void> startOrStop() async => state.isTesting ? stop() : start();
 
   Future<void> start() async {
-    if (state.isTesting) return; // re-entrancy guard
+    if (state.isTesting) return;
     emit(state.copyWith(isTesting: true));
 
     if (state.autoLoop) {

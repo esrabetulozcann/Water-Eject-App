@@ -1,11 +1,8 @@
-// onboarding_button_widget.dart
 import 'package:flutter/material.dart';
-// import 'package:easy_localization/easy_localization.dart';
-// import 'package:water_eject/app/common/constant/localization_keys.dart';
 
 class OnboardingButtonWidget extends StatelessWidget {
   final bool isLastPage;
-  final String? buttonText; // <-- nullable kabul ediyoruz
+  final String? buttonText;
   final VoidCallback onPressed;
 
   const OnboardingButtonWidget({
@@ -17,12 +14,10 @@ class OnboardingButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Eğer buttonText boş/null ise fallback kullan:
+    // Eğer buttonText boş/null ise fallback
     final label = (buttonText != null && buttonText!.trim().isNotEmpty)
         ? buttonText!.trim()
         : (isLastPage ? 'I Agree' : 'Next');
-    // Lokalizasyon kullanacaksan:
-    // : (isLastPage ? LocaleKeys.iAgree.tr() : LocaleKeys.next.tr());
 
     final colors = Theme.of(context).colorScheme;
 

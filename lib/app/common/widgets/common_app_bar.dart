@@ -33,7 +33,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool showSettings;
 
   /// Ayarlar ikonuna basılınca ne olsun?
-  /// Vermezsen varsayılan olarak showAboutDialog açar.
+  /// Vermezsem varsayılan olarak showAboutDialog açar.
   final VoidCallback? onSettingsPressed;
 
   /// Ek aksiyonlar (peak reset, paylaş, vs.)

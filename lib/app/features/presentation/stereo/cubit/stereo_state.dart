@@ -5,8 +5,8 @@ enum StereoChannel { none, left, right }
 class StereoState extends Equatable {
   final bool isTesting;
   final bool autoLoop;
-  final StereoChannel active; // şu an çalan kanal (UI highlight)
-  final StereoChannel selected; // kullanıcı seçimi (başlat’ta kullanılır)
+  final StereoChannel active; // şu an çalan kanal
+  final StereoChannel selected; // kullanıcı seçimi
   final Duration stepDuration;
 
   const StereoState({

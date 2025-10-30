@@ -12,25 +12,25 @@ class FeaturesList extends StatelessWidget {
     return Column(
       children: [
         FeatureRow(
-          //emoji: '🎵',
+          //🎵,
           icon: AppIcons.musicNote.iconData,
           text: LocaleKeys.unlimitedStereoCleaning.tr(),
         ),
         SizedBox(height: 4),
         FeatureRow(
-          //emoji: '🚫',
+          //🚫
           icon: AppIcons.block.iconData,
           text: LocaleKeys.adFreeExperience.tr(),
         ),
         SizedBox(height: 4),
         FeatureRow(
-          //emoji: '⚡'
+          //⚡
           icon: AppIcons.flash.iconData,
           text: LocaleKeys.customFrequencies.tr(),
         ),
         SizedBox(height: 4),
         FeatureRow(
-          //emoji: '🔊',
+          //🔊
           icon: AppIcons.volume.iconData,
           text: LocaleKeys.advancedAudioQuality.tr(),
         ),

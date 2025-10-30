@@ -44,7 +44,7 @@ class StereoPlayerImpl implements StereoPlayer {
         _right.setLoopMode(LoopMode.one),
       ]);
 
-      // Başlangıçta ikisini de sessize al/pause et
+      // Başlangıçta ikisini de sessize aldım.
       await Future.wait([
         _left.setVolume(0),
         _right.setVolume(0),

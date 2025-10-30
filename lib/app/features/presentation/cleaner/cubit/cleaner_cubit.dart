@@ -21,7 +21,6 @@ class CleanerCubit extends Cubit<CleanerState> {
   final IVibrationService vibration;
   final VolumeController _volume;
 
-  // ✅ Player stream’i için subscription’ı tutuyoruz
   StreamSubscription? _playerSub;
 
   CleanerCubit({
@@ -37,12 +36,8 @@ class CleanerCubit extends Cubit<CleanerState> {
   Timer? _bubbleTimer;
   Timer? _bubbleUpdateTimer;
 
-  // =========================
-  // Life-cycle / Init
-  // =========================
   Future<void> init() async {
     try {
-      // Gerekirse burada servis init’leri olur:
       // await audio.init();
       // await vibration.init();
       // emit(state.copyWith(...));
@@ -51,9 +46,6 @@ class CleanerCubit extends Cubit<CleanerState> {
     }
   }
 
-  // =========================
-  // UI Helpers (Bubbles)
-  // =========================
   void _startBubbles() {
     emit(state.copyWith(bubbles: [], showBubbles: true));
 
@@ -112,9 +104,7 @@ class CleanerCubit extends Cubit<CleanerState> {
     }
   }
 
-  // =========================
   // Logging
-  // =========================
   void _log(String m, [Object? d]) {
     if (kDebugMode) {
       dev.log(
@@ -124,9 +114,7 @@ class CleanerCubit extends Cubit<CleanerState> {
     }
   }
 
-  // =========================
   // Setters
-  // =========================
   Future<void> setMode(CleanerMode mode) async {
     emit(state.copyWith(mode: mode));
   }
@@ -147,9 +135,7 @@ class CleanerCubit extends Cubit<CleanerState> {
     emit(state.copyWith(vibrationEnabled: v));
   }
 
-  // =========================
   // Tone Profile
-  // =========================
   ({
     double startHz,
     double endHz,
@@ -215,15 +201,13 @@ class CleanerCubit extends Cubit<CleanerState> {
   }
 
   double _instantHzLogSweep(double s, double e, int T, int t) {
-    // ✅ defansif: T <= 0 ise başlangıç frekansı dön
+    // defansif: T <= 0 ise başlangıç frekansı dön
     if (T <= 0) return s;
     final K = T / math.log(e / s);
     return (s * math.exp(t / K)).clamp(s, e);
   }
 
-  // =========================
   // Start / Stop
-  // =========================
   Future<void> start() async {
     if (state.running) return;
 
@@ -288,14 +272,14 @@ class CleanerCubit extends Cubit<CleanerState> {
 
       await audio.prepareFromBytes(bytes);
 
-      // ✅ Eski dinleyiciyi iptal et, yenisini bağla
+      // Eski dinleyiciyi iptal ettim, yenisini bağladım
       await _playerSub?.cancel();
       _playerSub = audio.playerState$.listen(
         (s) => _log('player', {'playing': s.playing, 'proc': s.processing}),
         onError: (e, _) => _log('player_err', e.toString()),
       );
 
-      // ✅ Vibration
+      //  Vibration
       if (state.vibrationEnabled) {
         if (await vibration.isSupported()) {
           final amp = switch (state.intensity) {
@@ -340,7 +324,7 @@ class CleanerCubit extends Cubit<CleanerState> {
         _log('tick', {'remaining': remaining, 'hz': hz.toStringAsFixed(1)});
 
         if (elapsed >= total) {
-          // ✅ önce timer’ı durdur, sonra stop çağır
+          // önce timer’ı durdurdum, sonra stop çağırdım
           _timer?.cancel();
           _timer = null;
           stop();
@@ -367,7 +351,7 @@ class CleanerCubit extends Cubit<CleanerState> {
 
     _log('STOP');
 
-    // ✅ Re-entrancy önlemi: timer’ı hemen kes
+    //  Re-entrancy önlemi: timer’ı hemen kes
     _timer?.cancel();
     _timer = null;
 
@@ -389,9 +373,7 @@ class CleanerCubit extends Cubit<CleanerState> {
     );
   }
 
-  // =========================
   // Cleanup
-  // =========================
   Future<void> _cleanup() async {
     _bubbleTimer?.cancel();
     _bubbleTimer = null;
@@ -400,7 +382,7 @@ class CleanerCubit extends Cubit<CleanerState> {
     _vibTimer?.cancel();
     _vibTimer = null;
 
-    // ✅ Player dinleyicisini kes
+    // Player dinleyicisini kestim
     await _playerSub?.cancel();
     _playerSub = null;
 

@@ -23,11 +23,11 @@ class PackagesGrid extends StatelessWidget {
                     type: PlanType.monthly,
                     title: LocaleKeys.monthlyTitle.tr(),
                     period: '/${LocaleKeys.payMonthly.tr()}',
-                    // fiyatları parçalı vereceğiz (kart içinde)
+                    // fiyatları kart içinde
                     currency: '₺',
                     major: 19,
                     minor: 99,
-                    // rozet yok ama yer ayrılacak (Opacity ile)
+                    // rozet yok ama yer ayrılacak Opacity ile
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -39,17 +39,14 @@ class PackagesGrid extends StatelessWidget {
                     currency: '₺',
                     major: 99,
                     minor: 99,
-                    badgeText: LocaleKeys.yearlyDiscount
-                        .tr(), // örn: %58 Savings
-                    monthlyNote: LocaleKeys.yearlyPrice.tr(
-                      args: ['₺8.33'],
-                    ), // çevirine göre
+                    badgeText: LocaleKeys.yearlyDiscount.tr(),
+                    monthlyNote: LocaleKeys.yearlyPrice.tr(args: ['₺8.33']),
                   ),
                 ),
               ],
             ),
             const SizedBox(height: 8),
-            // Banner alanı sabit kalsın (zıplama olmasın)
+            // Banner alanı sabit kalsın
             SavingsBanner(
               visible: selected == PlanType.yearly,
               text:

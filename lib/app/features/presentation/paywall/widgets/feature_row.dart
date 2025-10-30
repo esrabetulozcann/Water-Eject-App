@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
 
 class FeatureRow extends StatelessWidget {
-  //final String emoji;
   final String text;
   final IconData? icon;
 
-  const FeatureRow({
-    super.key,
-    //required this.emoji,
-    required this.text,
-    this.icon,
-  });
+  const FeatureRow({super.key, required this.text, this.icon});
 
   @override
   Widget build(BuildContext context) {

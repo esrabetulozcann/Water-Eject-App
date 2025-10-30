@@ -3,7 +3,6 @@ import 'package:water_eject/app/features/data/cleaner/audio/just_audio_engine.da
 import 'package:water_eject/app/features/data/cleaner/audio/tone_generator.dart';
 
 class TonePlayer implements ITonePlayer {
-  // <-- implements
   final JustAudioEngine _engine;
   bool _playing = false;
 
