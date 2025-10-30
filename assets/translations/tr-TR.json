@@ -97,9 +97,11 @@
   "setting_light_mode":"Aydınlık Mod",
   "setting_language_en":"İngilizce",
   "setting_language_tr":"Türkçe",
-  "setting_abaout":"Hakkında",
+  "setting_about":"Hakkında",
   "setting_app_share":"Uygulamayı Paylaş",
   "setting_app_rate":"Uygulamayı Değerlendir",
-  "setting_privacy_policy":"Gizlilik Politikası"
+  "setting_privacy_policy":"Gizlilik Politikası",
+  "setting_theme": "Tema",
+  "setting_language" : "Dil"
 
 }

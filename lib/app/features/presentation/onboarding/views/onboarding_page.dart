@@ -43,7 +43,7 @@ class OnboardingPageWidget extends StatelessWidget {
           // Buton widget'ı
           OnboardingButtonWidget(
             isLastPage: isLastPage,
-            buttonText: page.buttonText,
+            buttonText: page.buttonText ?? '',
             onPressed: onNext,
           ),
 

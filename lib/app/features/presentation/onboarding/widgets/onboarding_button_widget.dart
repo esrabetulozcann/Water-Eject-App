@@ -1,47 +1,67 @@
-import 'package:easy_localization/easy_localization.dart';
+// onboarding_button_widget.dart
 import 'package:flutter/material.dart';
-import 'package:water_eject/app/common/constant/localization_keys.dart';
+// import 'package:easy_localization/easy_localization.dart';
+// import 'package:water_eject/app/common/constant/localization_keys.dart';
 
 class OnboardingButtonWidget extends StatelessWidget {
   final bool isLastPage;
-  final String? buttonText;
+  final String? buttonText; // <-- nullable kabul ediyoruz
   final VoidCallback onPressed;
 
   const OnboardingButtonWidget({
     super.key,
     required this.isLastPage,
-    this.buttonText,
+    required this.buttonText,
     required this.onPressed,
   });
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    // Eğer buttonText boş/null ise fallback kullan:
+    final label = (buttonText != null && buttonText!.trim().isNotEmpty)
+        ? buttonText!.trim()
+        : (isLastPage ? 'I Agree' : 'Next');
+    // Lokalizasyon kullanacaksan:
+    // : (isLastPage ? LocaleKeys.iAgree.tr() : LocaleKeys.next.tr());
 
-    return SizedBox(
-      width: double.infinity,
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
+    final colors = Theme.of(context).colorScheme;
+
+    return ConstrainedBox(
+      constraints: const BoxConstraints(
+        minHeight: 56,
+        minWidth: double.infinity,
+      ),
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: colors.primary.withOpacity(0.25),
+              blurRadius: 16,
+              offset: const Offset(0, 8),
+            ),
+          ],
         ),
-        child: Text(
-          _getButtonText(),
-          style: theme.textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.bold,
+        child: ElevatedButton(
+          onPressed: onPressed,
+          style: ElevatedButton.styleFrom(
+            backgroundColor: colors.primary,
+            foregroundColor: colors.onPrimary,
+            padding: const EdgeInsets.symmetric(vertical: 14),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+            elevation: 0,
+          ),
+          child: Text(
+            label,
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.w700,
+              color: colors.onPrimary,
+            ),
           ),
         ),
       ),
     );
-  }
-
-  String _getButtonText() {
-    if (isLastPage) {
-      return buttonText ?? LocaleKeys.start.tr();
-    }
-    return LocaleKeys.next.tr();
   }
 }

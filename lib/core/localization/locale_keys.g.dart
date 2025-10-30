@@ -2,7 +2,7 @@
 
 // ignore_for_file: constant_identifier_names
 
-abstract class LocaleKeys {
+abstract class  LocaleKeys {
   static const app_title = 'app_title';
   static const cta_subtitle = 'cta_subtitle';
   static const start = 'start';
@@ -51,8 +51,7 @@ abstract class LocaleKeys {
   static const about_dialog_title = 'about_dialog_title';
   static const about_dialog_description = 'about_dialog_description';
   static const mic_permission_required = 'mic_permission_required';
-  static const permission_permanently_denied_message =
-      'permission_permanently_denied_message';
+  static const permission_permanently_denied_message = 'permission_permanently_denied_message';
   static const permission_request_message = 'permission_request_message';
   static const cancel = 'cancel';
   static const open_settings = 'open_settings';
@@ -103,8 +102,11 @@ abstract class LocaleKeys {
   static const setting_light_mode = 'setting_light_mode';
   static const setting_language_en = 'setting_language_en';
   static const setting_language_tr = 'setting_language_tr';
-  static const setting_abaout = 'setting_abaout';
+  static const setting_about = 'setting_about';
   static const setting_app_share = 'setting_app_share';
   static const setting_app_rate = 'setting_app_rate';
   static const setting_privacy_policy = 'setting_privacy_policy';
+  static const setting_theme = 'setting_theme';
+  static const setting_language = 'setting_language';
+
 }

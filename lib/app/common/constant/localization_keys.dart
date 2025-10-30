@@ -114,4 +114,6 @@ class LocaleKeys {
   static const settingAppShare = 'setting_app_share';
   static const settingAppRate = 'setting_app_rate';
   static const settingPrivacyPolicy = 'setting_privacy_policy';
+  static const settingTheme = 'setting_theme';
+  static const settingLanguage = 'setting_language';
 }

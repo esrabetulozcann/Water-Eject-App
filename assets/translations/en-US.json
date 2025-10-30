@@ -98,8 +98,10 @@
   "setting_light_mode": "Light Mode",
   "setting_language_en": "English",
   "setting_language_tr": "Turkish",
-  "setting_abaout": "About",
+  "setting_about": "About",
   "setting_app_share": "Share App",
   "setting_app_rate": "Rate Us",
-  "setting_privacy_policy": "Privacy Policy"
+  "setting_privacy_policy": "Privacy Policy",
+  "setting_theme": "Theme",
+  "setting_language" : "Language"
 }
