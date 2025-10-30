@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:water_eject/core/localization/locale_keys.g.dart';
 import '../cubit/tone_cubit.dart';
 import '../cubit/tone_state.dart';
 
@@ -27,8 +29,8 @@ class FrequencyDisplay extends StatelessWidget {
               },
               child: Container(
                 padding: const EdgeInsets.all(4),
-                child: const Text(
-                  '+',
+                child: Text(
+                  LocaleKeys.plus.tr(),
                   style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -89,8 +91,8 @@ class FrequencyDisplay extends StatelessWidget {
               },
               child: Container(
                 padding: const EdgeInsets.all(4),
-                child: const Text(
-                  '−',
+                child: Text(
+                  LocaleKeys.minus.tr(),
                   style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
                 ),
               ),

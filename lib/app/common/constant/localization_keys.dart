@@ -103,6 +103,8 @@ class LocaleKeys {
   static const toneGenerator = 'tone_generator';
   static const toneSubtitle = 'tone_subtitle';
   static const toneAboutDescription = 'tone_about_description';
+  static const plus = 'plus';
+  static const minus = 'minus';
 
   //setting page
   static const settingTitle = 'setting_title';

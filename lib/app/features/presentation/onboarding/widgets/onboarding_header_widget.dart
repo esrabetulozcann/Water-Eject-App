@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:water_eject/core/localization/locale_keys.g.dart';
 import '../cubit/onboarding_cubit.dart';
 
 class OnboardingHeaderWidget extends StatelessWidget {
@@ -56,7 +58,7 @@ class OnboardingHeaderWidget extends StatelessWidget {
           TextButton(
             onPressed: onSkip,
             child: Text(
-              'Skip',
+              LocaleKeys.skip.tr(),
               style: Theme.of(context).textTheme.labelLarge?.copyWith(
                 color: colors.onSurface.withOpacity(0.6),
               ),

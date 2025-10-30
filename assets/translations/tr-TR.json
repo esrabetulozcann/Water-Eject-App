@@ -102,6 +102,8 @@
   "setting_app_rate":"Uygulamayı Değerlendir",
   "setting_privacy_policy":"Gizlilik Politikası",
   "setting_theme": "Tema",
-  "setting_language" : "Dil"
+  "setting_language" : "Dil",
+  "plus": "+",
+  "minus": "−"
 
 }
