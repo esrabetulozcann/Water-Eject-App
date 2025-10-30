@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:water_eject/core/config/app_config.dart';
 import 'package:water_eject/core/di/locator.dart';
 
+//AppInitializer, uygulama başlamadan önce gerekli bağımlılıkları, ekran yönünü ve localization sistemini başlatıyor
 class AppInitializer {
   static Future<void> initialize() async {
     WidgetsFlutterBinding.ensureInitialized();

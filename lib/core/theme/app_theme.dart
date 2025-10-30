@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:water_eject/app/common/constant/colors.dart';
 
+//AppTheme, uygulamanın renk paletini, aydınlık/karanlık mod yapılarını ve Material ayarlarını merkezi bir yerde yönetmek için yazıldı
 class AppTheme {
   static ThemeData get light {
     return ThemeData(

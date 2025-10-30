@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 
+//çok dillilik (multi-language) sisteminin ayarlarını merkezi bir yerde topladım
 class LocalizationConfig {
   static const List<Locale> supportedLocales = [
     Locale('tr', 'TR'),

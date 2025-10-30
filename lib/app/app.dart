@@ -5,6 +5,7 @@ import 'package:water_eject/app/common/localization/localization_wrapper.dart';
 import 'package:water_eject/app/common/theme/theme_builder.dart';
 import 'package:water_eject/core/config/localization_config.dart';
 
+//bütün altyapıyı (dil desteği, tema, Cubit’ler, vs.) tek yerde kurup uygulamayı ayağa kaldıran yapı.
 class WaterEjectApp extends StatelessWidget {
   const WaterEjectApp({super.key});
 

@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'dart:typed_data';
 
+//Sinüs dalga frekansları için
 class ToneGenerator {
   /// Çok amaçlı tek ton (AM/FM + harmonikler + hafif noise)
   static Uint8List richToneWav({

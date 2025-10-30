@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+//uygulamanın karanlık ve aydınlık tema modunu yönetmek için yazıldı
 class ThemeState extends Equatable {
   final ThemeMode mode;
   const ThemeState(this.mode);

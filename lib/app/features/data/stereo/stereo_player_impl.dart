@@ -5,6 +5,7 @@ import 'package:water_eject/app/features/data/stereo/stereo_player.dart';
 import 'package:water_eject/app/features/data/cleaner/audio/in_memory_audio_source.dart';
 import 'package:water_eject/app/features/data/cleaner/audio/tone_generator.dart';
 
+//cihazın sol ve sağ hoparlörlerini ayrı ayrı test etmek için iki ayrı AudioPlayer kullanılıyor
 class StereoPlayerImpl implements StereoPlayer {
   final _left = AudioPlayer();
   final _right = AudioPlayer();

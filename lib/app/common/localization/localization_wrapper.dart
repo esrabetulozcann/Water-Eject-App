@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:water_eject/core/cubit/localization_cubit.dart';
 
+//LocalizationWrapper, uygulama dilini tek kaynaktan yönetebilmemi sağlıyor.
+//LocaleCubit değişince UI otomatik olarak güncelleniyor.
 class LocalizationWrapper extends StatelessWidget {
   final Widget child;
 

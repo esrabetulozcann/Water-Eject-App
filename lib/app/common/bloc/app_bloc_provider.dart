@@ -7,6 +7,7 @@ import 'package:water_eject/app/features/presentation/paywall/cubit/premium_cubi
 import 'package:water_eject/core/cubit/localization_cubit.dart';
 import 'package:water_eject/core/theme/cubit/theme_cubit.dart';
 
+//Tüm Bloc sağlayıcılarını buradan yönettim
 class AppBlocProvider extends StatelessWidget {
   final Widget child;
 

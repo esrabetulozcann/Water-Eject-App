@@ -1,6 +1,7 @@
 import 'package:vibration/vibration.dart';
 import 'package:water_eject/app/domain/services/vibration_service.dart';
 
+//cihazın titreşim motorunu (vibrator) kontrol eden bir servis
 class VibrationServiceImpl implements IVibrationService {
   @override
   Future<bool> isSupported() async => await Vibration.hasVibrator();

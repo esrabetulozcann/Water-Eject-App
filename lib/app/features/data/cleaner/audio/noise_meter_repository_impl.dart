@@ -4,6 +4,7 @@ import 'package:water_eject/app/domain/models/calibration_value_model.dart';
 import 'package:water_eject/app/domain/models/sound_level_model.dart';
 import 'package:water_eject/app/domain/repositories/sound_level_repository.dart';
 
+//cihazın mikrofonundan gelen ses seviyesini (dB) ölçmek
 class NoiseMeterRepositoryImpl implements SoundLevelRepository {
   late final NoiseMeter _noiseMeter;
   StreamSubscription<NoiseReading>? _subscription;

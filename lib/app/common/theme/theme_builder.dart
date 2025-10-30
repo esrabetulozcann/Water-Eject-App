@@ -6,6 +6,7 @@ import 'package:water_eject/core/config/app_config.dart';
 import 'package:water_eject/core/theme/app_theme.dart';
 import 'package:water_eject/core/theme/cubit/theme_cubit.dart';
 
+//tema ve dil ayarlarına göre MaterialApp’i dinamik olarak oluşturan yapı
 class ThemeBuilder extends StatelessWidget {
   const ThemeBuilder({super.key});
 

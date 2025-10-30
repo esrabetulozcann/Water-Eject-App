@@ -6,6 +6,7 @@ import 'package:water_eject/app/features/presentation/cleaner/cubit/cleaner_cubi
 import 'package:water_eject/app/features/presentation/cleaner/cubit/cleaner_state.dart';
 import 'package:water_eject/app/common/constant/localization_keys.dart';
 
+//Cleaner sayfasında tekrar eden işleri düzenli hale getirmek için bir mixin
 mixin CleanerViewMixin<T extends StatefulWidget> on State<T> {
   /// Sayfa açılışında yapılacak işler
   Future<void> initCleaner() async {
