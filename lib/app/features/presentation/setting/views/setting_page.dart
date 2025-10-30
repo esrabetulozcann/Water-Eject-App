@@ -52,12 +52,12 @@ class SettingPage extends StatelessWidget {
                         SettingsOption(
                           value: 'light',
                           label: LocaleKeys.settingLightMode.tr(),
-                          icon: Icons.wb_sunny_rounded,
+                          icon: AppIcons.sunnyRounded.iconData,
                         ),
                         SettingsOption(
                           value: 'dark',
                           label: LocaleKeys.settingDarkMode.tr(),
-                          icon: Icons.dark_mode_rounded,
+                          icon: AppIcons.darkModeRounded.iconData,
                         ),
                       ],
                       onChanged: (val) {

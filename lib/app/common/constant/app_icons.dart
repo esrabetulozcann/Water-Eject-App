@@ -31,6 +31,9 @@ enum AppIcons {
   share,
   star,
   privacy,
+  sunnyRounded,
+  darkModeRounded,
+  check,
 }
 
 extension AppIconsExtension on AppIcons {
@@ -96,6 +99,12 @@ extension AppIconsExtension on AppIcons {
         return Icons.star_border_outlined;
       case AppIcons.privacy:
         return Icons.privacy_tip_outlined;
+      case AppIcons.sunnyRounded:
+        return Icons.wb_sunny_rounded;
+      case AppIcons.darkModeRounded:
+        return Icons.dark_mode_rounded;
+      case AppIcons.check:
+        return Icons.check;
     }
   }
 }

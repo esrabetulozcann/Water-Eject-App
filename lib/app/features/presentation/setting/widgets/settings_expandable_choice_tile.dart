@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:water_eject/app/common/constant/app_icons.dart';
 import 'package:water_eject/app/common/constant/colors.dart';
 import 'package:water_eject/app/domain/models/settings_option_model.dart';
 
@@ -41,7 +42,7 @@ class SettingsExpandableChoiceTile<T> extends StatelessWidget {
               trailing: AnimatedOpacity(
                 opacity: isSelected ? 1 : 0,
                 duration: const Duration(milliseconds: 150),
-                child: const Icon(Icons.check, size: 20),
+                child: Icon(AppIcons.check.iconData, size: 20),
               ),
               onTap: () => onChanged(o.value),
             );
