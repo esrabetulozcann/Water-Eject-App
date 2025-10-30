@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:water_eject/app/common/constant/colors.dart';
 import 'package:water_eject/core/localization/locale_keys.g.dart';
 import '../cubit/tone_cubit.dart';
 import '../cubit/tone_state.dart';
@@ -58,7 +59,7 @@ class FrequencyDisplay extends StatelessWidget {
                   ),
                   boxShadow: const [
                     BoxShadow(
-                      color: Colors.black12,
+                      color: AppColors.black12,
                       blurRadius: 4,
                       offset: Offset(0, 2),
                     ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:water_eject/app/common/constant/colors.dart';
 import 'package:water_eject/core/di/locator.dart';
 import '../cubit/paywall_selection_cubit.dart';
 import '../widgets/paywall_header.dart';
@@ -14,7 +15,7 @@ class PaywallPage extends StatelessWidget {
     return showModalBottomSheet<bool>(
       context: context,
       isScrollControlled: true,
-      backgroundColor: Colors.transparent,
+      backgroundColor: AppColors.transparent,
       builder: (_) => const PaywallPage(),
     );
   }

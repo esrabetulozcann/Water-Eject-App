@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:water_eject/app/common/constant/colors.dart';
 
 class SavingsBanner extends StatelessWidget {
   const SavingsBanner({super.key, required this.visible, required this.text});
@@ -16,7 +17,9 @@ class SavingsBanner extends StatelessWidget {
       height: 34,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: visible ? colors.primary.withOpacity(0.10) : Colors.transparent,
+        color: visible
+            ? colors.primary.withOpacity(0.10)
+            : AppColors.transparent,
         borderRadius: BorderRadius.circular(10),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 10),

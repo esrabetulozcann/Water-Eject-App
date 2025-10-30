@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:water_eject/app/common/constant/colors.dart';
 import 'package:water_eject/app/domain/models/onboarding_models.dart';
 import 'package:water_eject/core/localization/locale_keys.g.dart';
 import 'onboarding_button_widget.dart';
@@ -47,7 +48,7 @@ class OnboardingPageWidget extends StatelessWidget {
                 gradient: RadialGradient(
                   colors: [
                     colors.primary.withOpacity(0.15),
-                    Colors.transparent,
+                    AppColors.transparent,
                   ],
                   radius: 0.85,
                 ),

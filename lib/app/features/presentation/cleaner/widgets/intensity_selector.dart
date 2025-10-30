@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:water_eject/app/common/constant/colors.dart';
 
 import 'package:water_eject/app/common/constant/localization_keys.dart';
 import 'package:water_eject/app/features/presentation/cleaner/cubit/cleaner_state.dart';
@@ -64,7 +65,7 @@ class IntensitySelector extends StatelessWidget {
                 child: Container(
                   height: 8,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: AppColors.white,
                     borderRadius: BorderRadius.circular(4),
                   ),
                 ),
@@ -90,9 +91,9 @@ class IntensitySelector extends StatelessWidget {
                     ),
                     gradient: const LinearGradient(
                       colors: [
-                        Color(0xFF87CEEB),
-                        Color(0xFF4682B4),
-                        Color(0xFF00008B),
+                        AppColors.cleanerLightBlue,
+                        AppColors.cleanerMediumBlue,
+                        AppColors.cleanerDarkBlue,
                       ],
                     ),
                   ),
@@ -105,8 +106,8 @@ class IntensitySelector extends StatelessWidget {
                 child: SliderTheme(
                   data: SliderTheme.of(context).copyWith(
                     trackHeight: 0,
-                    inactiveTrackColor: Colors.transparent,
-                    activeTrackColor: Colors.transparent,
+                    inactiveTrackColor: AppColors.transparent,
+                    activeTrackColor: AppColors.transparent,
                     thumbShape: const RoundSliderThumbShape(
                       enabledThumbRadius: 14,
                     ),
@@ -184,7 +185,7 @@ class IntensitySelector extends StatelessWidget {
           decoration: BoxDecoration(
             color: isSelected
                 ? _getThumbColorForValue(intensity.index.toDouble())
-                : Colors.transparent,
+                : AppColors.transparent,
             shape: BoxShape.circle,
           ),
         ),
@@ -199,15 +200,15 @@ class IntensitySelector extends StatelessWidget {
     if (normalizedValue < 0.5) {
       final ratio = (normalizedValue * 2).toDouble(); // 0..1
       return Color.lerp(
-        const Color(0xFF87CEEB),
-        const Color(0xFF4682B4),
+        AppColors.cleanerLightBlue,
+        AppColors.cleanerMediumBlue,
         ratio,
       )!;
     } else {
       final ratio = ((normalizedValue - 0.5) * 2).toDouble(); // 0..1
       return Color.lerp(
-        const Color(0xFF4682B4),
-        const Color(0xFF00008B),
+        AppColors.cleanerMediumBlue,
+        AppColors.cleanerDarkBlue,
         ratio,
       )!;
     }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:water_eject/app/common/constant/colors.dart';
 import 'package:water_eject/app/domain/models/settings_option_model.dart';
 
 class SettingsExpandableChoiceTile<T> extends StatelessWidget {
@@ -26,7 +27,7 @@ class SettingsExpandableChoiceTile<T> extends StatelessWidget {
       color: colors.surface,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: Theme(
-        data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+        data: Theme.of(context).copyWith(dividerColor: AppColors.transparent),
         child: ExpansionTile(
           leading: leadingIcon == null
               ? null

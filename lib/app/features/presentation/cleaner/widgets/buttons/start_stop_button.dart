@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:water_eject/app/common/constant/app_icons.dart';
+import 'package:water_eject/app/common/constant/colors.dart';
 import 'package:water_eject/app/features/presentation/cleaner/cubit/cleaner_state.dart';
 import 'package:water_eject/app/features/presentation/cleaner/cubit/cleaner_cubit.dart';
 import 'package:water_eject/core/localization/locale_keys.g.dart';
@@ -34,7 +35,7 @@ class StartStopButton extends StatelessWidget {
               LocaleKeys.ready_hint.tr(),
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Colors.grey,
+                color: AppColors.grey,
                 fontSize: 13,
                 fontStyle: FontStyle.italic,
               ),
