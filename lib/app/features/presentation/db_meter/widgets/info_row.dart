@@ -19,6 +19,7 @@ class InfoRow extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Row(
+        spacing: 8,
         children: [
           Expanded(
             child: _InfoTile(
@@ -26,7 +27,6 @@ class InfoRow extends StatelessWidget {
               value: currentText,
             ),
           ),
-          const SizedBox(width: 8),
           Expanded(
             child: _InfoTile(
               title: LocaleKeys.peakDb.tr(),
@@ -60,6 +60,7 @@ class _InfoTile extends StatelessWidget {
           children: [
             Expanded(
               child: Column(
+                spacing: 4,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -71,7 +72,6 @@ class _InfoTile extends StatelessWidget {
                       ).colorScheme.onSurface.withOpacity(0.6),
                     ),
                   ),
-                  const SizedBox(height: 4),
                   Text(
                     value,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(

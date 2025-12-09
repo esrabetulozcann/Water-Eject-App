@@ -118,4 +118,14 @@ class LocaleKeys {
   static const settingPrivacyPolicy = 'setting_privacy_policy';
   static const settingTheme = 'setting_theme';
   static const settingLanguage = 'setting_language';
+
+  //about page
+  static const aboutTitle = 'about_title';
+  static const waterEjectWhatsThis = 'water_eject_whats_this';
+  static const waterEjectWhatsThisDesc = 'water_eject_whats_this_desc';
+  static const waterEjectHowToUse = 'water_eject_how_to_use';
+  static const waterEjectHz = 'water_eject_hz';
+  static const waterEjectVibration = 'water_eject_vibration';
+  static const waterEjectEjectsWater = 'water_eject_ejects_water';
+  static const waterEjectAboutNote = 'water_eject_about_note';
 }

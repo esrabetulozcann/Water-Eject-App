@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:water_eject/app/common/constant/localization_keys.dart';
 import 'package:water_eject/app/common/widgets/common_app_bar.dart';
 
-class StereoAppBar extends StatelessWidget {
+class StereoAppBar extends StatelessWidget implements PreferredSizeWidget {
   const StereoAppBar({super.key});
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
   @override
   Widget build(BuildContext context) {

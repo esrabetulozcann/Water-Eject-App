@@ -21,7 +21,7 @@ class SettingsTile extends StatelessWidget {
         icon,
         color: theme.colorScheme.onSurface,
       ), //  Theme.of(context).colorScheme.outline.withOpacity(0.2)
-      title: Text(title, style: theme.textTheme.bodyMedium),
+      title: Text(title, style: theme.textTheme.titleMedium),
       trailing: Icon(AppIcons.chevronRight.iconData),
       onTap: onTap,
     );

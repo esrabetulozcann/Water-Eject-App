@@ -36,7 +36,7 @@ class DecibelGauge extends StatelessWidget {
               value.toStringAsFixed(1),
               style: Theme.of(context).textTheme.displaySmall,
             ),
-            const SizedBox(height: 4),
+
             Text(label, style: Theme.of(context).textTheme.titleMedium),
           ],
         ),

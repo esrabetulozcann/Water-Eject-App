@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:water_eject/core/extensions/padding_extensions.dart';
 import '../cubit/dbmeter_cubit.dart';
 import '../cubit/dbmeter_state.dart';
 import 'package:water_eject/app/features/presentation/db_meter/widgets/gauge_section.dart';
@@ -14,9 +15,8 @@ class MeterBody extends StatelessWidget {
     final cubit = context.read<DbMeterCubit>();
 
     return Column(
+      //spacing: 12,
       children: [
-        const SizedBox(height: 12),
-
         // Gauge — kendi içinde BlocSelector kullanıyor
         const Expanded(child: GaugeSection()),
 
@@ -33,9 +33,8 @@ class MeterBody extends StatelessWidget {
           },
         ),
 
-        const MeterControls(),
-        const SizedBox(height: 8),
+        const MeterControls().onlyPadding(bottom: 8),
       ],
-    );
+    ).onlyPadding(top: 12);
   }
 }

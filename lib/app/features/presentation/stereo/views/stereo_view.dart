@@ -9,78 +9,83 @@ import 'package:water_eject/app/features/presentation/stereo/widgets/auto_loop_s
 import 'package:water_eject/app/features/presentation/stereo/widgets/channel_button.dart';
 import 'package:water_eject/app/features/presentation/stereo/widgets/start_button.dart';
 import 'package:water_eject/app/features/presentation/stereo/widgets/stereo_app_bar.dart';
+import 'package:water_eject/core/di/locator.dart';
+import 'package:water_eject/core/extensions/padding_extensions.dart';
 
 class StereoView extends StatelessWidget {
   const StereoView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    return BlocProvider(
+      create: (_) => sl<StereoCubit>(),
+      child: Scaffold(
+        appBar: const StereoAppBar(),
 
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          children: [
-            const SizedBox(height: 12),
-            const StereoAppBar(),
-            const SizedBox(height: 8),
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              children: [
+                // const StereoAppBar(),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        LocaleKeys.stereoStartTest.tr(),
+                        style: Theme.of(context).textTheme.titleMedium,
+                        textAlign: TextAlign.center,
+                      ).onlyPadding(bottom: 24),
 
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    LocaleKeys.stereoStartTest.tr(),
-                    style: theme.textTheme.titleMedium,
-                    textAlign: TextAlign.center,
+                      BlocBuilder<StereoCubit, StereoState>(
+                        buildWhen: (p, c) =>
+                            p.active != c.active || p.selected != c.selected,
+                        builder: (_, state) {
+                          final leftSelected =
+                              state.selected == StereoChannel.left;
+                          final rightSelected =
+                              state.selected == StereoChannel.right;
+                          final leftActive =
+                              state.active == StereoChannel.left &&
+                              state.isTesting;
+                          final rightActive =
+                              state.active == StereoChannel.right &&
+                              state.isTesting;
+
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              ChannelButton(
+                                label: LocaleKeys.stereoLeftChannel.tr(),
+                                side: StereoChannel.left,
+                                isActive: leftActive,
+                                isSelected: leftSelected,
+                                onTap: () =>
+                                    context.read<StereoCubit>().tapLeft(),
+                              ),
+                              ChannelButton(
+                                label: LocaleKeys.stereoRightChannel.tr(),
+                                side: StereoChannel.right,
+                                isActive: rightActive,
+                                isSelected: rightSelected,
+                                onTap: () =>
+                                    context.read<StereoCubit>().tapRight(),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+
+                      const AutoLoopSwitch().onlyPadding(top: 24),
+                    ],
                   ),
-                  const SizedBox(height: 24),
+                ),
 
-                  BlocBuilder<StereoCubit, StereoState>(
-                    buildWhen: (p, c) =>
-                        p.active != c.active || p.selected != c.selected,
-                    builder: (_, state) {
-                      final leftSelected = state.selected == StereoChannel.left;
-                      final rightSelected =
-                          state.selected == StereoChannel.right;
-                      final leftActive =
-                          state.active == StereoChannel.left && state.isTesting;
-                      final rightActive =
-                          state.active == StereoChannel.right &&
-                          state.isTesting;
-
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          ChannelButton(
-                            label: LocaleKeys.stereoLeftChannel.tr(),
-                            side: StereoChannel.left,
-                            isActive: leftActive,
-                            isSelected: leftSelected,
-                            onTap: () => context.read<StereoCubit>().tapLeft(),
-                          ),
-                          ChannelButton(
-                            label: LocaleKeys.stereoRightChannel.tr(),
-                            side: StereoChannel.right,
-                            isActive: rightActive,
-                            isSelected: rightSelected,
-                            onTap: () => context.read<StereoCubit>().tapRight(),
-                          ),
-                        ],
-                      );
-                    },
-                  ),
-
-                  const SizedBox(height: 24),
-                  const AutoLoopSwitch(),
-                ],
-              ),
+                const StartButton().onlyPadding(bottom: 24),
+              ],
             ),
-
-            const StartButton(),
-            const SizedBox(height: 24),
-          ],
+          ),
         ),
       ),
     );

@@ -2,10 +2,13 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:water_eject/app/common/constant/localization_keys.dart';
 import 'package:water_eject/app/common/widgets/common_app_bar.dart';
-import 'package:water_eject/app/features/presentation/setting/views/setting_page.dart';
+import 'package:water_eject/app/features/presentation/setting/views/setting_view.dart';
 
-class CleanerAppBar extends StatelessWidget {
+class CleanerAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CleanerAppBar({super.key});
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
   @override
   Widget build(BuildContext context) {
@@ -20,19 +23,11 @@ class CleanerAppBar extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return const SettingPage();
+              return const SettingView();
             },
           ),
         );
-        /*showAboutDialog(
-          context: context,
-          applicationName: LocaleKeys.app_title.tr(),
-          children: [Text(LocaleKeys.disclaimer_body.tr())],
-        );
-        */
       },
-
-      //  backgroundColor: const Color(0xFFE1F5FE),
     );
   }
 }

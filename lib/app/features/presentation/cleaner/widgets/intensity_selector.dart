@@ -6,6 +6,7 @@ import 'package:water_eject/app/common/constant/colors.dart';
 import 'package:water_eject/app/common/constant/localization_keys.dart';
 import 'package:water_eject/app/features/presentation/cleaner/cubit/cleaner_state.dart';
 import 'package:water_eject/app/common/enum/intensity_enum.dart';
+import 'package:water_eject/core/extensions/padding_extensions.dart';
 import '../cubit/cleaner_cubit.dart';
 
 class IntensitySelector extends StatelessWidget {
@@ -26,10 +27,14 @@ class IntensitySelector extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 12),
-            _buildIntensitySlider(context, state, cubit, currentValue),
-            const SizedBox(height: 8),
-            _buildIntensityLabels(context, state.intensity),
+            _buildIntensitySlider(
+              context,
+              state,
+              cubit,
+              currentValue,
+            ).onlyPadding(top: 12),
+
+            _buildIntensityLabels(context, state.intensity).onlyPadding(top: 8),
           ],
         );
       },
@@ -44,102 +49,99 @@ class IntensitySelector extends StatelessWidget {
   ) {
     final double progress = (currentValue / 2.0).clamp(0.0, 1.0).toDouble();
 
-    return SizedBox(
-      height: 48,
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          final double trackWidth =
-              constraints.maxWidth - 2 * (_kSidePad + _kSliderPad);
-          final double trackLeft = _kSidePad + _kSliderPad;
-          final double barWidth = (trackWidth * progress)
-              .clamp(0.0, trackWidth)
-              .toDouble();
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final double trackWidth =
+            constraints.maxWidth - 2 * (_kSidePad + _kSliderPad);
+        final double trackLeft = _kSidePad + _kSliderPad;
+        final double barWidth = (trackWidth * progress)
+            .clamp(0.0, trackWidth)
+            .toDouble();
 
-          return Stack(
-            children: [
-              // beyaz track
-              Positioned(
-                left: trackLeft,
-                right: trackLeft,
-                top: 20,
-                child: Container(
-                  height: 8,
-                  decoration: BoxDecoration(
-                    color: AppColors.white,
-                    borderRadius: BorderRadius.circular(4),
+        return Stack(
+          children: [
+            // beyaz track
+            Positioned(
+              left: trackLeft,
+              right: trackLeft,
+              top: 20,
+              child: Container(
+                //height: 8,
+                decoration: BoxDecoration(
+                  color: AppColors.white,
+                  borderRadius: BorderRadius.circular(4),
+                ),
+              ),
+            ),
+
+            // renkli kısım
+            Positioned(
+              left: trackLeft,
+              width: barWidth,
+              top: 20,
+              child: Container(
+                height: 8,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: const Radius.circular(4),
+                    bottomLeft: const Radius.circular(4),
+                    topRight: progress > 0
+                        ? Radius.zero
+                        : const Radius.circular(4),
+                    bottomRight: progress > 0
+                        ? Radius.zero
+                        : const Radius.circular(4),
+                  ),
+                  gradient: const LinearGradient(
+                    colors: [
+                      AppColors.cleanerLightBlue,
+                      AppColors.cleanerMediumBlue,
+                      AppColors.cleanerDarkBlue,
+                    ],
                   ),
                 ),
               ),
+            ),
 
-              // renkli kısım
-              Positioned(
-                left: trackLeft,
-                width: barWidth,
-                top: 20,
-                child: Container(
-                  height: 8,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      topLeft: const Radius.circular(4),
-                      bottomLeft: const Radius.circular(4),
-                      topRight: progress > 0
-                          ? Radius.zero
-                          : const Radius.circular(4),
-                      bottomRight: progress > 0
-                          ? Radius.zero
-                          : const Radius.circular(4),
-                    ),
-                    gradient: const LinearGradient(
-                      colors: [
-                        AppColors.cleanerLightBlue,
-                        AppColors.cleanerMediumBlue,
-                        AppColors.cleanerDarkBlue,
-                      ],
-                    ),
+            // Slider (kendi track’ini gizledim)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: _kSidePad),
+              child: SliderTheme(
+                data: SliderTheme.of(context).copyWith(
+                  trackHeight: 0,
+                  inactiveTrackColor: AppColors.transparent,
+                  activeTrackColor: AppColors.transparent,
+                  thumbShape: const RoundSliderThumbShape(
+                    enabledThumbRadius: 14,
                   ),
+                  overlayShape: const RoundSliderOverlayShape(
+                    overlayRadius: 20,
+                  ),
+                  thumbColor: _getThumbColorForValue(currentValue),
+                  overlayColor: _getThumbColorForValue(
+                    currentValue,
+                  ).withOpacity(0.2),
+                ),
+                child: Slider(
+                  value: currentValue,
+                  min: 0,
+                  max: 2,
+                  divisions: 20,
+                  label: _getIntensityLabel(
+                    Intensity.values[currentValue.round()],
+                  ),
+                  onChanged: state.running
+                      ? null
+                      : (value) {
+                          final intensity = Intensity.values[value.round()];
+                          cubit.setIntensity(intensity);
+                        },
                 ),
               ),
-
-              // Slider (kendi track’ini gizledim)
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: _kSidePad),
-                child: SliderTheme(
-                  data: SliderTheme.of(context).copyWith(
-                    trackHeight: 0,
-                    inactiveTrackColor: AppColors.transparent,
-                    activeTrackColor: AppColors.transparent,
-                    thumbShape: const RoundSliderThumbShape(
-                      enabledThumbRadius: 14,
-                    ),
-                    overlayShape: const RoundSliderOverlayShape(
-                      overlayRadius: 20,
-                    ),
-                    thumbColor: _getThumbColorForValue(currentValue),
-                    overlayColor: _getThumbColorForValue(
-                      currentValue,
-                    ).withOpacity(0.2),
-                  ),
-                  child: Slider(
-                    value: currentValue,
-                    min: 0,
-                    max: 2,
-                    divisions: 20,
-                    label: _getIntensityLabel(
-                      Intensity.values[currentValue.round()],
-                    ),
-                    onChanged: state.running
-                        ? null
-                        : (value) {
-                            final intensity = Intensity.values[value.round()];
-                            cubit.setIntensity(intensity);
-                          },
-                  ),
-                ),
-              ),
-            ],
-          );
-        },
-      ),
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -178,7 +180,7 @@ class IntensitySelector extends StatelessWidget {
             fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
           ),
         ),
-        const SizedBox(height: 4),
+
         Container(
           width: 6,
           height: 6,
@@ -188,7 +190,7 @@ class IntensitySelector extends StatelessWidget {
                 : AppColors.transparent,
             shape: BoxShape.circle,
           ),
-        ),
+        ).onlyPadding(top: 4),
       ],
     );
   }

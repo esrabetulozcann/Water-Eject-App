@@ -14,7 +14,6 @@ class DurationSlider extends StatelessWidget {
       buildWhen: (p, c) =>
           p.durationSec != c.durationSec || p.running != c.running,
       builder: (context, state) {
-        final cubit = context.read<CleanerCubit>();
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -29,7 +28,7 @@ class DurationSlider extends StatelessWidget {
               value: state.durationSec.toDouble(),
               onChanged: state.running
                   ? null
-                  : (v) => cubit.setDuration(v.round()),
+                  : (v) => context.read<CleanerCubit>().setDuration(v.round()),
             ),
             Align(
               alignment: Alignment.centerRight,

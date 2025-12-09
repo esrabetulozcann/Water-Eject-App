@@ -105,5 +105,13 @@
   "setting_theme": "Theme",
   "setting_language" : "Language",
   "plus": "+",
-  "minus": "−"
+  "minus": "−",
+  "about_title" : "About",
+  "water_eject_whats_this": "What is Water Eject?",
+  "water_eject_whats_this_desc": "It is designed to safely expel water from your phone's speaker. It generates a 300 Hz sine wave to vibrate the speaker diaphragm and push water droplets out.",
+  "water_eject_how_to_use": "How Does It Work?",
+  "water_eject_hz": "Generates a 300 Hz sine wave.",
+  "water_eject_vibration": "Vibrates the speaker diaphragm.",
+  "water_eject_ejects_water": "Pushes water droplets out through physical vibration.",
+  "water_eject_about_note": "Note: The app may not remove all the water. Ensure your device is completely dry before using it."
 }

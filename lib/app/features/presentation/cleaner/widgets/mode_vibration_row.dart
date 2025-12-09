@@ -5,7 +5,7 @@ import 'package:water_eject/app/common/constant/app_icons.dart';
 import 'package:water_eject/app/common/constant/localization_keys.dart';
 import 'package:water_eject/app/common/enum/cleaner_mode_enum.dart';
 import 'package:water_eject/app/features/presentation/cleaner/cubit/cleaner_state.dart';
-import 'package:water_eject/app/features/presentation/cleaner/widgets/cards/option_card.dart';
+import 'package:water_eject/app/features/presentation/cleaner/widgets/option_card.dart';
 import '../cubit/cleaner_cubit.dart';
 
 class ModeVibrationRow extends StatelessWidget {
@@ -21,6 +21,7 @@ class ModeVibrationRow extends StatelessWidget {
       builder: (context, state) {
         final cubit = context.read<CleanerCubit>();
         return Row(
+          spacing: 12,
           children: [
             Expanded(
               child: OptionCard(
@@ -34,7 +35,6 @@ class ModeVibrationRow extends StatelessWidget {
                       ),
               ),
             ),
-            const SizedBox(width: 12),
             Expanded(
               child: OptionCard(
                 title: LocaleKeys.vibration.tr(),

@@ -26,7 +26,7 @@ class SettingsSection extends StatelessWidget {
                   child: Text(title!, style: theme.textTheme.titleMedium),
                 ),
               ),
-              const Divider(height: 8),
+              // const Divider(height: 8),
             ],
             ..._withDividers(children, theme),
           ],

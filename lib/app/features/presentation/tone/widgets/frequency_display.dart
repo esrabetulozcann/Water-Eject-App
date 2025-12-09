@@ -12,8 +12,6 @@ class FrequencyDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     return BlocBuilder<ToneCubit, ToneState>(
       buildWhen: (p, c) => p.freq != c.freq || p.prevFreq != c.prevFreq,
       builder: (context, state) {
@@ -73,11 +71,12 @@ class FrequencyDisplay extends StatelessWidget {
                     return Text(
                       '${value.toStringAsFixed(0)} Hz',
                       textAlign: TextAlign.center,
-                      style: theme.textTheme.displayMedium?.copyWith(
-                        fontWeight: FontWeight.w700,
-                        height: 1.1,
-                        fontFeatures: const [FontFeature.tabularFigures()],
-                      ),
+                      style: Theme.of(context).textTheme.displayMedium
+                          ?.copyWith(
+                            fontWeight: FontWeight.w700,
+                            height: 1.1,
+                            fontFeatures: const [FontFeature.tabularFigures()],
+                          ),
                     );
                   },
                 ),

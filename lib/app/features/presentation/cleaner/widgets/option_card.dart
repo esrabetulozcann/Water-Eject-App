@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:water_eject/core/extensions/padding_extensions.dart';
 
 class OptionCard extends StatelessWidget {
   final String title;
@@ -28,8 +29,7 @@ class OptionCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Icon(icon),
-          const SizedBox(width: 10),
+          Icon(icon).onlyPadding(right: 10),
           Expanded(child: Text(title)),
           Switch(value: value, onChanged: onChanged),
         ],

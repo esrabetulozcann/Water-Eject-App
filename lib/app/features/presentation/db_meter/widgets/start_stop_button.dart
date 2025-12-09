@@ -15,9 +15,6 @@ class StartStopButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colors = theme.colorScheme;
-
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton.icon(
@@ -28,8 +25,8 @@ class StartStopButton extends StatelessWidget {
         ),
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: colors.primary,
-          foregroundColor: colors.onPrimary,
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          foregroundColor: Theme.of(context).colorScheme.onPrimary,
           padding: const EdgeInsets.symmetric(vertical: 14),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(14),

@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:water_eject/app/common/constant/app_icons.dart';
 import 'package:water_eject/app/common/constant/localization_keys.dart';
 import 'package:water_eject/app/domain/models/settings_option_model.dart';
+import 'package:water_eject/app/features/presentation/about/views/about_view.dart';
 
 import 'package:water_eject/app/features/presentation/setting/cubit/setting_cubit.dart';
 import 'package:water_eject/app/features/presentation/setting/cubit/setting_state.dart';
@@ -18,8 +19,8 @@ import 'package:water_eject/core/cubit/localization_cubit.dart';
 import 'package:water_eject/core/di/locator.dart';
 import 'package:water_eject/core/theme/cubit/theme_cubit.dart';
 
-class SettingPage extends StatelessWidget {
-  const SettingPage({super.key});
+class SettingView extends StatelessWidget {
+  const SettingView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -96,18 +97,30 @@ class SettingPage extends StatelessWidget {
                     SettingsTile(
                       icon: AppIcons.info.iconData,
                       title: LocaleKeys.settingAbout.tr(),
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return const AboutView();
+                            },
+                          ),
+                        );
+                      },
                     ),
                     SettingsTile(
                       icon: AppIcons.share.iconData,
                       title: LocaleKeys.settingAppShare.tr(),
+                      onTap: () {},
                     ),
                     SettingsTile(
                       icon: AppIcons.star.iconData,
                       title: LocaleKeys.settingAppRate.tr(),
+                      onTap: () {},
                     ),
                     SettingsTile(
                       icon: AppIcons.privacy.iconData,
                       title: LocaleKeys.settingPrivacyPolicy.tr(),
+                      onTap: () {},
                     ),
                   ],
                 ),

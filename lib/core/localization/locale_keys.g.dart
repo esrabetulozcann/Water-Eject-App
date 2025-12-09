@@ -110,5 +110,14 @@ abstract class  LocaleKeys {
   static const setting_language = 'setting_language';
   static const plus = 'plus';
   static const minus = 'minus';
+  static const water_eject_whats_this = 'water_eject_whats_this';
+  static const water_eject_whats_this_desc = 'water_eject_whats_this_desc';
+  static const water_eject_whats_this_desc2 = 'water_eject_whats_this_desc2';
+  static const water_eject_how_to_use = 'water_eject_how_to_use';
+  static const water_eject_hz = 'water_eject_hz';
+  static const water_eject_vibration = 'water_eject_vibration';
+  static const water_eject_ejects_water = 'water_eject_ejects_water';
+  static const water_eject_about_note = 'water_eject_about_note';
+  static const water_eject_about_note2 = 'water_eject_about_note2';
 
 }

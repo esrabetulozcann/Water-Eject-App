@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:water_eject/app/common/constant/colors.dart';
 import 'package:water_eject/app/common/constant/localization_keys.dart';
+import 'package:water_eject/core/extensions/padding_extensions.dart';
 import '../cubit/tone_cubit.dart';
 import '../cubit/tone_state.dart';
 
@@ -53,11 +54,10 @@ class _PresetChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     //final base = theme.colorScheme.primary.withOpacity(0.10);
 
-    final activeBg = theme.colorScheme.primary.withOpacity(0.08);
-    final inactiveBg = theme.colorScheme.primary.withOpacity(0.04);
+    final activeBg = Theme.of(context).colorScheme.primary.withOpacity(0.08);
+    final inactiveBg = Theme.of(context).colorScheme.primary.withOpacity(0.04);
 
     return InkWell(
       borderRadius: BorderRadius.circular(14),
@@ -69,18 +69,24 @@ class _PresetChip extends StatelessWidget {
           color: active ? activeBg : inactiveBg,
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
-            color: active ? theme.colorScheme.primary : AppColors.transparent,
+            color: active
+                ? Theme.of(context).colorScheme.primary
+                : AppColors.transparent,
             width: 1.2,
           ),
         ),
         child: Column(
           children: [
-            Text(labelTop, style: theme.textTheme.titleMedium),
-            const SizedBox(height: 2),
+            Text(
+              labelTop,
+              style: Theme.of(context).textTheme.titleMedium,
+            ).onlyPadding(bottom: 4),
             Text(
               labelBottom,
-              style: theme.textTheme.bodySmall?.copyWith(
-                color: theme.textTheme.bodySmall?.color?.withOpacity(0.7),
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: Theme.of(
+                  context,
+                ).textTheme.bodySmall?.color?.withOpacity(0.7),
               ),
             ),
           ],
