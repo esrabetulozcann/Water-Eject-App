@@ -112,5 +112,14 @@
   "water_eject_hz": "300 Hz frekansında sinüs dalgası üretir.",
   "water_eject_vibration": "Hoparlör diyaframını titreştirir.",
   "water_eject_ejects_water": "Fiziksel titreşimle su damlalarını dışarı atar.",
-  "water_eject_about_note": "Not: Uygulama suyu tamamen çıkarmayabilir. Cihazınızı kullanmadan önce tamamen kuruduğundan emin olun." 
+  "water_eject_about_note": "Not: Uygulama suyu tamamen çıkarmayabilir. Cihazınızı kullanmadan önce tamamen kuruduğundan emin olun.",
+  "water_eject_download" : "Water Eject uygulamasını dene! \n\nİndirme linki: ",
+  "water_eject" : "Water Eject uygulaması",
+  "onboarding_title_one" : "Su ve toz nedeniyle boğuk ses mi alıyorsun?",
+  "onboarding_description_one" : "Water Eject, telefonunun hoparlöründeki sıvı ve kirleri özel frekanslarla temizlemene yardımcı olur.",
+  "onboarding_title_two" : "142 Hz ve özel titreşim algoritmaları",
+  "onboarding_description_two" : "Cihaz hoparlörünü güvenli, cihaz dostu frekanslarla titreştirerek içindeki suyun dışarı atılmasını sağlar.",
+  "onboarding_title_three" : "Sadece başlat, gerisini biz halledelim",
+  "onboarding_description_three" : "Temizleme işlemi otomatik olarak başlar. İlerleme adım adım gösterilir.",
+  "next_two" : "Devam Et"
 }

@@ -11,6 +11,7 @@ import 'package:water_eject/app/domain/models/buble_model.dart';
 import 'package:water_eject/app/domain/services/audio_engine_service.dart';
 import 'package:water_eject/app/domain/services/vibration_service.dart';
 import 'package:water_eject/app/features/data/cleaner/audio/tone_generator.dart';
+import 'package:water_eject/app/google_ads.dart';
 
 import 'cleaner_state.dart';
 import '../../../../common/enum/cleaner_mode_enum.dart';
@@ -20,6 +21,7 @@ class CleanerCubit extends Cubit<CleanerState> {
   final IAudioEngine audio;
   final IVibrationService vibration;
   final VolumeController _volume;
+  final GoogleAds _googleAds = GoogleAds();
 
   StreamSubscription? _playerSub;
 
@@ -35,14 +37,73 @@ class CleanerCubit extends Cubit<CleanerState> {
   Timer? _vibTimer;
   Timer? _bubbleTimer;
   Timer? _bubbleUpdateTimer;
+  int _startButtonPressCount = 0;
+  bool _isShowingAd = false;
+
+  // Completer: reklam gösterildiğinde start() akışını durdurup reklam kapandığında devam etmek için
+  Completer<void>? _adCompleter;
 
   Future<void> init() async {
     try {
-      // await audio.init();
-      // await vibration.init();
-      // emit(state.copyWith(...));
+      // Reklamı başta yükle
+      await _loadInterstitialAd();
     } catch (e) {
       emit(state.copyWith(error: e.toString()));
+    }
+  }
+
+  Future<void> _loadInterstitialAd() async {
+    // Her seferinde önce flag temizle
+    _isShowingAd = false;
+
+    // GoogleAds.loadInterstitialAd callback'iyle reklam kapandığında
+    // completer'ı tamamlayıp yeniden reklam yüklemesi yapacağız.
+    _googleAds.loadInterstitialAd(
+      showAfterLoad: false,
+      onAdDismissed: () {
+        // Reklam kapandığında çağrılır
+        if (kDebugMode) {
+          dev.log('Interstitial dismissed', name: 'Cleaner');
+        }
+        _isShowingAd = false;
+
+        // Eğer bir bekleyen completer varsa tamamla (start() akışını devam ettir)
+        try {
+          _adCompleter?.complete();
+        } catch (_) {}
+        _adCompleter = null;
+
+        // Yeni reklam hazır olsun
+        _loadInterstitialAd();
+      },
+    );
+  }
+
+  Future<void> _showInterstitialAd() async {
+    // Eğer reklam yüklenmemişse hemen yükle ve geri dön
+    if (!_googleAds.isLoaded) {
+      if (kDebugMode)
+        dev.log('Ad not loaded, requesting load', name: 'Cleaner');
+      await _loadInterstitialAd();
+      return;
+    }
+
+    if (_isShowingAd) return;
+
+    _isShowingAd = true;
+    _adCompleter = Completer<void>();
+
+    // Show - GoogleAds içinde gösterim gerçekleşir, kapandığında onAdDismissed çağrılır
+    _googleAds.showInterstitialAd();
+
+    // Reklam kapanana kadar bekle
+    try {
+      await _adCompleter!.future;
+    } catch (_) {
+      // ignore
+    } finally {
+      _adCompleter = null;
+      _isShowingAd = false;
     }
   }
 
@@ -209,7 +270,24 @@ class CleanerCubit extends Cubit<CleanerState> {
 
   // Start / Stop
   Future<void> start() async {
-    if (state.running) return;
+    if (state.running || _isShowingAd) return;
+
+    // Reklam kontrolü
+    _startButtonPressCount++;
+
+    // İlk açılış veya her 4. tıklamada reklam göster
+    if (_startButtonPressCount == 1 || _startButtonPressCount % 4 == 0) {
+      // Eğer reklam yüklüyse göster ve reklam bitene kadar bekle
+      if (_googleAds.isLoaded) {
+        await _showInterstitialAd();
+      } else {
+        // Yüklü değilse yüklemeyi başlat (kullanıcı deneyimi için start devam edebilir)
+        _loadInterstitialAd();
+      }
+
+      // eğer reklam gösterildi ise, _showInterstitialAd reklam kapanana kadar bekler
+      // ve akış buradan devam eder.
+    }
 
     final prof = _profile();
     final initialHz = state.mode == CleanerMode.sweep
@@ -408,6 +486,7 @@ class CleanerCubit extends Cubit<CleanerState> {
   @override
   Future<void> close() async {
     await _cleanup();
+    _googleAds.dispose();
     return super.close();
   }
 }

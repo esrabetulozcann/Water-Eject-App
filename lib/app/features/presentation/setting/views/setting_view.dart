@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:in_app_review/in_app_review.dart';
+import 'package:share_plus/share_plus.dart';
 
 import 'package:water_eject/app/common/constant/app_icons.dart';
 import 'package:water_eject/app/common/constant/localization_keys.dart';
@@ -110,12 +112,35 @@ class SettingView extends StatelessWidget {
                     SettingsTile(
                       icon: AppIcons.share.iconData,
                       title: LocaleKeys.settingAppShare.tr(),
-                      onTap: () {},
+                      onTap: () {
+                        Share.share(
+                          '${LocaleKeys.waterEjectDownload.tr()} https://example.com', //'Water Eject uygulamasını dene! \n\nİndirme linki: https://example.com',
+                          subject: LocaleKeys.waterEject.tr(),
+                          sharePositionOrigin: const Rect.fromLTWH(
+                            0,
+                            0,
+                            100,
+                            100,
+                          ),
+                        );
+                      },
                     ),
                     SettingsTile(
                       icon: AppIcons.star.iconData,
                       title: LocaleKeys.settingAppRate.tr(),
-                      onTap: () {},
+                      onTap: () async {
+                        final InAppReview inAppReview = InAppReview.instance;
+
+                        if (await inAppReview.isAvailable()) {
+                          inAppReview
+                              .requestReview(); // Uygulama içi değerlendirme popup’ı
+                        } else {
+                          inAppReview.openStoreListing(
+                            appStoreId: 'YOUR_APP_ID',
+                            microsoftStoreId: 'YOUR_ID',
+                          );
+                        }
+                      },
                     ),
                     SettingsTile(
                       icon: AppIcons.privacy.iconData,

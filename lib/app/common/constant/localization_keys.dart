@@ -56,6 +56,13 @@ class LocaleKeys {
   //onboarding page
   static const next = 'next';
   static const skip = 'skip';
+  static const onboardingTitleOne = 'onboarding_title_one';
+  static const onboardingDescriptionOne = 'onboarding_description_one';
+  static const onboardingTitleTwo = 'onboarding_title_two';
+  static const onboardingDescriptionTwo = 'onboarding_description_two';
+  static const onboardingTitleThree = 'onboarding_title_three';
+  static const onboardingDescriptionThree = 'onboarding_description_three';
+  static const nextTwo = 'next_two';
 
   //paywall page
   static const year = 'year';
@@ -128,4 +135,8 @@ class LocaleKeys {
   static const waterEjectVibration = 'water_eject_vibration';
   static const waterEjectEjectsWater = 'water_eject_ejects_water';
   static const waterEjectAboutNote = 'water_eject_about_note';
+
+  //in-app review
+  static const waterEjectDownload = 'water_eject_download';
+  static const waterEject = 'water_eject';
 }

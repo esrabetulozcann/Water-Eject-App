@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:water_eject/app/features/presentation/onboarding/views/onboarding_view.dart';
 import 'package:water_eject/app/features/presentation/cleaner/views/cleaner_shell.dart';
+import 'package:water_eject/app/features/presentation/onboarding/views/onboarding_view.dart';
 import 'package:water_eject/app/features/presentation/stereo/views/stereo_view.dart';
 
 class AppRouter {
-  static const String onboarding = '/';
+  static const String onboarding = '/onboarding';
   static const String cleaner = '/cleaner';
   static const String stereo = '/stereo';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case onboarding:
-        return MaterialPageRoute(builder: (_) => const OnboardingView());
+        return MaterialPageRoute(builder: (_) => OnboardingView());
       case cleaner:
         return MaterialPageRoute(builder: (_) => const CleanerShell());
       case stereo:

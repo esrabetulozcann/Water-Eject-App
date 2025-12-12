@@ -1,65 +1,125 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:water_eject/app/common/router/app_router.dart';
-import '../cubit/onboarding_cubit.dart';
-import '../widgets/onboarding_header_widget.dart';
-import '../widgets/onboarding_content_widget.dart';
-import 'package:water_eject/app/domain/models/onboarding_models.dart';
+import 'package:water_eject/app/common/constant/localization_keys.dart';
+import 'package:water_eject/app/domain/models/onboarding_model.dart';
+import 'package:water_eject/app/features/presentation/cleaner/views/cleaner_shell.dart';
+import 'package:water_eject/app/features/presentation/onboarding/cubit/onboarding_cubit.dart';
+import 'package:water_eject/app/features/presentation/onboarding/cubit/onboarding_state.dart';
+import 'package:water_eject/app/features/presentation/onboarding/widgets/onboarding_item.dart';
+import 'package:water_eject/core/assets/images.dart';
+import 'package:water_eject/core/extensions/padding_extensions.dart';
 
 class OnboardingView extends StatelessWidget {
-  const OnboardingView({super.key});
+  OnboardingView({super.key});
+
+  final PageController pageController = PageController();
+
+  final List<OnboardingModel> pages = [
+    OnboardingModel(
+      title: LocaleKeys.onboardingTitleOne.tr(),
+      description: LocaleKeys.onboardingDescriptionOne.tr(),
+      imagePath: Images.instance.imgOnboardingOne,
+    ),
+    OnboardingModel(
+      title: LocaleKeys.onboardingTitleTwo.tr(),
+      description: LocaleKeys.onboardingDescriptionTwo.tr(),
+      imagePath: Images.instance.imgOnboardingTwo,
+    ),
+    OnboardingModel(
+      title: LocaleKeys.onboardingTitleThree.tr(),
+      description: LocaleKeys.onboardingDescriptionThree.tr(),
+      imagePath: Images.instance.imgOnboardingThree,
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    final pages = OnboardingData.pages;
     return BlocProvider(
-      create: (_) => OnboardingCubit(totalPages: pages.length),
-      child: _OnboardingContent(pages: pages),
-    );
-  }
-}
+      create: (_) => OnboardingCubit(),
+      child: BlocBuilder<OnboardingCubit, OnboardingState>(
+        builder: (context, state) {
+          final cubit = context.read<OnboardingCubit>();
 
-class _OnboardingContent extends StatelessWidget {
-  const _OnboardingContent({required this.pages});
-  final List<OnboardingPageModel> pages;
-
-  @override
-  Widget build(BuildContext context) {
-    Future<void> complete() async {
-      // navigasyon aksiyonu
-      final nav = Navigator.of(context);
-      final routeAction = nav.canPop()
-          ? () => nav.pop(true)
-          : () => nav.pushNamedAndRemoveUntil(AppRouter.cleaner, (r) => false);
-
-      // flag
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setBool('onboarding_done', true);
-
-      // context’e dokunmadan aksiyonu çalıştırdım
-      routeAction();
-    }
-
-    return BlocBuilder<OnboardingCubit, int>(
-      builder: (context, currentPage) {
-        return Scaffold(
-          body: SafeArea(
-            child: Column(
+          return Scaffold(
+            body: Stack(
               children: [
-                OnboardingHeaderWidget(
-                  currentPage: currentPage,
-                  onSkip: complete, // skip
+                PageView.builder(
+                  controller: pageController,
+                  itemCount: pages.length,
+                  onPageChanged: (index) {
+                    cubit.updatePage(index);
+                  },
+                  itemBuilder: (context, index) {
+                    return OnboardingItem(model: pages[index]);
+                  },
                 ),
-                OnboardingContentWidget(
-                  pages: pages,
-                  onComplete: complete, //next
+
+                //  Skip
+                Positioned(
+                  right: 20,
+                  top: 50,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => CleanerShell()),
+                        (route) => false,
+                      ); // Skip
+                    },
+                    child: Text(
+                      LocaleKeys.skip.tr(),
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white.withOpacity(0.8),
+                      ),
+                    ),
+                  ),
+                ),
+
+                //  Footer Button
+                Positioned(
+                  bottom: 40,
+                  left: 20,
+                  right: 20,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (state is OnboardingInitial &&
+                          state.pageIndex < pages.length - 1) {
+                        pageController.nextPage(
+                          duration: Duration(milliseconds: 300),
+                          curve: Curves.easeInOut,
+                        );
+                      } else {
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CleanerShell(),
+                          ),
+                          (route) => false,
+                        ); // onboarding bitti
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blueAccent,
+                      padding: EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: Text(
+                      state is OnboardingInitial && state.pageIndex == 2
+                          ? LocaleKeys.start.tr()
+                          : LocaleKeys.nextTwo.tr(),
+                      style: TextStyle(fontSize: 18, color: Colors.white),
+                    ),
+                  ).onlyPadding(bottom: 40, left: 20, right: 20),
                 ),
               ],
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

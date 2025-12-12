@@ -59,6 +59,6 @@ void setupLocator() {
 
   //Onboarding
   sl.registerFactoryParam<OnboardingCubit, int, void>(
-    (totalPages, _) => OnboardingCubit(totalPages: totalPages),
+    (totalPages, _) => OnboardingCubit(),
   );
 }

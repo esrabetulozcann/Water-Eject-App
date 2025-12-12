@@ -23,7 +23,7 @@ class PlayButton extends StatelessWidget {
               size: isPlaying ? 20 : 24,
             ),
             label: Text(
-              isPlaying ? LocaleKeys.stop.tr() : LocaleKeys.play.tr(),
+              isPlaying ? LocaleKeys.stop.tr() : LocaleKeys.start.tr(),
               style: TextStyle(fontSize: 16),
             ),
             onPressed: () => context.read<ToneCubit>().toggle(),

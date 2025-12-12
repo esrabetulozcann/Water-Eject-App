@@ -113,5 +113,16 @@
   "water_eject_hz": "Generates a 300 Hz sine wave.",
   "water_eject_vibration": "Vibrates the speaker diaphragm.",
   "water_eject_ejects_water": "Pushes water droplets out through physical vibration.",
-  "water_eject_about_note": "Note: The app may not remove all the water. Ensure your device is completely dry before using it."
+  "water_eject_about_note": "Note: The app may not remove all the water. Ensure your device is completely dry before using it.",
+  "water_eject_download" : "Try the Water Eject app! \n\nDownload link: ",
+  "water_eject" : "Water Eject app",
+  "onboarding_title_one": "Getting a muffled sound due to water or dust?",
+  "onboarding_description_one": "Water Eject helps you clean liquid and debris from your phone’s speaker using special sound frequencies.",
+  "onboarding_title_two": "142 Hz and a special vibration algorithm",
+  "onboarding_description_two": "The device vibrates your speaker at safe, device-friendly frequencies to push water out.",
+  "onboarding_title_three": "Just start it, we handle the rest",
+  "onboarding_description_three": "The cleaning process begins automatically, and progress is shown step by step.",
+  "next_two": "Continue"
+
+
 }
