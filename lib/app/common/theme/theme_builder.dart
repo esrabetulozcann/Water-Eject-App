@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:water_eject/app/common/router/app_router.dart';
 import 'package:water_eject/core/config/app_config.dart';
-import 'package:water_eject/core/initialization/app_initializer.dart';
+//import 'package:water_eject/core/initialization/app_initializer.dart';
 import 'package:water_eject/core/theme/app_theme.dart';
 import 'package:water_eject/core/theme/cubit/theme_cubit.dart';
 
 //tema ve dil ayarlarına göre MaterialApp’i dinamik olarak oluşturan yapı
 class ThemeBuilder extends StatelessWidget {
-  const ThemeBuilder({super.key});
+  final bool onboardingCompleted;
+
+  const ThemeBuilder({super.key, required this.onboardingCompleted});
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +27,7 @@ class ThemeBuilder extends StatelessWidget {
           supportedLocales: context.supportedLocales,
           localizationsDelegates: context.localizationDelegates,
           onGenerateRoute: AppRouter.generateRoute,
-          initialRoute: AppInitializer.isOnboardingCompleted
-              ? "/cleaner" // → onboarding bitti ise direkt ana sayfa
-              : "/onboarding",
+          initialRoute: onboardingCompleted ? "/cleaner" : "/onboarding",
         );
       },
     );

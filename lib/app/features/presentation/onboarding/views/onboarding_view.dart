@@ -1,9 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:water_eject/app/common/constant/localization_keys.dart';
 import 'package:water_eject/app/domain/models/onboarding_model.dart';
-import 'package:water_eject/app/features/presentation/cleaner/views/cleaner_shell.dart';
 import 'package:water_eject/app/features/presentation/onboarding/cubit/onboarding_cubit.dart';
 import 'package:water_eject/app/features/presentation/onboarding/cubit/onboarding_state.dart';
 import 'package:water_eject/app/features/presentation/onboarding/widgets/onboarding_item.dart';
@@ -33,6 +33,15 @@ class OnboardingView extends StatelessWidget {
     ),
   ];
 
+  Future<void> _completeOnboarding(BuildContext context) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('onboarding_completed', true);
+
+    if (!context.mounted) return;
+
+    Navigator.pushReplacementNamed(context, "/cleaner");
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -61,12 +70,9 @@ class OnboardingView extends StatelessWidget {
                   top: 50,
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(builder: (context) => CleanerShell()),
-                        (route) => false,
-                      ); // Skip
+                      _completeOnboarding(context); // skip
                     },
+
                     child: Text(
                       LocaleKeys.skip.tr(),
                       style: TextStyle(
@@ -91,15 +97,10 @@ class OnboardingView extends StatelessWidget {
                           curve: Curves.easeInOut,
                         );
                       } else {
-                        Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => CleanerShell(),
-                          ),
-                          (route) => false,
-                        ); // onboarding bitti
+                        _completeOnboarding(context);
                       }
                     },
+
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blueAccent,
                       padding: EdgeInsets.symmetric(vertical: 16),

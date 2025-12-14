@@ -34,6 +34,7 @@ enum AppIcons {
   sunnyRounded,
   darkModeRounded,
   check,
+  chevronLeft,
 }
 
 extension AppIconsExtension on AppIcons {
@@ -105,6 +106,8 @@ extension AppIconsExtension on AppIcons {
         return Icons.dark_mode_rounded;
       case AppIcons.check:
         return Icons.check;
+      case AppIcons.chevronLeft:
+        return Icons.chevron_left;
     }
   }
 }

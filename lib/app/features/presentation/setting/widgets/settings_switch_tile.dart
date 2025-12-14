@@ -16,9 +16,8 @@ class SettingsSwitchTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return SwitchListTile(
-      secondary: Icon(icon, color: theme.colorScheme.onSurface),
+      secondary: Icon(icon, color: Theme.of(context).colorScheme.onSurface),
       title: Text(title),
       value: value,
       onChanged: onChanged,

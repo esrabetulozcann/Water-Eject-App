@@ -8,9 +8,8 @@ class SettingsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return Card(
-      color: theme.colorScheme.surfaceVariant,
+      color: Theme.of(context).colorScheme.surfaceVariant,
       elevation: 0,
       margin: const EdgeInsets.only(bottom: 16),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
@@ -23,12 +22,15 @@ class SettingsSection extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(16, 12, 16, 4),
                 child: Align(
                   alignment: Alignment.centerLeft,
-                  child: Text(title!, style: theme.textTheme.titleMedium),
+                  child: Text(
+                    title!,
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
                 ),
               ),
               // const Divider(height: 8),
             ],
-            ..._withDividers(children, theme),
+            ..._withDividers(children, Theme.of(context)),
           ],
         ),
       ),

@@ -82,8 +82,9 @@ class CleanerCubit extends Cubit<CleanerState> {
   Future<void> _showInterstitialAd() async {
     // Eğer reklam yüklenmemişse hemen yükle ve geri dön
     if (!_googleAds.isLoaded) {
-      if (kDebugMode)
+      if (kDebugMode) {
         dev.log('Ad not loaded, requesting load', name: 'Cleaner');
+      }
       await _loadInterstitialAd();
       return;
     }

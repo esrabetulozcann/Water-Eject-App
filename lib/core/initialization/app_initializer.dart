@@ -1,25 +1,26 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:water_eject/core/config/app_config.dart';
 import 'package:water_eject/core/di/locator.dart';
 
 //AppInitializer, uygulama başlamadan önce gerekli bağımlılıkları, ekran yönünü ve localization sistemini başlatıyor
 class AppInitializer {
-  static bool isOnboardingCompleted = false;
-
-  static Future<void> initialize() async {
+  static Future<bool> initialize() async {
     WidgetsFlutterBinding.ensureInitialized();
 
-    await _initializeDependencies();
+    await EasyLocalization.ensureInitialized();
     await _setDeviceOrientation();
-    await _checkOnboardingStatus();
+    await _initServices();
+
+    return _checkOnboardingStatus();
   }
 
-  static Future<void> _initializeDependencies() async {
-    await EasyLocalization.ensureInitialized();
+  static Future<void> _initServices() async {
     setupLocator();
+    await MobileAds.instance.initialize();
   }
 
   static Future<void> _setDeviceOrientation() async {
@@ -28,8 +29,8 @@ class AppInitializer {
     );
   }
 
-  static Future<void> _checkOnboardingStatus() async {
+  static Future<bool> _checkOnboardingStatus() async {
     final prefs = await SharedPreferences.getInstance();
-    isOnboardingCompleted = prefs.getBool('onboarding_completed') ?? false;
+    return prefs.getBool('onboarding_completed') ?? false;
   }
 }

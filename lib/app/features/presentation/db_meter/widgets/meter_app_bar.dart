@@ -16,7 +16,6 @@ class MeterAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: true,
       subtitle: LocaleKeys.realTimeSoundLevel.tr(),
       showSettings: false,
-      //automaticallyImplyLeading: false, //  hizalar aynı
       onSettingsPressed: () {
         showAboutDialog(
           context: context,
