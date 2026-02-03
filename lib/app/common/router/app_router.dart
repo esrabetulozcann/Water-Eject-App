@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:water_eject/app/features/presentation/about/views/about_view.dart';
 import 'package:water_eject/app/features/presentation/cleaner/views/cleaner_shell.dart';
 import 'package:water_eject/app/features/presentation/onboarding/views/onboarding_view.dart';
+import 'package:water_eject/app/features/presentation/setting/views/setting_view.dart';
 import 'package:water_eject/app/features/presentation/stereo/views/stereo_view.dart';
 
 class AppRouter {
   static const String onboarding = '/onboarding';
   static const String cleaner = '/cleaner';
   static const String stereo = '/stereo';
+  static const String setting = '/setting';
+  static const String about = '/about';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -16,6 +20,10 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const CleanerShell());
       case stereo:
         return MaterialPageRoute(builder: (_) => const StereoView());
+      case setting:
+        return MaterialPageRoute(builder: (_) => const SettingView());
+      case about:
+        return MaterialPageRoute(builder: (_) => const AboutView());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

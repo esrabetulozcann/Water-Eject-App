@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'package:water_eject/app/common/constant/app_icons.dart';
 import 'package:water_eject/app/common/constant/localization_keys.dart';
+import 'package:water_eject/app/common/router/app_router.dart';
 import 'package:water_eject/app/domain/models/settings_option_model.dart';
-import 'package:water_eject/app/features/presentation/about/views/about_view.dart';
 
 import 'package:water_eject/app/features/presentation/setting/cubit/setting_cubit.dart';
 import 'package:water_eject/app/features/presentation/setting/cubit/setting_state.dart';
@@ -23,6 +24,16 @@ import 'package:water_eject/core/theme/cubit/theme_cubit.dart';
 
 class SettingView extends StatelessWidget {
   const SettingView({super.key});
+
+  Future<void> _openPrivacyPolicy() async {
+    final Uri url = Uri.parse(
+      'https://github.com/esrabetulozcann/Water-Eject-App/blob/main/PRIVACY_POLICY.md',
+    );
+
+    if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
+      throw 'Privacy Policy açılamadı';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -100,13 +111,7 @@ class SettingView extends StatelessWidget {
                       icon: AppIcons.info.iconData,
                       title: LocaleKeys.settingAbout.tr(),
                       onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return const AboutView();
-                            },
-                          ),
-                        );
+                        AppRouter.push(context, AppRouter.about);
                       },
                     ),
                     SettingsTile(
@@ -145,7 +150,8 @@ class SettingView extends StatelessWidget {
                     SettingsTile(
                       icon: AppIcons.privacy.iconData,
                       title: LocaleKeys.settingPrivacyPolicy.tr(),
-                      onTap: () {},
+                      onTap:
+                          _openPrivacyPolicy, //https://github.com/esrabetulozcann/Water-Eject-App/blob/main/README.md
                     ),
                   ],
                 ),

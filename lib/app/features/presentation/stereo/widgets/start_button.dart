@@ -6,16 +6,10 @@ import 'package:water_eject/app/common/constant/localization_keys.dart';
 import '../cubit/stereo_cubit.dart';
 import '../cubit/stereo_state.dart';
 
-import 'package:water_eject/app/features/presentation/paywall/cubit/premium_cubit.dart';
-import 'package:water_eject/app/features/presentation/paywall/views/paywall_page.dart';
-
 class StartButton extends StatelessWidget {
   const StartButton({super.key});
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colors = theme.colorScheme;
-
     return BlocBuilder<StereoCubit, StereoState>(
       buildWhen: (p, c) => p.isTesting != c.isTesting,
       builder: (_, state) {
@@ -25,15 +19,15 @@ class StartButton extends StatelessWidget {
           width: double.infinity,
           child: ElevatedButton.icon(
             style: ElevatedButton.styleFrom(
-              backgroundColor: colors.primary,
-              foregroundColor: colors.onPrimary,
+              backgroundColor: Theme.of(context).colorScheme.primary,
+              foregroundColor: Theme.of(context).colorScheme.onPrimary,
               padding: const EdgeInsets.symmetric(vertical: 14),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(14),
               ),
             ),
             onPressed: () async {
-              final premium = context.read<PremiumCubit>().state;
+              /* final premium = context.read<PremiumCubit>().state;
               final stereo = context.read<StereoCubit>();
 
               final isOn = context.read<StereoCubit>().state.isTesting;
@@ -42,7 +36,8 @@ class StartButton extends StatelessWidget {
                 final purchased = await PaywallPage.show(context) ?? false;
                 if (!purchased) return;
               }
-
+*/
+              final stereo = context.read<StereoCubit>();
               await stereo.startOrStop();
             },
             icon: Icon(

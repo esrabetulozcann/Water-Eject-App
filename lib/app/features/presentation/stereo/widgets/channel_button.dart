@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:water_eject/app/common/constant/app_icons.dart';
 import 'package:water_eject/app/common/constant/colors.dart';
 import 'package:water_eject/app/common/enum/stereo_channel_enum.dart';
+import 'package:water_eject/core/extensions/padding_extensions.dart';
 
 class ChannelButton extends StatelessWidget {
   final String label;
@@ -49,8 +50,7 @@ class ChannelButton extends StatelessWidget {
           onTap: onTap,
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 180),
-            width: 118,
-            height: 118,
+            padding: const EdgeInsets.all(25),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: bg,
@@ -90,13 +90,12 @@ class ChannelButton extends StatelessWidget {
                 : Icon(AppIcons.volumeUp.iconData, size: 40),
           ),
         ),
-        const SizedBox(height: 10),
         Text(
           label,
           style: theme.textTheme.bodyMedium?.copyWith(
             color: theme.textTheme.bodyMedium?.color?.withValues(alpha: 0.85),
           ),
-        ),
+        ).onlyPadding(top: 10),
       ],
     );
   }

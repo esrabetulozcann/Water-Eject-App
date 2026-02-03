@@ -14,7 +14,6 @@ import 'package:water_eject/app/features/data/cleaner/audio/noise_meter_reposito
 import 'package:water_eject/app/domain/repositories/sound_level_repository.dart';
 import 'package:water_eject/app/features/presentation/db_meter/cubit/dbmeter_cubit.dart';
 import 'package:water_eject/app/features/presentation/onboarding/cubit/onboarding_cubit.dart';
-import 'package:water_eject/app/features/presentation/paywall/cubit/paywall_selection_cubit.dart';
 import 'package:water_eject/app/features/presentation/setting/cubit/setting_cubit.dart';
 import 'package:water_eject/app/features/presentation/stereo/cubit/stereo_cubit.dart';
 import 'package:water_eject/app/features/presentation/tone/cubit/tone_cubit.dart';
@@ -55,7 +54,7 @@ void setupLocator() {
   sl.registerFactory(() => ToneCubit(sl<ITonePlayer>()));
 
   //paywall
-  sl.registerFactory(() => PaywallSelectionCubit());
+  //sl.registerFactory(() => PaywallSelectionCubit());
 
   //Onboarding
   sl.registerFactoryParam<OnboardingCubit, int, void>(

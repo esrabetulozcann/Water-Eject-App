@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:water_eject/app/common/constant/localization_keys.dart';
+import 'package:water_eject/app/common/router/app_router.dart';
 import 'package:water_eject/app/domain/models/onboarding_model.dart';
 import 'package:water_eject/app/features/presentation/onboarding/cubit/onboarding_cubit.dart';
 import 'package:water_eject/app/features/presentation/onboarding/cubit/onboarding_state.dart';
@@ -39,7 +40,8 @@ class OnboardingView extends StatelessWidget {
 
     if (!context.mounted) return;
 
-    Navigator.pushReplacementNamed(context, "/cleaner");
+    //Navigator.pushReplacementNamed(context, "/cleaner");
+    AppRouter.pushReplacement(context, AppRouter.cleaner);
   }
 
   @override
@@ -48,8 +50,6 @@ class OnboardingView extends StatelessWidget {
       create: (_) => OnboardingCubit(),
       child: BlocBuilder<OnboardingCubit, OnboardingState>(
         builder: (context, state) {
-          final cubit = context.read<OnboardingCubit>();
-
           return Scaffold(
             body: Stack(
               children: [
@@ -57,7 +57,7 @@ class OnboardingView extends StatelessWidget {
                   controller: pageController,
                   itemCount: pages.length,
                   onPageChanged: (index) {
-                    cubit.updatePage(index);
+                    context.read<OnboardingCubit>().updatePage(index);
                   },
                   itemBuilder: (context, index) {
                     return OnboardingItem(model: pages[index]);
@@ -77,6 +77,7 @@ class OnboardingView extends StatelessWidget {
                       LocaleKeys.skip.tr(),
                       style: TextStyle(
                         fontSize: 16,
+                        fontWeight: FontWeight.w900,
                         color: Colors.white.withOpacity(0.8),
                       ),
                     ),

@@ -19,74 +19,72 @@ class StereoView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => sl<StereoCubit>(),
-      child: Scaffold(
-        appBar: const StereoAppBar(),
+      child: Builder(
+        builder: (context) {
+          return Scaffold(
+            appBar: const StereoAppBar(),
+            body: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            LocaleKeys.stereoStartTest.tr(),
+                            style: Theme.of(context).textTheme.titleMedium,
+                            textAlign: TextAlign.center,
+                          ).onlyPadding(bottom: 24),
 
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              children: [
-                // const StereoAppBar(),
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        LocaleKeys.stereoStartTest.tr(),
-                        style: Theme.of(context).textTheme.titleMedium,
-                        textAlign: TextAlign.center,
-                      ).onlyPadding(bottom: 24),
+                          BlocBuilder<StereoCubit, StereoState>(
+                            buildWhen: (p, c) =>
+                                p.active != c.active ||
+                                p.selected != c.selected,
+                            builder: (context, state) {
+                              return Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  ChannelButton(
+                                    label: LocaleKeys.stereoLeftChannel.tr(),
+                                    side: StereoChannel.left,
+                                    isActive:
+                                        state.active == StereoChannel.left &&
+                                        state.isTesting,
+                                    isSelected:
+                                        state.selected == StereoChannel.left,
+                                    onTap: () =>
+                                        context.read<StereoCubit>().tapLeft(),
+                                  ),
+                                  ChannelButton(
+                                    label: LocaleKeys.stereoRightChannel.tr(),
+                                    side: StereoChannel.right,
+                                    isActive:
+                                        state.active == StereoChannel.right &&
+                                        state.isTesting,
+                                    isSelected:
+                                        state.selected == StereoChannel.right,
+                                    onTap: () =>
+                                        context.read<StereoCubit>().tapRight(),
+                                  ),
+                                ],
+                              );
+                            },
+                          ),
 
-                      BlocBuilder<StereoCubit, StereoState>(
-                        buildWhen: (p, c) =>
-                            p.active != c.active || p.selected != c.selected,
-                        builder: (_, state) {
-                          final leftSelected =
-                              state.selected == StereoChannel.left;
-                          final rightSelected =
-                              state.selected == StereoChannel.right;
-                          final leftActive =
-                              state.active == StereoChannel.left &&
-                              state.isTesting;
-                          final rightActive =
-                              state.active == StereoChannel.right &&
-                              state.isTesting;
-
-                          return Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              ChannelButton(
-                                label: LocaleKeys.stereoLeftChannel.tr(),
-                                side: StereoChannel.left,
-                                isActive: leftActive,
-                                isSelected: leftSelected,
-                                onTap: () =>
-                                    context.read<StereoCubit>().tapLeft(),
-                              ),
-                              ChannelButton(
-                                label: LocaleKeys.stereoRightChannel.tr(),
-                                side: StereoChannel.right,
-                                isActive: rightActive,
-                                isSelected: rightSelected,
-                                onTap: () =>
-                                    context.read<StereoCubit>().tapRight(),
-                              ),
-                            ],
-                          );
-                        },
+                          const AutoLoopSwitch().onlyPadding(top: 24),
+                        ],
                       ),
-
-                      const AutoLoopSwitch().onlyPadding(top: 24),
-                    ],
-                  ),
+                    ),
+                    const StartButton().onlyPadding(bottom: 24),
+                  ],
                 ),
-
-                const StartButton().onlyPadding(bottom: 24),
-              ],
+              ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }

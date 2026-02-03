@@ -23,33 +23,30 @@ class OnboardingItem extends StatelessWidget {
             // Title
             Expanded(
               flex: 2,
-              child: Center(
-                child: Text(
-                  model.title,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 26,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white,
-                  ),
-                ).allPadding(16),
-              ),
+              child: Text(
+                model.title,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white,
+                ),
+              ).onlyPadding(top: 85),
             ),
 
             // Description
             Expanded(
               flex: 2,
-              child: Center(
-                child: Text(
-                  model.description,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 20,
-                    height: 1.4,
-                    color: Colors.white.withOpacity(0.9),
-                  ),
-                ).onlyPadding(top: 10),
-              ),
+              child: Text(
+                model.description,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 20,
+                  height: 1.4,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white.withOpacity(0.9),
+                ),
+              ).onlyPadding(top: 140),
             ),
           ],
         ).onlyPadding(bottom: 30),

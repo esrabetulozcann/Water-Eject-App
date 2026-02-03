@@ -17,7 +17,7 @@ class PresetRow extends StatelessWidget {
       buildWhen: (p, c) => p.freq != c.freq,
       builder: (context, state) {
         return Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: presets.map((p) {
             final isActive = (state.freq.round() == p.round());
             return _PresetChip(
@@ -63,8 +63,8 @@ class _PresetChip extends StatelessWidget {
       borderRadius: BorderRadius.circular(14),
       onTap: onTap,
       child: Container(
-        width: 110,
-        padding: const EdgeInsets.symmetric(vertical: 12),
+        // width: 110,
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
         decoration: BoxDecoration(
           color: active ? activeBg : inactiveBg,
           borderRadius: BorderRadius.circular(14),
@@ -76,14 +76,18 @@ class _PresetChip extends StatelessWidget {
           ),
         ),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
               labelTop,
               style: Theme.of(context).textTheme.titleMedium,
+              maxLines: 1,
             ).onlyPadding(bottom: 4),
             Text(
               labelBottom,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                letterSpacing: 0.5,
                 color: Theme.of(
                   context,
                 ).textTheme.bodySmall?.color?.withOpacity(0.7),
@@ -91,7 +95,7 @@ class _PresetChip extends StatelessWidget {
             ),
           ],
         ),
-      ),
+      ).onlyPadding(right: 12, left: 0, bottom: 0, top: 0),
     );
   }
 }

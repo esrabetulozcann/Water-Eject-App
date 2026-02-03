@@ -21,17 +21,21 @@ class OptionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
     return Container(
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.all(6),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         color: cs.surfaceVariant.withOpacity(0.4),
         border: Border.all(color: cs.outline.withOpacity(0.2)),
       ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Icon(icon).onlyPadding(right: 10),
-          Expanded(child: Text(title)),
-          Switch(value: value, onChanged: onChanged),
+          Icon(icon, size: 20).onlyPadding(right: 5),
+          Text(title),
+          Transform.scale(
+            scale: 0.9,
+            child: Switch(value: value, onChanged: onChanged),
+          ),
         ],
       ),
     );
